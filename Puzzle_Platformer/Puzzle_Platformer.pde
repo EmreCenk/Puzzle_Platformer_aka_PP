@@ -5,13 +5,16 @@
 Player emre;
 PhysicsManager physics;
 Prison my_prison;
-Platform p;
+Platform p, p2, p3;
 
 void setup(){
   size(400, 400);
   //PVector center_, float height_, float length_, color colour_
 
   p = new Platform(new PVector(100, 300), 100, 20, color(0, 0, 0));
+  p2 = new Platform(new PVector(200, 300), 100, 20, color(0, 0, 0));
+  p3 = new Platform(new PVector(300, 200), 100, 20, color(0, 0, 0));
+
   my_prison = new Prison();
   emre = new Player(new PVector(width/2, height/2), 25, color(0, 0, 0), 1);
   physics = new PhysicsManager();
@@ -24,15 +27,22 @@ void draw(){
   background(255);
   physics.gravity();
   emre.check_player_movement();
+  
   emre.move();
   p.move();
+  
   p.keep_object_above_platform(emre, physics);
+  p2.keep_object_above_platform(emre, physics);
+  p3.keep_object_above_platform(emre, physics);
+  
   my_prison.imprison(emre);
   my_prison.imprison(p);
   
   emre.display();
   p.display();
-  
+  p2.display();
+  p3.display();
+
 }
 
 void keyPressed(){
