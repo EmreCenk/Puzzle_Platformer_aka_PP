@@ -2,8 +2,11 @@
 
 class PhysicsManager{
   ArrayList<Substance> objs;
+  float gravity_intensity;
+  
   PhysicsManager(){
     this.objs = new ArrayList<Substance>();
+    this.gravity_intensity = 9.81;
   }
   void gravity(){
     // we use a = -9.81 as our acceleration and derive a formula to find the new velocity
@@ -18,8 +21,7 @@ class PhysicsManager{
     v2 = 9.81/FPS + vy
     */
     for (int i = 0; i < this.objs.size(); i++){
-      this.objs.get(i).velocity.y += 9.8/frameRate; 
-      println(this.objs.get(i).velocity);
+      this.objs.get(i).velocity.y += this.gravity_intensity/frameRate; 
     }
   }
   

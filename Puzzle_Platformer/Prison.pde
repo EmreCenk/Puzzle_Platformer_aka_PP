@@ -1,5 +1,5 @@
 
-
+float DEFAULT_BOUNCE = 0;
 
 
 class Prison{
@@ -11,7 +11,7 @@ class Prison{
   Prison(float x1, float y1, float x2, float y2){
     this.top_left = new PVector(x1, y1);
     this.bottom_right = new PVector(x2, y2);
-    this.bounciness = 0; //default value
+    this.bounciness = DEFAULT_BOUNCE; //default value
   }
   
   Prison(float x1, float y1, float x2, float y2, float bounce_loss){
@@ -31,15 +31,13 @@ class Prison{
     
     if (obj.coordinate.y < this.top_left.y + obj.radius){
       ////top wall
-      obj.velocity.y *= -1;
       obj.coordinate.y = this.top_left.y + obj.radius;
-      obj.velocity.mult(this.bounciness);      
+      obj.velocity.mult(-(this.bounciness + obj.bounciness) / 2);      
     }
     else if (obj.coordinate.y > this.bottom_right.y - obj.radius){
       //bottom wall
-      obj.velocity.y *= -1;
       obj.coordinate.y = this.bottom_right.y - obj.radius;
-      obj.velocity.mult((this.bounciness + obj.bounciness) / 2);
+      obj.velocity.mult(-(this.bounciness + obj.bounciness) / 2);
       obj.jumping = false;
 
     }

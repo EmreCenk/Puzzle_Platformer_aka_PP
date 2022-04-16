@@ -3,6 +3,7 @@
 class Player extends Circle{
   boolean moving_down, moving_right, moving_left;
   float walking_speed;
+
   Player(PVector coordinates_, float radius_, color colour_, float walking_speed_){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
     this.moving_down = false;
