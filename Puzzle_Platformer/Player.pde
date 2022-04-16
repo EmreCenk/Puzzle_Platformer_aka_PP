@@ -1,0 +1,52 @@
+
+
+class Player extends Circle{
+  boolean moving_down, moving_right, moving_left;
+  float walking_speed;
+  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_){
+    super(new PVector(0, 0), coordinates_, radius_, colour_);
+    this.moving_down = false;
+    this.moving_right = false;
+    this.moving_left = false;
+    this.walking_speed = walking_speed_;
+    
+    
+  }
+  
+  void walk_right(){
+    this.coordinate.x += this.walking_speed;
+  }
+  
+  void walk_left(){
+    this.coordinate.x -= this.walking_speed;
+  }
+  
+  void jump(){
+    if (this.jumping) return;
+    this.velocity.y -= 10;
+    this.jumping = true;
+    
+  }
+
+  void check_player_movement(){
+    //if (this.moving_up) this.move_up();
+    //if (this.moving_down) this.move_down();
+    if (this.moving_right) this.walk_right();
+    if (this.moving_left) this.walk_left();
+  }
+  
+  void key_press_movement(){
+    if (keyCode == UP) this.jump();
+    //else if (keyCode == DOWN) this.moving_down = true;
+    if (keyCode == RIGHT) this.moving_right = true;
+    else if (keyCode == LEFT) this.moving_left = true;
+  }
+  
+
+  void key_up_movement(){
+    //if (keyCode == UP) this.moving_up = false;
+    //else if (keyCode == DOWN) this.moving_down = false;
+    if (keyCode == RIGHT) this.moving_right = false;
+    else if (keyCode == LEFT) this.moving_left = false;
+  }
+}
