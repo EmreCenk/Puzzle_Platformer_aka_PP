@@ -3,14 +3,14 @@
 class Player extends Circle{
   boolean moving_down, moving_right, moving_left;
   float walking_speed;
-
+  boolean dynamic_colours;
   Player(PVector coordinates_, float radius_, color colour_, float walking_speed_){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
     this.moving_down = false;
     this.moving_right = false;
     this.moving_left = false;
     this.walking_speed = walking_speed_;
-    
+    this.dynamic_colours = true;
     
   }
   
@@ -49,5 +49,20 @@ class Player extends Circle{
     //else if (keyCode == DOWN) this.moving_down = false;
     if (keyCode == RIGHT) this.moving_right = false;
     else if (keyCode == LEFT) this.moving_left = false;
+  }
+  
+  void display(){
+
+    
+    color color_to_use;
+    if (this.dynamic_colours && !this.jumping){
+      color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
+    }
+    else{
+      color_to_use = this.colour;
+    }
+    stroke(color_to_use);
+    fill(color_to_use);
+    circle(this.coordinate.x, this.coordinate.y, 2*this.radius);
   }
 }

@@ -33,7 +33,7 @@ class Platform{
         some_substance.coordinate.y = this.bottom_right.y + some_substance.radius;
       }
       some_substance.velocity.mult(-(this.bounciness + some_substance.bounciness) / 2);      
-
+      some_substance.jumping = false;
 
     }
     return; // for better readability
