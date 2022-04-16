@@ -2,37 +2,36 @@
 
 
 
-class Platform{
+class Platform extends Substance{
   
-  PVector top_left, bottom_right;
   float width_, height_;
-  color colour;
   float bounciness;
   Platform(PVector center_, float width_, float height_, color colour_){
-    this.colour = colour_;
+    super(new PVector(0, 0), center_, height_/2, colour_);
     this.width_ = width_;
     this.height_ = height_;
-    this.top_left = new PVector(center_.x - width_/2, center_.y - height_/2);
-    this.bottom_right = new PVector(center_.x + width_/2, center_.y + height_/2);
+
     this.bounciness = DEFAULT_BOUNCE;
   }
   
 
   
-  void do_job(Substance some_substance, PhysicsManager phys){
+  void keep_object_above_platform(Substance some_substance, PhysicsManager phys){
     // this method is the definition of "you had one job"
     // lifts the substance
+    PVector top_left = new PVector(this.coordinate.x - width_/2, this.coordinate.y - height_/2);
+    PVector bottom_right = new PVector(this.coordinate.x + width_/2, this.coordinate.y + height_/2);
     
-    if (circle_in_rect(this.top_left, this.bottom_right, some_substance.coordinate, some_substance.radius, 0.5) ){
+    if (circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 0.5) ){
       // could be more efficient if we only checked if they are parralel but that is too much typing lol
       
-      if (abs(some_substance.coordinate.y - this.top_left.y) < abs(some_substance.coordinate.y - this.bottom_right.y) ){
-        some_substance.coordinate.y = this.top_left.y - some_substance.radius;
+      if (abs(some_substance.coordinate.y - top_left.y) < abs(some_substance.coordinate.y - bottom_right.y) ){
+        some_substance.coordinate.y = top_left.y - some_substance.radius;
       }
       else{
-        some_substance.coordinate.y = this.bottom_right.y + some_substance.radius;
+        some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
-      some_substance.velocity.mult(-(this.bounciness + some_substance.bounciness) / 2);      
+      some_substance.velocity.mult(-(bounciness + some_substance.bounciness) / 2);      
       some_substance.jumping = false;
 
     }
@@ -40,11 +39,14 @@ class Platform{
   }
   
   void display(){
+    PVector top_left = new PVector(this.coordinate.x - width_/2, this.coordinate.y - height_/2);
+    PVector bottom_right = new PVector(this.coordinate.x + width_/2, this.coordinate.y + height_/2);
+    
     stroke(this.colour);
     fill(this.colour);
-    rect(this.top_left.x, this.top_left.y, this.width_, this.height_);
-    circle(this.top_left.x, this.top_left.y, 10);
-    circle(this.bottom_right.x, this.bottom_right.y, 10);
+    rect(top_left.x, top_left.y, width_, height_);
+    circle(top_left.x, top_left.y, 10);
+    circle(bottom_right.x, bottom_right.y, 10);
   }
 
 }

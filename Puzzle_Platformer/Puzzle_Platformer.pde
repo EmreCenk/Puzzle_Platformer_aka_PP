@@ -16,6 +16,7 @@ void setup(){
   emre = new Player(new PVector(width/2, height/2), 25, color(0, 0, 0), 1);
   physics = new PhysicsManager();
   physics.add_obj(emre);
+  physics.add_obj(p);
 
 }
 
@@ -24,12 +25,14 @@ void draw(){
   physics.gravity();
   emre.check_player_movement();
   emre.move();
-  p.do_job(emre, physics);
+  p.move();
+  p.keep_object_above_platform(emre, physics);
   my_prison.imprison(emre);
-  
+  my_prison.imprison(p);
   
   emre.display();
   p.display();
+  
 }
 
 void keyPressed(){
