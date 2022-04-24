@@ -38,17 +38,45 @@ void elastic_collision_2d(Substance obj1, Substance obj2){
 }
 
 PVector get_pendulum_velocity(Pendulum pendulum){
+  // Note: this function is made up of a lot of math and physics work that has not been double checked by a second person 
+  // (I've concluded that it appears to be working properly via visual inspection)
+  // proceed with caution
+  
+  
   /* using conservation of energy we can find the magnitude of the velocity
   mgh = 1/2 * m * v^2
   2gh = v^2
   sqrt(2*g*h) = |v|
   */
   float magnitude = sqrt(2*g*abs(pendulum.hanging_thing.coordinate.y - pendulum.minimum_h));
+ 
+  
+  /*
+  since the pendulum is in circular motion, we know the velocity's direction will be tangent to the circle 
+  To find the slope of the tangent to the circle, let's take the derivative of the equation of a circle:
+  x^2 + y^2 = r^2
+  d(x^2)/dx + d(y^2)/dx = 0
+  2x + 2y * dy/dx = 0
+  dy/dx = -2x/2y
+  dy/dx = -x/y
+  
+  since this is the slope, it is equal to tan(theta) where theta is the angle between the line and the x axis
+  
+  therefore:
+  tan(theta) = -x/y
+  theta = tan^(-1)(-x/y)
+ 
+  */
+  
+  // finding what x and y are inside a single vector:
   PVector w = new PVector(abs(pendulum.hanging_thing.coordinate.x - pendulum.pivot.coordinate.x), abs(pendulum.hanging_thing.coordinate.y - pendulum.pivot.coordinate.y));
-
+  
+  // fixing sign if needed:
   if (pendulum.hanging_thing.coordinate.x > pendulum.pivot.coordinate.x) w.x *= - 1;
+
   float angle = atan2(w.x, w.y);
   
+  // Now that we have the magnitude and the angle, all we have to do is convert these polar coordinates to cartesian:
   PVector u = polar_to_cartesian(magnitude, angle);
   return u;
 }
