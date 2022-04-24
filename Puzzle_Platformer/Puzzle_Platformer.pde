@@ -5,14 +5,19 @@
 Player emre;
 Physics physics;
 Prison my_prison;
+ArrayList<Pendulum> pendulums;
 Platform p, p2, p3;
 Pendulum mp1, mp2;
 Circle circle;
 
 void setup() {
-  size(700, 400);
+  size(1400, 1400);
   //PVector center_, float height_, float length_, color colour_
-
+  pendulums = new ArrayList<Pendulum>();
+  int n = 25;
+  for (int i = 0; i < n; i++){
+    pendulums.add(new Pendulum(new PVector(i * width/n, 100), 5, (i + 1) * n, (i+1)*n/2, color(0,0,0)));
+  }
   mp1 = new Pendulum(new PVector(width/2, 100), 10, 150, PI/20, 10);
   mp2 = new Pendulum(new PVector(width*0.7, 100), 10, 225, PI/20, 10);
   mp2.current_theta = -PI/14;
@@ -27,6 +32,7 @@ void setup() {
   physics = new Physics();
   physics.add_obj(emre);
   physics.add_obj(p);
+  
 }
 
 void draw() {
@@ -55,6 +61,11 @@ void draw() {
   mp2.swing();
   mp2.collide(emre);
   mp2.display();
+  for (int i = 0; i < pendulums.size(); i++){
+    pendulums.get(i).swing();
+    pendulums.get(i).collide(emre);
+    pendulums.get(i).display();
+  }
 }
 
 void keyPressed() {
