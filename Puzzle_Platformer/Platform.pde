@@ -10,7 +10,7 @@ class Platform extends Substance{
     super(new PVector(0, 0), center_, height_/2, colour_);
     this.width_ = width_;
     this.height_ = height_;
-    this.bounciness = DEFAULT_BOUNCE;
+    this.bounciness = SUBSTANCE_DEFAULT_BOUNCE;
   }
   
 

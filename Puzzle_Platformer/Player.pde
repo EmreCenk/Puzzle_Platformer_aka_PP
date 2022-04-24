@@ -2,7 +2,7 @@
 
 class Player extends Circle{
   boolean moving_down, moving_right, moving_left;
-  float walking_speed;
+  float walking_speed, jump_power;
   boolean dynamic_colours;
   Player(PVector coordinates_, float radius_, color colour_, float walking_speed_){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
@@ -11,6 +11,7 @@ class Player extends Circle{
     this.moving_left = false;
     this.walking_speed = walking_speed_;
     this.dynamic_colours = true;
+    this.jump_power = 10;
     
   }
   
@@ -18,7 +19,7 @@ class Player extends Circle{
   
   void jump(){
     if (this.jumping) return;
-    this.velocity.y -= 10;
+    this.velocity.y -= this.jump_power;
     this.jumping = true;
     
   }

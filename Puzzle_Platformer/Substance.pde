@@ -1,7 +1,4 @@
 
-float DEFAULT_MASS = 1.1;
-float DEFAULT_BOUNCINESS = 1.3;
-
 class Substance{
   color colour;
   PVector velocity, coordinate;
@@ -19,7 +16,7 @@ class Substance{
     this.colour = colour_;
     
     //default values:
-    this.bounciness = DEFAULT_BOUNCINESS;
+    this.bounciness = SUBSTANCE_DEFAULT_BOUNCE;
     this.mass = DEFAULT_MASS;
     this.jumping = false;  
     this.previous_coordinate = new PVector(coordinates_.x, coordinates_.y);
@@ -45,10 +42,7 @@ class Substance{
     this.coordinate.add(this.velocity);
   }
   void draw_velocity(){
-    //frameRate(10);
-    this.velocity.mult(10);
     line(this.coordinate.x, this.coordinate.y, this.coordinate.x + this.velocity.x, this.coordinate.y + this.velocity.y);
-    this.velocity.mult(1/10);
   }
   
 

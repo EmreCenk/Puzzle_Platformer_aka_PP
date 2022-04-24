@@ -1,7 +1,4 @@
 
-float DEFAULT_BOUNCE = 0;
-
-
 class Prison{
   // this class creates the wall boundaries that beyblades bounce off of
 
@@ -11,7 +8,7 @@ class Prison{
   Prison(float x1, float y1, float x2, float y2){
     this.top_left = new PVector(x1, y1);
     this.bottom_right = new PVector(x2, y2);
-    this.bounciness = DEFAULT_BOUNCE; //default value
+    this.bounciness = SUBSTANCE_DEFAULT_BOUNCE;
   }
   
   Prison(float x1, float y1, float x2, float y2, float bounce_loss){

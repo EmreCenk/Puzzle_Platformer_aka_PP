@@ -1,6 +1,5 @@
 
 
-float USEFUL_COEF = 600;
 class Pendulum{
   
   Circle hanging_thing, pivot;
@@ -12,6 +11,7 @@ class Pendulum{
     
     //note: theta in radians
     this.pivot = new Circle(new PVector(0, 0), coordinate_, circle_radius/2, colour);
+    //this.pivot.mass = 1;
     this.hanging_thing = new Circle(new PVector(0, 0), new PVector(0, 0), 10, colour);
     this.string_length = length_of_string;
     this.time_period = 2*PI*sqrt(this.string_length/g); 
@@ -21,7 +21,7 @@ class Pendulum{
     this.angular_acceleration = 0;
     this.angular_speed = 0;
     
-    this.usefullness_coefficient = USEFUL_COEF;
+    this.usefullness_coefficient = PENDULUM_VELOCITY_USEFULLNESS_COEFFICIENT;
     this.initialize_height();
   }
   Pendulum(PVector coordinate_, float circle_radius, float length_of_string, float theta){
@@ -37,7 +37,7 @@ class Pendulum{
     this.pivot.display();
     this.hanging_thing.display();
     line(this.pivot.coordinate.x, this.pivot.coordinate.y, this.hanging_thing.coordinate.x, this.hanging_thing.coordinate.y);
-    this.draw_velocity();
+    //this.draw_velocity();
   }
   
   void update_velocity(){
