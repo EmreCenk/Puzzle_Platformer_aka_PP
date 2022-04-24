@@ -78,5 +78,8 @@ PVector get_pendulum_velocity(Pendulum pendulum){
   
   // Now that we have the magnitude and the angle, all we have to do is convert these polar coordinates to cartesian:
   PVector u = polar_to_cartesian(magnitude, angle);
+  
+  if (pendulum.hanging_thing.coordinate.x > pendulum.pivot.coordinate.x) u.mult(-1);
+
   return u;
 }

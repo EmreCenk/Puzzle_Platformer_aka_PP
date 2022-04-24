@@ -35,15 +35,20 @@ class Substance{
    this.bounciness = bounciness_;
   }
 
-
+  void change_position(PVector new_coordinate){
+    this.previous_coordinate = new PVector(this.coordinate.x, this.coordinate.y);
+    this.coordinate = new_coordinate;
+  }
 
   void move(){
     this.previous_coordinate = new PVector(this.coordinate.x, this.coordinate.y);
     this.coordinate.add(this.velocity);
   }
   void draw_velocity(){
-  
+    frameRate(10);
+    this.velocity.mult(10);
     line(this.coordinate.x, this.coordinate.y, this.coordinate.x + this.velocity.x, this.coordinate.y + this.velocity.y);
+    this.velocity.mult(1/10);
   }
   
 

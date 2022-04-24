@@ -14,15 +14,7 @@ class Player extends Circle{
     
   }
   
-  void walk_right(){
-    this.previous_coordinate.x = this.coordinate.x;
-    this.coordinate.x += this.walking_speed;
-  }
-  
-  void walk_left(){
-    this.previous_coordinate.x = this.coordinate.x;
-    this.coordinate.x -= this.walking_speed;
-  }
+
   
   void jump(){
     if (this.jumping) return;
@@ -30,13 +22,23 @@ class Player extends Circle{
     this.jumping = true;
     
   }
+  void move(){
+    if (this.moving_left) this.velocity.x -= this.walking_speed;
+    if (this.moving_right) this.velocity.x += this.walking_speed;
+    
+    super.move();    
 
-  void check_player_movement(){
+    if (this.moving_left) this.velocity.x += this.walking_speed;
+    if (this.moving_right) this.velocity.x -= this.walking_speed;
+    
+
+  }
+  //void check_player_movement(){
     //if (this.moving_up) this.move_up();
     //if (this.moving_down) this.move_down();
-    if (this.moving_right) this.walk_right();
-    if (this.moving_left) this.walk_left();
-  }
+    //if (this.moving_right) this.walk_right();
+    //if (this.moving_left) this.walk_left();
+  //}
   
   void key_press_movement(){
     if (keyCode == UP) this.jump();

@@ -1,6 +1,6 @@
 
 float g = 9.81;
-
+float epsilon = 0.5; // close to 0 but not quite
 class Physics{
   ArrayList<Substance> objs;
   float gravity_intensity;
@@ -22,10 +22,16 @@ class Physics{
     v2 = 9.81/FPS + vy
     */
     for (int i = 0; i < this.objs.size(); i++){
-      this.objs.get(i).velocity.y += this.gravity_intensity/frameRate; 
+      this.objs.get(i).velocity.y += this.gravity_intensity/frameRate; // gravity
+      this.objs.get(i).velocity.x *= 0.99; // friction
+      if (abs(this.objs.get(i).velocity.x) < epsilon) this.objs.get(i).velocity.x = 0;
+      
     }
   }
   
+  void velocity_loss(){
+
+  }
   void add_obj(Substance some_object){
     this.objs.add(some_object);
   }
