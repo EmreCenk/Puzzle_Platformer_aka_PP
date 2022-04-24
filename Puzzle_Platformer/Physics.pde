@@ -1,4 +1,5 @@
 
+float g = 9.81;
 
 class Physics{
   ArrayList<Substance> objs;
@@ -6,12 +7,12 @@ class Physics{
   
   Physics(){
     this.objs = new ArrayList<Substance>();
-    this.gravity_intensity = 9.81;
+    this.gravity_intensity = g;
   }
   void gravity(){
     /* 
-    we use a = -9.81 as our acceleration and derive a formula to find the new velocity
-    a = 9.81 m/s^2 (since down is positive on the screen)
+    we use a = g as our acceleration and derive a formula to find the new velocity
+    a = g m/s^2 (since down is positive on the screen)
     v1 = vy
     t = 1/FPS
     v2 = ?

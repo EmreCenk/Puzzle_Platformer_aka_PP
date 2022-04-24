@@ -15,10 +15,12 @@ class Player extends Circle{
   }
   
   void walk_right(){
+    this.previous_coordinate.x = this.coordinate.x;
     this.coordinate.x += this.walking_speed;
   }
   
   void walk_left(){
+    this.previous_coordinate.x = this.coordinate.x;
     this.coordinate.x -= this.walking_speed;
   }
   

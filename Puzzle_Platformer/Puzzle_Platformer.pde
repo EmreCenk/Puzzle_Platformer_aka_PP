@@ -3,24 +3,25 @@
 
 
 Player emre;
-PhysicsManager physics;
+Physics physics;
 Prison my_prison;
 Platform p, p2, p3;
 Pendulum myPendulum;
+Circle circle;
 
 void setup(){
-  size(400, 400);
+  size(1400, 400);
   //PVector center_, float height_, float length_, color colour_
 
   myPendulum = new Pendulum(new PVector(100, 100), 10, 150, PI/20, 10);
-
+  //circle = new Circle(new PVector(0,_, PVector coordinates_, float radius_, color colour_);
   p = new Platform(new PVector(100, 300), 100, 20, color(0, 0, 0));
   p2 = new Platform(new PVector(200, 300), 100, 20, color(0, 0, 0));
   p3 = new Platform(new PVector(300, 200), 100, 20, color(0, 0, 0));
 
   my_prison = new Prison();
-  emre = new Player(new PVector(width/2, height/2), 25, color(0, 0, 0), 1);
-  physics = new PhysicsManager();
+  emre = new Player(new PVector(300, 100), 25, color(0, 0, 0), 1);
+  physics = new Physics();
   physics.add_obj(emre);
   physics.add_obj(p);
 
@@ -47,6 +48,7 @@ void draw(){
   p3.display();
 
   myPendulum.swing();
+  myPendulum.collide(emre);
   myPendulum.display();
 
 }

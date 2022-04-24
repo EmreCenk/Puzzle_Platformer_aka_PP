@@ -15,7 +15,7 @@ class Platform extends Substance{
   
 
   
-  void keep_object_above_platform(Substance some_substance, PhysicsManager phys){
+  void keep_object_above_platform(Substance some_substance, Physics phys){
     // this method is the definition of "you had one job"
     // lifts the substance
     PVector top_left = new PVector(this.coordinate.x - width_/2, this.coordinate.y - height_/2);
@@ -30,7 +30,7 @@ class Platform extends Substance{
       else{
         some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
-      some_substance.velocity.mult(-(bounciness + some_substance.bounciness) / 2);      
+      some_substance.velocity.y *= -(bounciness + some_substance.bounciness) / 2;      
       some_substance.jumping = false;
 
     }

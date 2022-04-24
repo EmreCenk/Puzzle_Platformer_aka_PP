@@ -1,0 +1,54 @@
+
+// file for physics calculations
+
+
+float[] elastic_collision_1d(float m1, float v1, float m2, float v2){
+  // using physics to simulate collisions  
+  // conservation of momentum: m1*v1 + m2*v2 = m1*v1' + m2*v2'
+  // conservation of kinetic energy (assuming no energy is lost): m1*(v1^2) + m2*(v2^2) = m1*(v1'^2) + m2*(v2'^2)
+  // Note: I'm not sure if momentum and kinetic energy is treated differently when the objects are spinning
+  // As a result, I will be treating the beyblades as if they are non-spinning objects
+
+  float new_v2, new_v1;
+  float p_i = m1 * v1 + m2 * v2; // initial momentum
+  float Ek_i = m1 * v1 * v1 + m2 * v2 * v2; // initial kinetic energy
+  float[] v2_final_options = solve_quadratic(m2 + (m2*m2)/m1, -2*p_i*m2/m1, p_i*p_i/m1 - Ek_i); // the result of a page of algebra and 15+ minutes of my life
+
+  //one of the answers will be inadmissible:
+  if (v2_final_options[0] == v2) new_v2 = v2_final_options[1];
+  else new_v2 = v2_final_options[0];
+  
+  new_v1 = (p_i - m2 * new_v2)/m1;
+  if (new_v1 == Float.NaN || new_v2 == Float.NaN){stop();}
+  return new float[] {new_v1, new_v2};
+}
+
+
+void elastic_collision_2d(Substance obj1, Substance obj2){
+  // calculates what would happen if 2 beyblades collided
+  // if this function has been called, we are sure that the 2 beyblades are intersecting at some point
+  
+  // note: since this is 2d we have to do each component individually :(
+  float [] x_components = elastic_collision_1d(obj1.mass, obj1.velocity.x, obj2.mass, obj2.velocity.x);  
+  float [] y_components = elastic_collision_1d(obj1.mass, obj1.velocity.y, obj2.mass, obj2.velocity.y);
+  
+  obj1.velocity  = new PVector(x_components[0], y_components[0]).mult(0.99);
+  obj2.velocity = new PVector(x_components[1], y_components[1]).mult(0.99);
+
+}
+
+PVector get_pendulum_velocity(Pendulum pendulum){
+  /* using conservation of energy we can find the magnitude of the velocity
+  mgh = 1/2 * m * v^2
+  2gh = v^2
+  sqrt(2*g*h) = |v|
+  */
+  float magnitude = sqrt(2*g*abs(pendulum.hanging_thing.coordinate.y - pendulum.minimum_h));
+  PVector w = new PVector(abs(pendulum.hanging_thing.coordinate.x - pendulum.pivot.coordinate.x), abs(pendulum.hanging_thing.coordinate.y - pendulum.pivot.coordinate.y));
+
+  if (pendulum.hanging_thing.coordinate.x > pendulum.pivot.coordinate.x) w.x *= - 1;
+  float angle = atan2(w.x, w.y);
+  
+  PVector u = polar_to_cartesian(magnitude, angle);
+  return u;
+}

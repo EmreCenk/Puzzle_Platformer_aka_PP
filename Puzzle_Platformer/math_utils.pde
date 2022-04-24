@@ -103,3 +103,33 @@ int sign(float a){
   return -1;
 
 }
+
+float dot_product(PVector a, PVector b){
+  return (a.x*b.x + a.y*b.y);
+}
+
+PVector subtract(PVector a, PVector b){
+  return new PVector(a.x - b.x, a.y - b.y);
+}
+
+PVector project(PVector a, PVector b){
+  // projecting vector a onto vector b
+  // this is equivalent to finding where the point would fall if a perpendicular line was drawn vector a to vector b
+  // Here's a neat proof: https://www.youtube.com/watch?v=aTBtgW7U-Y8
+  
+  float k = dot_product(a, b) / dot_product(b, b);
+  return new PVector(k * b.x, k * b.y);
+  
+}
+boolean line_intersects_circle(PVector line_point_1, PVector line_point_2, PVector circle_center, float radius1, float radius2){
+  
+  // if the circle isn't even inside the rectangle that would be drawn with the line points, then it definitely isn't on the line
+  if (!circle_in_rect(line_point_1, line_point_2, circle_center, radius1 + radius2, 1)) return false;
+  
+  //PVector projected_point = new PVector(0, 0);
+  PVector actual_vector = subtract(line_point_1, line_point_2);
+  PVector projected_point = project(circle_center, actual_vector); 
+  float distance = dist(circle_center.x, circle_center.y, projected_point.x, projected_point.y);
+  return (distance < radius1 + radius2);
+
+}
