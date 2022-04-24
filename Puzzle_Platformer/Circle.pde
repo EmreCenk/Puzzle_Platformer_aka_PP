@@ -20,9 +20,6 @@ class Circle extends Substance{
   
   void collide(Substance obj){
     if (this.is_colliding(obj)){
-      println("a");
-
-      println(this.velocity);
       elastic_collision_2d(obj, this);
     }
   }

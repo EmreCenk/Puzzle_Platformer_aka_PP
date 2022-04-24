@@ -20,7 +20,7 @@ void setup() {
   p3 = new Platform(new PVector(width*0.2, 200), 100, 20, color(0, 0, 0));
 
   my_prison = new Prison();
-  emre = new Player(new PVector(300, 100), 25, color(0, 0, 0), 1);
+  emre = new Player(new PVector(375, 100), 25, color(0, 0, 0), 1);
   physics = new Physics();
   physics.add_obj(emre);
   physics.add_obj(p);

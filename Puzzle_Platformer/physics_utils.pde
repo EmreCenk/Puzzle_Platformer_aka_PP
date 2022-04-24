@@ -43,14 +43,10 @@ PVector get_pendulum_velocity(Pendulum pendulum){
   // proceed with caution
   
   
-  /* using conservation of energy we can find the magnitude of the velocity
-  mgh = 1/2 * m * v^2
-  2gh = v^2
-  sqrt(2*g*h) = |v|
-  */
-  float magnitude = sqrt(2*g*abs(pendulum.hanging_thing.coordinate.y - pendulum.minimum_h));
- 
+  // we already know the magnitude:
+  float magnitude = pendulum.angular_speed;
   
+  //now lets find the direction:
   /*
   since the pendulum is in circular motion, we know the velocity's direction will be tangent to the circle 
   To find the slope of the tangent to the circle, let's take the derivative of the equation of a circle:
@@ -63,23 +59,25 @@ PVector get_pendulum_velocity(Pendulum pendulum){
   since this is the slope, it is equal to tan(theta) where theta is the angle between the line and the x axis
   
   therefore:
+  tan(theta) = dy/dx = -x/y
   tan(theta) = -x/y
   theta = tan^(-1)(-x/y)
  
   */
   
-  // finding what x and y are inside a single vector:
-  PVector w = new PVector(abs(pendulum.hanging_thing.coordinate.x - pendulum.pivot.coordinate.x), abs(pendulum.hanging_thing.coordinate.y - pendulum.pivot.coordinate.y));
+  // finding what x and y are:
+  float x = abs(pendulum.hanging_thing.coordinate.x - pendulum.pivot.coordinate.x);
+  float y = abs(pendulum.hanging_thing.coordinate.y - pendulum.pivot.coordinate.y);
   
   // fixing sign if needed:
-  if (pendulum.hanging_thing.coordinate.x > pendulum.pivot.coordinate.x) w.x *= - 1;
+  if (pendulum.hanging_thing.coordinate.x > pendulum.pivot.coordinate.x) x *= - 1;
 
-  float angle = atan2(w.x, w.y);
+  float angle = atan2(x, y);
   
   // Now that we have the magnitude and the angle, all we have to do is convert these polar coordinates to cartesian:
   PVector u = polar_to_cartesian(magnitude, angle);
   
-  if (pendulum.hanging_thing.coordinate.x > pendulum.pivot.coordinate.x) u.mult(-1);
+  //if (pendulum.hanging_thing.coordinate.x > pendulum.pivot.coordinate.x) u.mult(-1);
 
   return u;
 }
