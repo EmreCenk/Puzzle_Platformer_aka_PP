@@ -14,7 +14,7 @@ class Pendulum{
     this.pivot = new Circle(new PVector(0, 0), coordinate_, circle_radius/2, colour);
     this.hanging_thing = new Circle(new PVector(0, 0), new PVector(0, 0), 10, colour);
     this.string_length = length_of_string;
-    this.time_period = 2*PI*sqrt(this.string_length/9.81); // todo: replace with gravity intensity
+    this.time_period = 2*PI*sqrt(this.string_length/g); 
     
     this.max_theta = theta;
     this.current_theta = theta;

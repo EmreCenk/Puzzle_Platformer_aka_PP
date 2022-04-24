@@ -6,14 +6,17 @@ Player emre;
 Physics physics;
 Prison my_prison;
 Platform p, p2, p3;
-Pendulum myPendulum;
+Pendulum mp1, mp2;
 Circle circle;
 
 void setup() {
   size(700, 400);
   //PVector center_, float height_, float length_, color colour_
 
-  myPendulum = new Pendulum(new PVector(width/2, 100), 10, 150, PI/20, 10);
+  mp1 = new Pendulum(new PVector(width/2, 100), 10, 150, PI/20, 10);
+  mp2 = new Pendulum(new PVector(width*0.7, 100), 10, 225, PI/20, 10);
+  mp2.current_theta = -PI/14;
+  
   //circle = new Circle(new PVector(0,_, PVector coordinates_, float radius_, color colour_);
   p = new Platform(new PVector(width*0.4, 300), 100, 20, color(0, 0, 0));
   p2 = new Platform(new PVector(width*0.3, 300), 100, 20, color(0, 0, 0));
@@ -45,9 +48,13 @@ void draw() {
   p2.display();
   p3.display();
 
-  myPendulum.swing();
-  myPendulum.collide(emre);
-  myPendulum.display();
+  mp1.swing();
+  mp1.collide(emre);
+  mp1.display();
+  
+  mp2.swing();
+  mp2.collide(emre);
+  mp2.display();
 }
 
 void keyPressed() {
