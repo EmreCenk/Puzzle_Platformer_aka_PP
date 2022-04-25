@@ -4,8 +4,7 @@ class Shop{
     
   }
   void opened(){
-    open = !open;
-    shopWindow.setVisible(open);
+    createGUI();
     this.displayIcons();
 
 }

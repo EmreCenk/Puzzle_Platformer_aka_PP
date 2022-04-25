@@ -33,14 +33,10 @@ public void createGUI(){
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
   
-// raw top left of gui : (0, 228), bottom right : (370, 728)
-// icons start at top left : (0, 228), stop at bottom right : (200, 728)
-  
   shopWindow = GWindow.getWindow(this, "shop", 0, 200, 370, 500, JAVA2D);
   shopWindow.setActionOnClose(G4P.CLOSE_WINDOW);
   shopWindow.addDrawHandler(this, "draw_shop");
   shopWindow.addMouseHandler(this, "windowMouse");
-  shopWindow.setVisible(false);
   shopWindow.loop();
   
 }

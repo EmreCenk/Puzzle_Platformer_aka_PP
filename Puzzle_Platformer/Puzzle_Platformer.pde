@@ -17,7 +17,6 @@ Pendulum mp1, mp2;
 Circle circle;
 
 void setup() {
-  createGUI();
   pick = new Pickaxe(10, 10);
   test.addToStock(pick);
   test.addToStock(pick);
