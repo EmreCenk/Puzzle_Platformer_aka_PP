@@ -19,8 +19,12 @@ class Circle extends Substance{
   }
   
   void collide(Substance obj){
-    if (this.is_colliding(obj)){
-      elastic_collision_2d(obj, this);
-    }
+    
+    if (!this.is_colliding(obj)) return;
+    float delta_d = obj.radius+this.radius - dist(this.coordinate.x, this.coordinate.y, obj.coordinate.x, obj.coordinate.y);
+    float theta = atan2(obj.coordinate.y - this.coordinate.y, obj.coordinate.x - this.coordinate.x);    
+    obj.coordinate.add(polar_to_cartesian(delta_d, theta));
+    elastic_collision_2d(obj, this);
+    
   }
 }
