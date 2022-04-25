@@ -82,26 +82,26 @@ class Pendulum{
     // So here's a new physics rule: in our world, the velocity of a pendulum happens to magicallybecome way more powerful in collisions
 
     this.update_velocity();
-    this.hanging_thing.velocity.mult(this.usefullness_coefficient);
+    this.hanging_thing.velocity.mult(-this.usefullness_coefficient);
     this.hanging_thing.collide(obj);
-    this.hanging_thing.velocity.mult(1/(this.usefullness_coefficient));
-
-    println(this.hanging_thing.velocity);
-    println(project(this.hanging_thing.velocity, get_pendulum_velocity(this)), project(this.hanging_thing.velocity, get_pendulum_velocity(this)).mag());
-    println();
-
-    this.angular_speed = project(this.hanging_thing.velocity, get_pendulum_velocity(this)).mag();
+    this.hanging_thing.velocity.mult(-1/(this.usefullness_coefficient));
+    
+    if (obj.coordinate.x > this.hanging_thing.coordinate.x){
+      
+    }
+    PVector vel = get_pendulum_velocity(this);
+    this.angular_speed = project(this.hanging_thing.velocity, vel).mag();
     this.draw_velocity();
     
 }
   
   void draw_velocity(){
     //we have to multiply by this or it's not even visible
-    //println(this.hanging_thing.velocity.mult(frameRate));
-
-    this.hanging_thing.velocity.mult(this.usefullness_coefficient);
+    this.update_velocity();
+    this.hanging_thing.velocity.mult(10*this.usefullness_coefficient);
+    println(this.hanging_thing.velocity.mag());
     this.hanging_thing.draw_velocity();
-    this.hanging_thing.velocity.mult(1/(this.usefullness_coefficient));
+    this.hanging_thing.velocity.mult(1/(10*this.usefullness_coefficient));
 
   }
 }
