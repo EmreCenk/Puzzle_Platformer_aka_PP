@@ -1,4 +1,7 @@
+import g4p_controls.*;
 
+boolean open = false;
+Shop test = new Shop();
 
 
 
