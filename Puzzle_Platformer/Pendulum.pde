@@ -69,21 +69,30 @@ class Pendulum{
   }
   
   void collide(Substance obj){
-    this.update_velocity();
-    this.pivot.collide(obj);
+    this.pivot.collide(obj); // the pivot is always has a velocity of 0 anyways so we don't need to multiply by some coefficient
     
+    if (!this.hanging_thing.is_colliding(obj)) return;
     //if (this.hanging_thing.is_colliding(obj)){
     //  obj.change_position(new PVector(obj.coordinate.x, obj.coordinate.y));
     //}
     
     // here, the velocity of the pendulum is too small to actually be usefull in most physics calculations
     // To counteract this, we have to multiply with some coefficient to make the velocity usefull
-    // So here's a new physics rule: in our world, the velocity of a pendulum happens to become way more powerful in collisions
+    // So here's a new physics rule: in our world, the velocity of a pendulum happens to magicallybecome way more powerful in collisions
+
+    this.update_velocity();
     this.hanging_thing.velocity.mult(this.usefullness_coefficient);
     this.hanging_thing.collide(obj);
     this.hanging_thing.velocity.mult(1/(this.usefullness_coefficient));
 
-  }
+    println(this.hanging_thing.velocity);
+    println(project(this.hanging_thing.velocity, get_pendulum_velocity(this)), project(this.hanging_thing.velocity, get_pendulum_velocity(this)).mag());
+    println();
+
+    this.angular_speed = project(this.hanging_thing.velocity, get_pendulum_velocity(this)).mag();
+    this.draw_velocity();
+    
+}
   
   void draw_velocity(){
     //we have to multiply by this or it's not even visible

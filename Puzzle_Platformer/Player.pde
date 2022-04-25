@@ -29,8 +29,8 @@ class Player extends Circle{
     
     super.move();    
 
-    if (this.moving_left) this.velocity.x += this.walking_speed;
-    if (this.moving_right) this.velocity.x -= this.walking_speed;
+    //if (this.moving_left) this.velocity.x += this.walking_speed;
+    //if (this.moving_right) this.velocity.x -= this.walking_speed;
     
 
   }
