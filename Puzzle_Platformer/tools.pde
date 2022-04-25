@@ -1,6 +1,7 @@
-class Tools{
+class Tool{
   int price;
   PImage icon;
+  String path;
   
   
 }
