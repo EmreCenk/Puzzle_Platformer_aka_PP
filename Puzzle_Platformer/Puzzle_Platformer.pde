@@ -3,7 +3,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 
 
-boolean open = true;
+boolean open = false;
 Shop test = new Shop();
 Pickaxe pick;
 
@@ -26,9 +26,9 @@ void setup() {
   test.addToStock(pick);
   test.addToStock(pick);
   test.addToStock(pick);
-  //size(700, 500);
   
   createGUI();
+  shopWindow.setVisible(open);
   
     //frameRate(5);
 
