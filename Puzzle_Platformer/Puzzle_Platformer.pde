@@ -26,7 +26,7 @@ void setup() {
   test.addToStock(pick);
   test.addToStock(pick);
   test.addToStock(pick);
-  size(700, 500);
+  //size(700, 500);
   
   createGUI();
   
@@ -34,7 +34,7 @@ void setup() {
 
   size(1200, 500);
 
-  pick = new Pickaxe(10, 10, "pick.png");
+  pick = new Pickaxe(10, 10);
   test.addToStock(pick);
   test.displayIcons();
   
