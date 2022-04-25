@@ -18,7 +18,6 @@ Circle circle;
 
 void setup() {
   createGUI();
-    //frameRate(5);
   pick = new Pickaxe(10, 10);
   test.addToStock(pick);
   test.addToStock(pick);
@@ -110,6 +109,4 @@ void iconClicked(){
   Point mouse;
   mouse = MouseInfo.getPointerInfo().getLocation();
   println( "X=" + mouse.x + " Y=" + mouse.y );
-  
-  
 }
