@@ -1,5 +1,5 @@
 class Shop{
-  ArrayList<Tools> stock = new ArrayList<Tools> ();
+  ArrayList<Tool> stock = new ArrayList<Tool> ();
   Shop(){
     
   }
@@ -8,7 +8,7 @@ class Shop{
     shopWindow.setVisible(open);
   }
   
-  void addToStock(Tools a){
+  void addToStock(Tool a){
     this.stock.add(a);
   }
   
@@ -16,7 +16,7 @@ class Shop{
     int x = 0;
     int y = 0;
     for(int i = 0; i < stock.size(); i ++){
-      win_draw(stock.get(i).icon, x, y);
+      //win_draw(loadImage(stock.get(i).path), x, y);
     }
     
   }

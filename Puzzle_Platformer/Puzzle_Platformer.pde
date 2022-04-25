@@ -2,7 +2,7 @@ import g4p_controls.*;
 
 boolean open = false;
 Shop test = new Shop();
-
+Pickaxe pick;
 
 
 Player emre;
@@ -14,8 +14,14 @@ Pendulum mp1, mp2;
 Circle circle;
 
 void setup() {
+  createGUI();
+  
     //frameRate(5);
-
+  pick = new Pickaxe(10, 10, "pick.png");
+  test.addToStock(pick);
+  test.displayIcons();
+  
+  
   size(700, 500);
   //PVector center_, float height_, float length_, color colour_
   pendulums = new ArrayList<Pendulum>();
@@ -77,6 +83,9 @@ void draw() {
 
 void keyPressed() {
   emre.key_press_movement();
+  if(key == 'p'){
+    test.opened();
+  }
 }
 
 void keyReleased() {
