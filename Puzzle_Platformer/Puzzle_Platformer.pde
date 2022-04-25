@@ -11,7 +11,7 @@ Pendulum mp1, mp2;
 Circle circle;
 
 void setup() {
-    frameRate(5);
+    //frameRate(5);
 
   size(700, 500);
   //PVector center_, float height_, float length_, color colour_
@@ -31,7 +31,7 @@ void setup() {
 
   my_prison = new Prison();
   emre = new Player(new PVector(width*0.3, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6);
-  emre.velocity = new PVector(70, 0);
+  //emre.velocity = new PVector(70, 0);
   
   physics = new Physics();
   physics.add_obj(emre);

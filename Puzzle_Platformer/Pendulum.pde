@@ -71,10 +71,11 @@ class Pendulum{
   void collide(Substance obj){
     this.pivot.collide(obj); // the pivot is always has a velocity of 0 anyways so we don't need to multiply by some coefficient
     
-    if (!this.hanging_thing.is_colliding(obj)) return;
+    if (!this.hanging_thing.is_colliding(obj)) return; // technically checked twice (once here, then once in the collide function)
     //if (this.hanging_thing.is_colliding(obj)){
     //  obj.change_position(new PVector(obj.coordinate.x, obj.coordinate.y));
     //}
+    
     
     // here, the velocity of the pendulum is too small to actually be usefull in most physics calculations
     // To counteract this, we have to multiply with some coefficient to make the velocity usefull
