@@ -1,4 +1,7 @@
 import g4p_controls.*;
+import java.awt.MouseInfo;
+import java.awt.Point;
+
 
 boolean open = false;
 Shop test = new Shop();
@@ -15,14 +18,18 @@ Circle circle;
 
 void setup() {
   createGUI();
-  
     //frameRate(5);
-  pick = new Pickaxe(10, 10, "pick.png");
+  pick = new Pickaxe(10, 10);
   test.addToStock(pick);
-  test.displayIcons();
-  
-  
+  test.addToStock(pick);
+  test.addToStock(pick);
+  test.addToStock(pick);
+  test.addToStock(pick);
+  test.addToStock(pick);
+  test.addToStock(pick);
+  test.addToStock(pick);
   size(700, 500);
+  
   //PVector center_, float height_, float length_, color colour_
   pendulums = new ArrayList<Pendulum>();
   int n = 0;
@@ -47,8 +54,12 @@ void setup() {
   physics.add_obj(p);
   
 }
-
 void draw() {
+  Point mouse;
+  mouse = MouseInfo.getPointerInfo().getLocation();
+  println( "X=" + mouse.x + " Y=" + mouse.y );
+  
+  
   background(255);
   physics.gravity();
 
@@ -90,4 +101,15 @@ void keyPressed() {
 
 void keyReleased() {
   emre.key_up_movement();
+}
+
+// raw top left of gui : (0, 228), bottom right : (370, 728)
+// icons start at top left : (0, 228), stop at bottom right : (200, 728)
+
+void iconClicked(){
+  Point mouse;
+  mouse = MouseInfo.getPointerInfo().getLocation();
+  println( "X=" + mouse.x + " Y=" + mouse.y );
+  
+  
 }
