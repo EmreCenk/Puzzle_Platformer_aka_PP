@@ -7,6 +7,7 @@ class Shop{
     open = !open;
     shopWindow.setVisible(open);
     this.displayIcons();
+    
 
 }
   

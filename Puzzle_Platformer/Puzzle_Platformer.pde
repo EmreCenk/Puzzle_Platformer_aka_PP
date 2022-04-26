@@ -16,6 +16,7 @@ Pendulum mp1, mp2;
 Circle circle;
 
 void setup() {
+
   size(1200, 500);
   createGUI();
   shopWindow.setVisible(open);
@@ -32,6 +33,7 @@ void setup() {
   itemShop.addToStock(pick2);
   itemShop.displayIcons();
   //---------------------------------------------------------------------------\\
+
   
   
   //PVector center_, float height_, float length_, color colour_
