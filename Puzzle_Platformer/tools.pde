@@ -42,14 +42,18 @@ class Tool{
       if(mouse.x > 223 && mouse.x < 273 && mouse.y > 300 && mouse.y < 350){
         if(itemShop.stock.contains(this)){
           if(emre.inventory.size() < emre.invSize){
-            if(emre.money > price){
+            if(emre.money >= price){
               emre.money -= price;
               emre.addItemToInv(this);
               itemShop.stock.remove(this);
               itemShop.update();
               label.setText("");
               priceLabel.setText("");
+            }else{
+              println("YOU ARE BROKE");
             }
+          }else{
+            println("YOUR INVENTORY IS FULL");
           }
         }
       }
