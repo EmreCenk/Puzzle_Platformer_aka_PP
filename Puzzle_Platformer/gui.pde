@@ -32,11 +32,11 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  
   shopWindow = GWindow.getWindow(this, "shop", 0, 200, 370, 500, JAVA2D);
-  shopWindow.setActionOnClose(G4P.CLOSE_WINDOW);
+  shopWindow.setActionOnClose(G4P.KEEP_OPEN);
   shopWindow.addDrawHandler(this, "draw_shop");
   shopWindow.addMouseHandler(this, "windowMouse");
+  
   shopWindow.loop();
   
 }
