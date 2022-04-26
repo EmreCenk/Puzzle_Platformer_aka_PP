@@ -30,7 +30,7 @@ class Platform extends Substance{
       else{
         some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
-      some_substance.velocity.y *= -(bounciness + some_substance.bounciness) / 2;      
+      some_substance.velocity.y *= -sqrt(bounciness * some_substance.bounciness);      
       some_substance.jumping = false;
 
     }

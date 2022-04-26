@@ -1,12 +1,11 @@
 import g4p_controls.*;
-import java.awt.MouseInfo;
-import java.awt.Point;
+import java.awt.*;
 
 
 boolean open = false;
-Shop test = new Shop();
+Shop itemShop = new Shop();
 Pickaxe pick;
-
+Pickaxe pick2;
 
 Player emre;
 Physics physics;
@@ -17,35 +16,33 @@ Pendulum mp1, mp2;
 Circle circle;
 
 void setup() {
-  pick = new Pickaxe(10, 10);
-  test.addToStock(pick);
-  test.addToStock(pick);
-  test.addToStock(pick);
-  test.addToStock(pick);
-  test.addToStock(pick);
-  test.addToStock(pick);
-  test.addToStock(pick);
-  test.addToStock(pick);
-  
+
+  size(1200, 500);
   createGUI();
   shopWindow.setVisible(open);
   
-    //frameRate(5);
-
-  size(1200, 500);
-
-  pick = new Pickaxe(10, 10);
-  test.addToStock(pick);
-  test.displayIcons();
+  //----------------- create items ------------------------------\\
+  pick = new Pickaxe(10, 10, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  pick2 = new Pickaxe(20, 20, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  
+  //--------------------------------------------------------------\\
   
   
+  //------------------------ add items to shop -------------------------------\\
+  itemShop.addToStock(pick);
+  itemShop.addToStock(pick2);
+  itemShop.displayIcons();
+  //---------------------------------------------------------------------------\\
 
+  
+  
   //PVector center_, float height_, float length_, color colour_
   pendulums = new ArrayList<Pendulum>();
   int n = 0;
   for (int i = 0; i < n; i++){
     pendulums.add(new Pendulum(new PVector(i * width/n, 100), 5, ((i + 1) * 10), ((i+1)*n/2)%n, color(0,0,0)));
   }
+  
   mp1 = new Pendulum(new PVector(width*0.4, 100), 10, 150, PI/20, 10);
   mp2 = new Pendulum(new PVector(width*0.6, 100), 10, 225, PI/20, 10);
   mp2.current_theta = -PI/14;
@@ -65,11 +62,6 @@ void setup() {
   
 }
 void draw() {
-  Point mouse;
-  mouse = MouseInfo.getPointerInfo().getLocation();
-  println( "X=" + mouse.x + " Y=" + mouse.y );
-  
-  
   background(255);
   physics.gravity();
 
@@ -109,7 +101,7 @@ void draw() {
 void keyPressed() {
   emre.key_press_movement();
   if(key == 'p'){
-    test.opened();
+    itemShop.opened();
   }
 }
 
@@ -117,11 +109,36 @@ void keyReleased() {
   emre.key_up_movement();
 }
 
-// raw top left of gui : (0, 228), bottom right : (370, 728)
+// raw top left of gui : (0, 230), bottom right : (400, 730)
 // icons start at top left : (0, 228), stop at bottom right : (200, 728)
 
+int tdToOd(int x, int y){
+  return(x + 4*y);
+}
+
 void iconClicked(){
+  int xOffset = 0;
+  int yOffset = 230;
   Point mouse;
   mouse = MouseInfo.getPointerInfo().getLocation();
-  println( "X=" + mouse.x + " Y=" + mouse.y );
+  for(int y = 0; y < ceil(itemShop.stock.size() / 4.0); y++){
+    for(int x = 0; x < 4; x++){
+      if(mouse.x > xOffset + x * 50 && mouse.x < xOffset + 50 + x * 50){
+        if(mouse.y > yOffset + y*50 && mouse.y < yOffset + 50 + y * 50){
+          itemShop.stock.get(tdToOd(x, y)).clicked();
+        }
+      }
+    }
+  }
+}
+
+void updateShopWindow(){
+  shopWindow.background(255);
+}
+
+int size = 50;
+void outline(int x, int y, int size){
+  shopWindow.stroke(0);
+  shopWindow.strokeWeight(2);
+  shopWindow.rect(x, y, size, size);
 }

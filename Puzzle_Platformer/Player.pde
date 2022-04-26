@@ -11,9 +11,11 @@ class Player extends Circle{
     this.moving_left = false;
     this.walking_speed = walking_speed_;
     this.dynamic_colours = true;
+    
     this.jump_power = 8;
-    this.terminal_velocity = DEFAULT_TERMINAL_VELOCITY;
 
+    this.terminal_velocity = DEFAULT_TERMINAL_VELOCITY;
+    this.bounciness = DEFAULT_PLAYER_BOUNCINESS;
 }
   
 
