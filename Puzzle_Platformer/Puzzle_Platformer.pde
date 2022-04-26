@@ -1,6 +1,7 @@
 import g4p_controls.*;
 import java.awt.*;
 
+
 int inventorySize = 2;
 int money = 100;
 boolean open = false;
