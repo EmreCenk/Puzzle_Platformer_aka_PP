@@ -60,7 +60,7 @@ void setup() {
   p3 = new Platform(new PVector(width*0.3, 200), 100, 20, color(0, 0, 0));
 
   my_prison = new Prison();
-  emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, 6);
+  emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, 2);
   //emre.velocity = new PVector(70, 0);
   
   physics = new Physics();

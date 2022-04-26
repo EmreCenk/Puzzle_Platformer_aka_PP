@@ -31,21 +31,23 @@ class Tool{
   }
   
   void displayBuyButton(){
-    println("displaying button");
     buyLabel.setText("buy");
     outline(223, 50, 50, color(0, 255, 0));
     
   }
   
   void buyButtClicked(){
-    println("");
-    println("buy clicked");
     if(selected){
       if(mouse.x > 223 && mouse.x < 273 && mouse.y > 280 && mouse.y < 330){
         if(itemShop.stock.contains(this)){
-          itemShop.stock.remove(this);
-          itemShop.update();
-          label.setText("");
+          if(emre.inventory.size() < emre.invSize){
+            emre.addItemToInv(this);
+            itemShop.stock.remove(this);
+            itemShop.update();
+            label.setText("");
+          }else{
+            println("inventory is full");
+          }
         }
       }
     }
