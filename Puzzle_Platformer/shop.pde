@@ -7,8 +7,6 @@ class Shop{
     open = !open;
     shopWindow.setVisible(open);
     this.displayIcons();
-    
-
 }
   
   void addToStock(Tool a){
@@ -20,7 +18,7 @@ class Shop{
     int x = 0;
     int y = 0;
     for( int i = 0 ; i < stock.size(); i++){ 
-      outline(x, y, size);
+      outline(x, y, size, 0);
       shopWindow.image(stock.get(i).icon, x, y);
       
       x += size;

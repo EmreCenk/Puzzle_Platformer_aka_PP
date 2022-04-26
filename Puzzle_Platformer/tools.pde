@@ -2,42 +2,39 @@ class Tool{
   int price;
   PImage icon;
   String desc;
-  Tool(int p, PImage i, String d){
+  int uses;
+  Tool(int p, PImage i, String d, int u){
     price = p;
     i.resize(50, 50);
     icon = i;
     desc = d;
+    uses = u;
   }
   void clicked(){
-    
+    itemShop.displayIcons();
+    explain();
   }
+  
   void explain(){
     label.setText(desc);
+    itemShop.displayIcons();
+    outline(275, 50, size, 0);
+    shopWindow.image(icon, 275, 50);
   }
   
 }
 
 //--------------------------------------------PICKAXE---------------------------------------------------------\\
 class Pickaxe extends Tool{
-  
-  int uses;
-  Pickaxe(int u, int p, PImage i, String d){
-    super(p, i, d);
-    this.uses = u;
+  Pickaxe(int p, PImage i, String d, int u){
+    super(p, i, d, u);
   }
   
-  void explain(){
-    super.explain();
-    itemShop.displayIcons();
-    outline(275, 50, size);
-    shopWindow.image(icon, 275, 50);
-    
+}
+
+class Block extends Tool{
+  Block(int p, PImage i, String d, int u){
+    super(p, i, d, u);
   }
-  
-  void clicked(){
-    explain();
-    
-  }
-  
   
 }
