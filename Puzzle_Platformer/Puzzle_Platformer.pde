@@ -1,19 +1,20 @@
 import g4p_controls.*;
 import java.awt.*;
 int inventorySize = 2;
-int money = 10;
-
+int money = 100;
 boolean open = false;
 Shop itemShop = new Shop();
-//----------------- create items-------------------
+
+//----------------- create items-----------------
 Pickaxe pick;
 Pickaxe pick2;
 Block dirt;
 Block diamond;
 
-//---------------------------------------------
+//-----------------------------------------------
 
-//-------------- emre stuff idk---------------
+
+//-------------- emre stuff idk------------------
 Player emre;
 Physics physics;
 Prison my_prison;
@@ -32,7 +33,6 @@ void setup() {
   size(1200, 500);
   createGUI();
   shopWindow.setVisible(open);
-  
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
   pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
