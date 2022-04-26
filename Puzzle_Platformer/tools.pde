@@ -24,29 +24,32 @@ class Tool{
   
   void explain(){
     label.setText(desc);
+    priceLabel.setText("$"+ str(price));
     itemShop.update();
     displayBuyButton();
-    outline(275, 50, size, 0);
-    shopWindow.image(icon, 275, 50);
+    outline(275, 70, size, 0);
+    shopWindow.image(icon, 275, 70);
   }
   
   void displayBuyButton(){
     buyLabel.setText("buy");
-    outline(223, 50, 50, color(0, 255, 0));
+    outline(223, 70, 50, color(0, 255, 0));
     
   }
   
   void buyButtClicked(){
     if(selected){
-      if(mouse.x > 223 && mouse.x < 273 && mouse.y > 280 && mouse.y < 330){
+      if(mouse.x > 223 && mouse.x < 273 && mouse.y > 300 && mouse.y < 350){
         if(itemShop.stock.contains(this)){
           if(emre.inventory.size() < emre.invSize){
-            emre.addItemToInv(this);
-            itemShop.stock.remove(this);
-            itemShop.update();
-            label.setText("");
-          }else{
-            println("inventory is full");
+            if(emre.money > price){
+              emre.money -= price;
+              emre.addItemToInv(this);
+              itemShop.stock.remove(this);
+              itemShop.update();
+              label.setText("");
+              priceLabel.setText("");
+            }
           }
         }
       }
