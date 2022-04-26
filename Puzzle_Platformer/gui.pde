@@ -37,7 +37,7 @@ public void createGUI(){
   shopWindow.setActionOnClose(G4P.KEEP_OPEN);
   shopWindow.addDrawHandler(this, "draw_shop");
   shopWindow.addMouseHandler(this, "windowMouse");
-  label = new GLabel(shopWindow, 200, 0, 200, 500);
+  label = new GLabel(shopWindow, 200, -75, 200, 500);
   label.setFont(new Font("Monospaced", Font.PLAIN, 20));
   label.setLocalColor(2, color(0,0,0));
   label.setText("");

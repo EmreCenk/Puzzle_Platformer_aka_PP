@@ -6,6 +6,7 @@ boolean open = false;
 Shop itemShop = new Shop();
 Pickaxe pick;
 Pickaxe pick2;
+Block dirt;
 
 Player emre;
 Physics physics;
@@ -22,8 +23,10 @@ void setup() {
   shopWindow.setVisible(open);
   
   //----------------- create items ------------------------------\\
-  pick = new Pickaxe(10, 10, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  pick2 = new Pickaxe(20, 20, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  // Tool(price, PImage, description, uses) 
+  pick = new Pickaxe(10, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
+  pick2 = new Pickaxe(20, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 20);
+  dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   
   //--------------------------------------------------------------\\
   
@@ -31,6 +34,7 @@ void setup() {
   //------------------------ add items to shop -------------------------------\\
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
+  itemShop.addToStock(dirt);
   itemShop.displayIcons();
   //---------------------------------------------------------------------------\\
 
@@ -137,8 +141,8 @@ void updateShopWindow(){
 }
 
 int size = 50;
-void outline(int x, int y, int size){
-  shopWindow.stroke(0);
+void outline(int x, int y, int size, color col){
+  shopWindow.stroke(col);
   shopWindow.strokeWeight(2);
   shopWindow.rect(x, y, size, size);
 }
