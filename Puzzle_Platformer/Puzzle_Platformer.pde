@@ -5,10 +5,15 @@ int money = 10;
 
 boolean open = false;
 Shop itemShop = new Shop();
+//----------------- create items-------------------
 Pickaxe pick;
 Pickaxe pick2;
 Block dirt;
+Block diamond;
 
+//---------------------------------------------
+
+//-------------- emre stuff idk---------------
 Player emre;
 Physics physics;
 Prison my_prison;
@@ -16,6 +21,8 @@ ArrayList<Pendulum> pendulums;
 Platform p, p2, p3;
 Pendulum mp1, mp2;
 Circle circle;
+
+//------------------------------------------------
 
 Point mouse;
 
@@ -31,6 +38,7 @@ void setup() {
   pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
+  diamond = new Block(30, loadImage("images/diamond.png"), "DIAMOND AAAAAAA", 10);
   
   //--------------------------------------------------------------\\
   
@@ -39,6 +47,7 @@ void setup() {
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
   itemShop.addToStock(dirt);
+  itemShop.addToStock(diamond);
   //---------------------------------------------------------------------------\\
 
   

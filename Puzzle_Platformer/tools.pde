@@ -49,6 +49,7 @@ class Tool{
               itemShop.update();
               label.setText("");
               priceLabel.setText("");
+              usesLabel.setText("");
             }else{
               println("YOU ARE BROKE");
             }
@@ -67,6 +68,11 @@ class Pickaxe extends Tool{
   Pickaxe(int p, PImage i, String d, int u){
     super(p, i, d, u);
   }
+  void explain(){
+    usesLabel.setText("uses :" + str(uses));
+    super.explain();
+    
+  }
   
 }
 
@@ -74,4 +80,11 @@ class Block extends Tool{
   Block(int p, PImage i, String d, int u){
     super(p, i, d, u);
   }
+  
+  void explain(){
+    usesLabel.setText("blocks :" + str(uses));
+    super.explain();
+    
+  }
+  
 }
