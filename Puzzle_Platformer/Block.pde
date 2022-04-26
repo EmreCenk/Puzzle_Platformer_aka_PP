@@ -1,5 +1,5 @@
-class Block extends Platform {
-   Block (PVector center_, float height_, color colour_){
+class PlayBlock extends Platform {
+   PlayBlock (PVector center_, float height_, color colour_){
    super(center_, height_, height_, colour_); 
    
     PVector block1 = new PVector(this.coordinate.x - height_, this.coordinate.y - height_);
