@@ -6,6 +6,8 @@ class Shop{
   void opened(){
     open = !open;
     shopWindow.setVisible(open);
+    shopWindow.fill(255);
+    fill(255);
     update();
     displayIcons();
     
