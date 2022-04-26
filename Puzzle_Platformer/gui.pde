@@ -15,13 +15,16 @@
  */
 
 public void draw_shop(PApplet appc, GWinData data) {
-  
 }
 
 public void windowMouse(PApplet appc, GWinData data, MouseEvent event) {
   if (event.getAction() == MouseEvent.CLICK){ //?? 
     iconClicked();
+    for(int i = 0; i < itemShop.stock.size(); i ++){
+      itemShop.stock.get(i).buyButtClicked();
+    }
   }
+  
 }
 
 // Create all the GUI controls.
@@ -41,6 +44,12 @@ public void createGUI(){
   label.setFont(new Font("Monospaced", Font.PLAIN, 20));
   label.setLocalColor(2, color(0,0,0));
   label.setText("");
+  
+  buyLabel = new GLabel(shopWindow, 228, 50, 50, 50);
+  buyLabel.setFont(new Font("Monospaced", Font.PLAIN, 20));
+  buyLabel.setLocalColor(2, color(0,0,0));
+  buyLabel.setText("");
+  
   shopWindow.frameRate(60);
   shopWindow.loop();
   
@@ -52,3 +61,4 @@ public void createGUI(){
 GWindow shopWindow;
 GImageButton img; 
 GLabel label; 
+GLabel buyLabel;

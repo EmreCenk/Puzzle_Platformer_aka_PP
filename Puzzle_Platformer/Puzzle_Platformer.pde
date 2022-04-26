@@ -16,6 +16,9 @@ Platform p, p2, p3;
 Pendulum mp1, mp2;
 Circle circle;
 
+Point mouse;
+
+
 void setup() {
 
   size(1200, 500);
@@ -35,7 +38,7 @@ void setup() {
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
   itemShop.addToStock(dirt);
-  itemShop.displayIcons();
+  itemShop.update();
   //---------------------------------------------------------------------------\\
 
   
@@ -57,7 +60,7 @@ void setup() {
   p3 = new Platform(new PVector(width*0.3, 200), 100, 20, color(0, 0, 0));
 
   my_prison = new Prison();
-  emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6);
+  emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, 6);
   //emre.velocity = new PVector(70, 0);
   
   physics = new Physics();
@@ -66,6 +69,8 @@ void setup() {
   
 }
 void draw() {
+  mouse = MouseInfo.getPointerInfo().getLocation();
+  //println(mouse.x, mouse.y);
   background(255);
   physics.gravity();
 
@@ -120,23 +125,28 @@ int tdToOd(int x, int y){
   return(x + 4*y);
 }
 
+
+
 void iconClicked(){
   int xOffset = 0;
   int yOffset = 230;
-  Point mouse;
-  mouse = MouseInfo.getPointerInfo().getLocation();
   for(int y = 0; y < ceil(itemShop.stock.size() / 4.0); y++){
     for(int x = 0; x < 4; x++){
       if(mouse.x > xOffset + x * 50 && mouse.x < xOffset + 50 + x * 50){
         if(mouse.y > yOffset + y*50 && mouse.y < yOffset + 50 + y * 50){
           itemShop.stock.get(tdToOd(x, y)).clicked();
+          
         }
       }
     }
   }
 }
 
-void updateShopWindow(){
+void iconBought(){
+  
+}
+
+void shopBackground(){
   shopWindow.background(255);
 }
 

@@ -14,7 +14,6 @@ class Shop{
   }
   
   void displayIcons(){
-    updateShopWindow();
     int x = 0;
     int y = 0;
     for( int i = 0 ; i < stock.size(); i++){ 
@@ -28,7 +27,17 @@ class Shop{
       }
     }  
   }
+  void update(){
+    shopBackground();
+    buyLabel.setText("");
+    displayIcons();
+  }
   
+  void itemBought(Tool a){
+    stock.remove(a);
+    update();
+    
+  }
 
 }
   
