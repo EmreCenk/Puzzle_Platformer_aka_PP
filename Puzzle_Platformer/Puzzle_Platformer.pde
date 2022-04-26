@@ -2,7 +2,7 @@ import g4p_controls.*;
 import java.awt.*;
 
 
-int inventorySize = 2;
+int inventorySize = 4;
 int money = 100;
 boolean open = false;
 Shop itemShop = new Shop();
@@ -31,6 +31,7 @@ Point mouse;
 
 
 void setup() {
+  fill(0);
 
   size(1200, 500);
   createGUI();

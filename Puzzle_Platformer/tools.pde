@@ -50,6 +50,7 @@ class Tool{
               label.setText("");
               priceLabel.setText("");
               usesLabel.setText("");
+              emre.displayInventory();
             }else{
               println("YOU ARE BROKE");
             }

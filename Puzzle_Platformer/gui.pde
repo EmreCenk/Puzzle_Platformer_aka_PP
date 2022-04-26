@@ -15,6 +15,7 @@
  */
 
 public void draw_shop(PApplet appc, GWinData data) {
+  
 }
 
 public void windowMouse(PApplet appc, GWinData data, MouseEvent event) {
@@ -66,8 +67,25 @@ public void createGUI(){
   usesLabel.setLocalColor(2, color(0,0,0));
   usesLabel.setText("");
   
+  shopWindow.background(255);
   shopWindow.frameRate(60);
   shopWindow.loop();
+  for(int i = 0; i < 20; i++){
+    int x = 0;
+    int y = 0;
+    PImage temp = loadImage("images/money.png");
+    temp.resize(50, 50);
+    shopWindow.image(temp, 200, 0);
+    for( int j = 0 ; j < itemShop.stock.size(); j++){ 
+      outline(x, y, size, 0);
+      shopWindow.image(itemShop.stock.get(j).icon, x, y);
+      x += size;
+      if(i%4 == 3){
+        x = 0;
+        y += size;
+      }
+    }  
+  }
   
 }
 
