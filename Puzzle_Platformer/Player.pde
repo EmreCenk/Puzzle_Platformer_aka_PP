@@ -1,11 +1,14 @@
-
-
 class Player extends Circle{
+  int invSize;
+  ArrayList <Tool> inventory;
+  
   boolean moving_down, moving_right, moving_left;
   float walking_speed, jump_power, terminal_velocity;
   boolean dynamic_colours;
-  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_){
+  
+  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int iSize){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
+    inventory = new ArrayList <Tool> (invSize);
     this.moving_down = false;
     this.moving_right = false;
     this.moving_left = false;
@@ -72,5 +75,19 @@ class Player extends Circle{
     stroke(color_to_use);
     fill(color_to_use);
     circle(this.coordinate.x, this.coordinate.y, 2*this.radius);
+    displayInventory();
   }
+  
+  void addItemToInv(Tool a){
+    inventory.add(a);
+  }
+  
+  void displayInventory(){
+    //println("displaying inventory");
+  }
+ 
+  
+  
+  
+  
 }
