@@ -101,7 +101,7 @@ class Pendulum{
     //we have to multiply by this or it's not even visible
     this.update_velocity();
     this.hanging_thing.velocity.mult(10*this.usefullness_coefficient);
-    println(this.hanging_thing.velocity.mag());
+    //println(this.hanging_thing.velocity.mag());
     this.hanging_thing.draw_velocity();
     this.hanging_thing.velocity.mult(1/(10*this.usefullness_coefficient));
 

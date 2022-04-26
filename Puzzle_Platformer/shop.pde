@@ -15,11 +15,13 @@ class Shop{
   }
   
   void displayIcons(){
-    int size = 50;
+    updateShopWindow();
     int x = 0;
     int y = 0;
-    for( int i = 0 ; i < stock.size(); i++){
-      img = new GImageButton(shopWindow, x, y, size, size, new String[] { stock.get(i).iconPath } );
+    for( int i = 0 ; i < stock.size(); i++){ 
+      outline(x, y, size);
+      shopWindow.image(stock.get(i).icon, x, y);
+      
       x += size;
       if(i%4 == 3){
         x = 0;
