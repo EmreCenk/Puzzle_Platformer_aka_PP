@@ -79,11 +79,11 @@ class Pendulum{
     
     // here, the velocity of the pendulum is too small to actually be usefull in most physics calculations
     // To counteract this, we have to multiply with some coefficient to make the velocity usefull
-    // So here's a new physics rule: in our world, the velocity of a pendulum happens to magicallybecome way more powerful in collisions
+    // So here's a new physics rule: in our world, the velocity of a pendulum happens to magically become way more powerful in collisions
     this.update_velocity();
-    this.hanging_thing.velocity.mult(-this.usefullness_coefficient);
+    this.hanging_thing.velocity.mult(this.usefullness_coefficient);
     this.hanging_thing.collide(obj);
-    this.hanging_thing.velocity.mult(-1/(this.usefullness_coefficient));
+    this.hanging_thing.velocity.mult(1/(this.usefullness_coefficient));
     
     //if (obj.getClass().getName() == "Puzzle_Platformer$Player"){
     obj.jumping = false;
