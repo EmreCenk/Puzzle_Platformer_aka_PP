@@ -114,7 +114,7 @@ void draw() {
     pendulums.get(i).collide(emre);
     pendulums.get(i).display();
   }
-  
+ 
 }
 
 void keyPressed() {

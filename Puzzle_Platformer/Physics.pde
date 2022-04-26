@@ -10,6 +10,7 @@ class Physics{
     this.gravity_intensity = g;
     this.mu = DEFAULT_MU; // coefficient of friction
   }
+  
   void gravity(){
     /* 
     we use a = g as our acceleration and derive a formula to find the new velocity
@@ -36,6 +37,7 @@ class Physics{
     else obj.velocity.x = max(0, obj.velocity.x - friction_acceleration);
     obj.velocity.x *= 0.99; // friction
   }
+  
   void add_obj(Substance some_object){
     this.objs.add(some_object);
   }
