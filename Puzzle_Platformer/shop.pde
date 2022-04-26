@@ -7,6 +7,7 @@ class Shop{
     open = !open;
     shopWindow.setVisible(open);
     this.displayIcons();
+    update();
 }
   
   void addToStock(Tool a){
@@ -14,6 +15,7 @@ class Shop{
   }
   
   void displayIcons(){
+    emre.displayInventory();
     int x = 0;
     int y = 0;
     PImage temp = loadImage("images/money.png");
@@ -31,6 +33,7 @@ class Shop{
       }
     }  
   }
+  
   void update(){
     shopBackground();
     buyLabel.setText("");
@@ -40,7 +43,6 @@ class Shop{
   void itemBought(Tool a){
     stock.remove(a);
     update();
-    
   }
 
 }

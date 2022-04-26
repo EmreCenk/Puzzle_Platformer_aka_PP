@@ -34,8 +34,8 @@ class Tool{
   void displayBuyButton(){
     buyLabel.setText("buy");
     outline(223, 70, 50, color(0, 255, 0));
-    
   }
+  
   
   void buyButtClicked(){
     if(selected){
@@ -55,6 +55,7 @@ class Tool{
             }
           }else{
             println("YOUR INVENTORY IS FULL");
+            
           }
         }
       }

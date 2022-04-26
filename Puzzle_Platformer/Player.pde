@@ -85,8 +85,21 @@ class Player extends Circle{
   }
   
   void displayInventory(){
-    //println("displaying inventory");
+    int x = 200;
+    int y = 400;
+    for( int j = 0 ; j < inventory.size(); j++){ 
+      outline(x, y, size, 0);
+      shopWindow.image(inventory.get(j).icon, x, y);
+      x += size;
+      
+      if(j%4 == 3){
+        x = 0;
+        y += size;
+      }
+    }  
+    
   }
+ 
  
   
   
