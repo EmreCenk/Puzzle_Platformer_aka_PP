@@ -1,4 +1,5 @@
 class Player extends Circle{
+  int money;
   int invSize;
   ArrayList <Tool> inventory = new ArrayList <Tool>();
   
@@ -6,9 +7,10 @@ class Player extends Circle{
   float walking_speed, jump_power, terminal_velocity;
   boolean dynamic_colours;
   
-  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv){
+  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
     invSize = inv;
+    money = m;
     this.moving_down = false;
     this.moving_right = false;
     this.moving_left = false;

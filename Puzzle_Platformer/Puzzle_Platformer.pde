@@ -1,6 +1,7 @@
 import g4p_controls.*;
 import java.awt.*;
-
+int inventorySize = 2;
+int money = 1900000000;
 
 boolean open = false;
 Shop itemShop = new Shop();
@@ -27,8 +28,8 @@ void setup() {
   
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
-  pick = new Pickaxe(10, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
-  pick2 = new Pickaxe(20, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 20);
+  pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
+  pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   
   //--------------------------------------------------------------\\
@@ -38,7 +39,6 @@ void setup() {
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
   itemShop.addToStock(dirt);
-  itemShop.update();
   //---------------------------------------------------------------------------\\
 
   
@@ -60,13 +60,14 @@ void setup() {
   p3 = new Platform(new PVector(width*0.3, 200), 100, 20, color(0, 0, 0));
 
   my_prison = new Prison();
-  emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, 2);
+  emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money);
   //emre.velocity = new PVector(70, 0);
   
   physics = new Physics();
   physics.add_obj(emre);
   physics.add_obj(p);
   
+  itemShop.update();
 }
 void draw() {
   mouse = MouseInfo.getPointerInfo().getLocation();
