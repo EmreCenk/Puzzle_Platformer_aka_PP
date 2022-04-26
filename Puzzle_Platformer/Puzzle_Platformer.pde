@@ -155,10 +155,6 @@ void iconClicked(){
   }
 }
 
-void iconBought(){
-  
-}
-
 void shopBackground(){
   shopWindow.background(255);
 }
