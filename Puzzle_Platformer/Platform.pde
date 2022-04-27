@@ -19,8 +19,15 @@ class Platform extends Substance{
   void keep_object_above_platform(Substance some_substance){
     // this method is the definition of "you had one job"
     // lifts the substance
-    PVector top_left = new PVector(this.coordinate.x - width_/2, this.coordinate.y - height_/2);
-    PVector bottom_right = new PVector(this.coordinate.x + width_/2, this.coordinate.y + height_/2);
+    PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
+    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+    
+    boolean outside_y = (some_substance.coordinate.y < top_left.y - some_substance.radius * 0.5 || some_substance.coordinate.y > bottom_right.y + some_substance.radius * 0.5);
+    if (some_substance.radius*2 > this.height_ && !outside_y){
+      if (abs(top_left.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = top_left.x - some_substance.radius;
+      else if (abs(bottom_right.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = bottom_right.x + some_substance.radius;
+      //return;
+    }
     
     if (circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 0.5) ){
       // could be more efficient if we only checked if they are parralel but that is too much typing lol
@@ -42,12 +49,12 @@ class Platform extends Substance{
   }
   
   void display(){
-    PVector top_left = new PVector(this.coordinate.x - width_/2, this.coordinate.y - height_/2);
-    PVector bottom_right = new PVector(this.coordinate.x + width_/2, this.coordinate.y + height_/2);
+    PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
+    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
     
     stroke(this.colour);
     fill(this.colour);
-    rect(top_left.x, top_left.y, width_, height_);
+    rect(top_left.x, top_left.y, this.width_, height_);
     circle(top_left.x, top_left.y, 10);
     circle(bottom_right.x, bottom_right.y, 10);
     stroke(255);

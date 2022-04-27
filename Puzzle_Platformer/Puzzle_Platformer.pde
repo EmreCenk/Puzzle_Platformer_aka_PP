@@ -69,12 +69,12 @@ void setup() {
 
 
   //circle = new Circle(new PVector(0,_, PVector coordinates_, float radius_, color colour_);
-  p = new Platform(new PVector(width*0.1, 300), 100, 20, color(0, 0, 0));
+  p = new Platform(new PVector(width*0.4, 300), 100, 20, color(0, 0, 0));
   p2 = new Platform(new PVector(width*0.3, 350), 1300, 20, color(0, 0, 0));
-  p3 = new Platform(new PVector(width*0.3, 200), 100, 20, color(0, 0, 0));
+  p3 = new Platform(new PVector(width*0.6, 200), 100, 20, color(0, 0, 0));
 
   my_prison = new Prison();
-  emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money);
+  emre = new Player(new PVector(width*0.01, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money);
   //emre.velocity = new PVector(70, 0);
 
   physics = new PhysicsManager();
@@ -98,8 +98,7 @@ void draw() {
   //println(mouse.x, mouse.y);
   background(255);
 
-  //physics.apply_friction_to_universe();
-  
+  physics.apply_friction_to_universe();
   physics.apply_gravity_to_universe();
   physics.update_positions_in_universe();
   physics.apply_collision_in_universe();
