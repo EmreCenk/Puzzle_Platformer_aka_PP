@@ -18,7 +18,7 @@ Block diamond;
 
 //-------------- emre stuff idk------------------
 Player emre;
-Physics physics;
+PhysicsManager physics;
 Prison my_prison;
 ArrayList<Pendulum> pendulums;
 Platform p, p2, p3;
@@ -77,7 +77,7 @@ void setup() {
   emre = new Player(new PVector(width*0.7, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money);
   //emre.velocity = new PVector(70, 0);
   
-  physics = new Physics();
+  physics = new PhysicsManager();
   physics.add_obj(emre);
   physics.add_obj(p);
   physics.add_obj(b);
@@ -88,8 +88,8 @@ void draw() {
   mouse = MouseInfo.getPointerInfo().getLocation();
   //println(mouse.x, mouse.y);
   background(255);
-  physics.gravity();
-
+  physics.apply_gravity_to_universe();
+  physics.apply_friction_to_universe();
 
 
   emre.move();

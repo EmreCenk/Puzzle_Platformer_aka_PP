@@ -1,17 +1,17 @@
 
 
 
-class Physics{
+class PhysicsManager{
   ArrayList<Substance> objs;
   float gravity_intensity, mu;
   
-  Physics(){
+  PhysicsManager(){
     this.objs = new ArrayList<Substance>();
     this.gravity_intensity = g;
     this.mu = DEFAULT_MU; // coefficient of friction
   }
   
-  void gravity(){
+  void apply_gravity_to_universe(){
     /* 
     we use a = g as our acceleration and derive a formula to find the new velocity
     a = g m/s^2 (since down is positive on the screen)
@@ -25,11 +25,16 @@ class Physics{
     */
     for (int i = 0; i < this.objs.size(); i++){
       this.objs.get(i).velocity.y += this.gravity_intensity/frameRate; // gravity
-      this.slow_down_object(this.objs.get(i));
-      if (abs(this.objs.get(i).velocity.x) < epsilon) this.objs.get(i).velocity.x = 0;
-      
+     
     }
   }
+  void apply_friction_to_universe(){
+    for (int i = 0; i < this.objs.size(); i++){
+      this.slow_down_object(this.objs.get(i));
+      if (abs(this.objs.get(i).velocity.x) < epsilon) this.objs.get(i).velocity.x = 0;
+      }
+  }
+ 
   
   void slow_down_object(Substance obj){
     float friction_acceleration = this.mu * this.gravity_intensity;
