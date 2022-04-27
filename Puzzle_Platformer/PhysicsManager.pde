@@ -8,6 +8,7 @@ class PhysicsManager{
   ArrayList<Platform> platforms;
   ArrayList<Prison> prisons;
   ArrayList<Pendulum> pendulums;
+  Player player;
   float gravity_intensity, mu;
   
   PhysicsManager(){
@@ -141,4 +142,5 @@ class PhysicsManager{
     //this.add_circle(pendulum.hanging_thing);
     //this.add_circle(pendulum.pivot);
   }
+  
 }

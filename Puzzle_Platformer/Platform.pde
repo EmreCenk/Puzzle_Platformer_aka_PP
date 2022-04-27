@@ -17,7 +17,7 @@ class Platform extends Substance{
 
   
   void keep_object_above_platform(Substance some_substance){
-    // this method is the definition of "you had one job"
+
     // lifts the substance
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
     PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
