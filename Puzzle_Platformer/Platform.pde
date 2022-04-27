@@ -49,6 +49,9 @@ class Platform extends Substance{
     rect(top_left.x, top_left.y, width_, height_);
     circle(top_left.x, top_left.y, 10);
     circle(bottom_right.x, bottom_right.y, 10);
+    stroke(255);
+    fill(255);
+    
   }
 
 }

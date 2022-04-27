@@ -26,10 +26,9 @@ Pendulum mp1, mp2;
 Circle circle;
 PlayBlock b;
 
-//------------------------------------------------
+//-----------------------------------------------
 
 Point mouse;
-
 
 void setup() {
   fill(0);
@@ -167,10 +166,6 @@ void iconClicked(){
       }
     }
   }
-}
-
-void iconBought(){
-  
 }
 
 void shopBackground(){
