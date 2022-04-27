@@ -14,11 +14,11 @@
  * =========================================================
  */
 
-public void draw_shop(PApplet appc, GWinData data) {
+synchronized public void draw_shop(PApplet appc, GWinData data) {
   
 }
 
-public void windowMouse(PApplet appc, GWinData data, MouseEvent event) {
+synchronized public void windowMouse(PApplet appc, GWinData data, MouseEvent event) {
   if (event.getAction() == MouseEvent.CLICK){ //?? 
     iconClicked();
     for(int i = 0; i < itemShop.stock.size(); i ++){
