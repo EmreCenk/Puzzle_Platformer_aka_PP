@@ -24,6 +24,7 @@ ArrayList<Pendulum> pendulums;
 Platform p, p2, p3;
 Pendulum mp1, mp2;
 Circle circle;
+PlayBlock b;
 
 //------------------------------------------------
 
@@ -35,7 +36,7 @@ void setup() {
 
   size(1200, 500);
   createGUI();
-  shopWindow.setVisible(open);
+  //shopWindow.setVisible(open);
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
   pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
@@ -45,7 +46,7 @@ void setup() {
   
   //--------------------------------------------------------------\\
   
-  
+  b = new PlayBlock(new PVector(100, 300), 50, color(0));
   //------------------------ add items to shop -------------------------------\\
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
@@ -78,6 +79,7 @@ void setup() {
   physics = new Physics();
   physics.add_obj(emre);
   physics.add_obj(p);
+  physics.add_obj(b);
   
   itemShop.update();
 }
@@ -87,14 +89,26 @@ void draw() {
   background(255);
   physics.gravity();
 
+
+
   emre.move();
   p.move();
-
-  p.keep_object_above_platform(emre, physics);
-  p2.keep_object_above_platform(emre, physics);
-  p3.keep_object_above_platform(emre, physics);
+  
+  b.keep_object_above_platform(emre);
+  b.move();
+  b.display();
+  
+  p.keep_object_above_platform(emre);
+  p2.keep_object_above_platform(emre);
+  p3.keep_object_above_platform(emre);
+  
+  p.keep_object_above_platform(b);
+  p2.keep_object_above_platform(b);
+  p3.keep_object_above_platform(b);
 
   my_prison.imprison(emre);
+  my_prison.imprison(b);
+
   my_prison.imprison(p);
 
   emre.display();
@@ -117,7 +131,7 @@ void draw() {
     pendulums.get(i).collide(emre);
     pendulums.get(i).display();
   }
- 
+  
 }
 
 void keyPressed() {

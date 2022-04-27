@@ -15,7 +15,7 @@ class Platform extends Substance{
   
 
   
-  void keep_object_above_platform(Substance some_substance, Physics phys){
+  void keep_object_above_platform(Substance some_substance){
     // this method is the definition of "you had one job"
     // lifts the substance
     PVector top_left = new PVector(this.coordinate.x - width_/2, this.coordinate.y - height_/2);
@@ -23,13 +23,16 @@ class Platform extends Substance{
     
     if (circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 0.5) ){
       // could be more efficient if we only checked if they are parralel but that is too much typing lol
-      
+    
+
+
       if (abs(some_substance.coordinate.y - top_left.y) < abs(some_substance.coordinate.y - bottom_right.y) ){
         some_substance.coordinate.y = top_left.y - some_substance.radius;
       }
       else{
         some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
+
       some_substance.velocity.y *= -sqrt(bounciness * some_substance.bounciness);      
       some_substance.jumping = false;
 
