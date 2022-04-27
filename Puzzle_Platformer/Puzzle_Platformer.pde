@@ -66,6 +66,8 @@ void setup() {
   mp2 = new Pendulum(new PVector(width*0.6, 100), 10, 225, PI/20, 10);
   mp2.current_theta = -PI/14;
   
+
+  
   //circle = new Circle(new PVector(0,_, PVector coordinates_, float radius_, color colour_);
   p = new Platform(new PVector(width*0.1, 300), 100, 20, color(0, 0, 0));
   p2 = new Platform(new PVector(width*0.3, 350), 1300, 20, color(0, 0, 0));

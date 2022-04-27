@@ -84,7 +84,7 @@ class Pendulum{
     this.hanging_thing.velocity.mult(this.usefullness_coefficient);
     this.hanging_thing.collide(obj);
     this.hanging_thing.velocity.mult(1/(this.usefullness_coefficient));
-    
+    println("1", this.hanging_thing.velocity);
     //if (obj.getClass().getName() == "Puzzle_Platformer$Player"){
     obj.jumping = false;
     //}
@@ -92,7 +92,16 @@ class Pendulum{
       
     }
     PVector vel = get_pendulum_velocity(this);
-    this.angular_speed = project(this.hanging_thing.velocity, vel).mag();
+    println("2", this.hanging_thing, this.hanging_thing.velocity, vel);
+
+
+    PVector projected = project(this.hanging_thing.velocity, vel);
+    this.angular_speed = projected.mag();
+    if (projected.x < 0) this.angular_speed *= -1;
+    
+    println("3", this.angular_speed);
+    println("-------------------------------");
+    println();println();
     this.draw_velocity();
     
 }
