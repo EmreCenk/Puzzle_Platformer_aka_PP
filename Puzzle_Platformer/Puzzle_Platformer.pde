@@ -87,7 +87,7 @@ void setup() {
   physics.add_platform(p2);
   physics.add_platform(p3);
 
-  physics.add_obj(b);
+  physics.add_block(b);
 
   physics.add_prison(my_prison);
   itemShop.update();

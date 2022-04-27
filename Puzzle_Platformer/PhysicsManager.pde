@@ -11,6 +11,7 @@ class PhysicsManager{
   float gravity_intensity, mu;
   
   PhysicsManager(){
+    this.blocks = new ArrayList<PlayBlock>();
     this.pendulums = new ArrayList<Pendulum>();
     this.prisons = new ArrayList<Prison>();
     this.objs = new ArrayList<Substance>();
@@ -48,6 +49,13 @@ class PhysicsManager{
     for (int i = 0; i < this.pendulums.size(); i++){
       for (int j = 0; j < this.objs.size(); j++){
         this.pendulums.get(i).collide(this.objs.get(j));
+      }
+    }
+    
+    //block collision
+    for (int i = 0; i < this.blocks.size(); i++){
+      for (int j = 0; j < this.objs.size(); j++){
+        this.blocks.get(i).collide(this.objs.get(j));
       }
     }
   }
