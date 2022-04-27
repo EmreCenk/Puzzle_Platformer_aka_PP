@@ -23,6 +23,8 @@ class Pendulum{
     
     this.usefullness_coefficient = PENDULUM_VELOCITY_USEFULLNESS_COEFFICIENT;
     this.initialize_height();
+    
+    this.swing(); // we call swing once to properly initialize the coordinates of the hanging_thing
   }
   Pendulum(PVector coordinate_, float circle_radius, float length_of_string, float theta){
     this(coordinate_, circle_radius, length_of_string, theta, color(0,0,0));

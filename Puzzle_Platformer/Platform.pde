@@ -11,6 +11,7 @@ class Platform extends Substance{
     this.width_ = width_;
     this.height_ = height_;
     this.bounciness = SUBSTANCE_DEFAULT_BOUNCE;
+    this.effected_by_gravity = false; // by default platforms are immune to gravity
   }
   
 
