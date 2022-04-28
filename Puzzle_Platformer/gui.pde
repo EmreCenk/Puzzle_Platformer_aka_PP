@@ -44,7 +44,11 @@ public void createGUI(){
   shopWindow.addDrawHandler(this, "draw_shop");
   shopWindow.addMouseHandler(this, "windowMouse");
   
+<<<<<<< Updated upstream
   //shopWindow.background(255);
+=======
+  shopBackground();
+>>>>>>> Stashed changes
   
   label = new GLabel(shopWindow, 200, 145, 200, 500);
   label.setFont(new Font("Monospaced", Font.PLAIN, 20));
@@ -58,7 +62,7 @@ public void createGUI(){
   invLabel.setTextAlign(GAlign.LEFT, GAlign.TOP);
   invLabel.setText("Inventory: ");
   
-  priceLabel = new GLabel(shopWindow, 330, 70, 70, 50);
+  priceLabel = new GLabel(shopWindow, 330, 80, 70, 50);
   priceLabel.setFont(new Font("Monospaced", Font.PLAIN, 20));
   priceLabel.setLocalColor(2, color(0,0,0));
   priceLabel.setTextAlign(GAlign.LEFT, GAlign.TOP);
