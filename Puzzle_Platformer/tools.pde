@@ -63,6 +63,9 @@ class Tool{
       }
     }
   }
+  void displayTool(int x, int y){
+    image(this.icon, x, y);
+  }
   
 }
 
