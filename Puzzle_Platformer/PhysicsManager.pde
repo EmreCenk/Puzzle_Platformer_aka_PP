@@ -44,9 +44,9 @@ class PhysicsManager{
   }
   void apply_collision_in_universe(){
     // circle collision
-    for (int i = 0; i < this.circles.size(); i++){
-      for (int j = 0; j < this.objs.size(); j++){
-        this.circles.get(i).collide(this.objs.get(j));
+    for (int i = 0; i < this.objs.size(); i++){
+      for (int j = i+1; j < this.objs.size(); j++){
+        this.objs.get(i).collide(this.objs.get(j));
       }
     }
     
@@ -182,7 +182,7 @@ class PhysicsManager{
     this.objs.add(some_object);
   }
   void add_circle(Circle circ){
-    this.circles.add(circ);
+    //this.circles.add(circ);
     this.add_obj(circ);
   }
   void add_block(PlayBlock block){

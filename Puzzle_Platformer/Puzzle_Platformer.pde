@@ -25,6 +25,7 @@ Platform p, p2, p3;
 Pendulum mp1, mp2;
 Circle circle;
 PlayBlock b;
+Circle goal_ball;
 
 //-----------------------------------------------
 
@@ -43,7 +44,7 @@ void setup() {
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   diamond = new Block(30, loadImage("images/diamond.png"), " BLUE BLOCK AAAAAAA", 10);
   emreBlock = new Block(30, loadImage("images/emre.png"), " EMREEEEEEEEEEEEEE", 90);
-
+  
   //--------------------------------------------------------------\\
 
   b = new PlayBlock(new PVector(100, 300), 50, color(0));
@@ -79,10 +80,12 @@ void setup() {
 
   my_prison = new Prison();
   emre = new Player(new PVector(width*0.01, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  
+  goal_ball = new Circle(new PVector(0,0), new PVector(0, 0), 10, color(100, 100, 0));
+  println(goal_ball.velocity);
   //emre.velocity = new PVector(70, 0);
 
   physics = new PhysicsManager();
+  physics.add_circle(goal_ball);
   physics.add_player(emre);
 
   physics.add_pendulum(mp1);
