@@ -94,8 +94,8 @@ void setup() {
   //physics.display_universe();
   noLoop();
 }
+
 void draw() {
-  
   //frameRate(1);
   //println(frameRate);
   //println(mouse.x, mouse.y);
@@ -120,7 +120,10 @@ void keyPressed() {
   if (key == 's'){
     loop();
   }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 }
 
 void keyReleased() {
@@ -150,6 +153,7 @@ void iconClicked() {
 }
 
 void shopBackground() {
+  shopWindow.loop();
   shopWindow.background(255);
 }
 
