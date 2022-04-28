@@ -40,7 +40,7 @@ class PlayBlock extends Platform {
         some_substance.coordinate.y = top_left.y - some_substance.radius;
       }
       else{
-        println(some_substance);
+        //println(some_substance);
         //some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
 

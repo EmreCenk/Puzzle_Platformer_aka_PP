@@ -46,12 +46,8 @@ void setup() {
   //--------------------------------------------------------------\\
 
   b = new PlayBlock(new PVector(100, 300), 50, color(0));
-<<<<<<< Updated upstream
-  //b.mass = 2;
-=======
+
   b.mass = 2;
-  
->>>>>>> Stashed changes
   //------------------------ add items to shop -------------------------------\\
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
@@ -105,17 +101,14 @@ void draw() {
   mouse = MouseInfo.getPointerInfo().getLocation();
   //println(mouse.x, mouse.y);
   background(255);
-
-<<<<<<< Updated upstream
+  
   physics.update_universe();
-=======
   physics.apply_friction_to_universe();
   physics.apply_gravity_to_universe();
   physics.update_positions_in_universe();
   physics.apply_collision_in_universe();
   physics.display_universe();
   
->>>>>>> Stashed changes
 }
 
 void keyPressed() {
