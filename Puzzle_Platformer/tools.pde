@@ -63,9 +63,11 @@ class Tool{
       }
     }
   }
-  void displayTool(int x, int y){
+  void displayTool(int x, int y, int w, int h){
+    icon.resize(w, h);
     image(this.icon, x, y);
   }
+  
   
 }
 
