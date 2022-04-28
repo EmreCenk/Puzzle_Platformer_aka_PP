@@ -85,6 +85,9 @@ class PhysicsManager{
     
     //block collision
     for (int i = 0; i < this.blocks.size(); i++){
+      for (int j = i+1; j<this.blocks.size(); j++){
+        this.blocks.get(i).collide(this.blocks.get(j));
+      }
       for (int j = 0; j < this.objs.size(); j++){
         this.blocks.get(i).collide(this.objs.get(j));
       }

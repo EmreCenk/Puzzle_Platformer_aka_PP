@@ -44,7 +44,7 @@ public void createGUI(){
   shopWindow.addDrawHandler(this, "draw_shop");
   shopWindow.addMouseHandler(this, "windowMouse");
   
-  shopWindow.background(255);
+  //shopWindow.background(255);
   
   label = new GLabel(shopWindow, 200, 145, 200, 500);
   label.setFont(new Font("Monospaced", Font.PLAIN, 20));

@@ -60,7 +60,7 @@ void setup() {
   //mp1 = new Pendulum(new PVector(width*0.4, 100), 10, 150, PI/20, 10);
   //p2 = new Platform(new PVector(width*0.3, 350), 1300, 20, color(0, 0, 0));
   emre = new Player(new PVector(130, 170), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  emre.mass = 7;
+  emre.mass = 5;
   goal_ball = new Circle(new PVector(0,0), new PVector(230, 185), 10, color(100, 100, 0));
   goal_ball.mass = 4;
 
@@ -72,9 +72,9 @@ void setup() {
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
   physics.add_player(emre);
-  physics.add_platform(new Platform(new PVector(30, 200), 500, 20, color(255,0,0))); // red
-  physics.add_platform(new Platform(new PVector(530, 400), 300, 50, color(0,0,0))); // black
-  physics.add_platform(new Platform(new PVector(930, 360), 300, 20, color(0,255,0))); // green
+  physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255,0,0))); // red
+  physics.add_platform(new Platform(new PVector(530, 430), 400, 50, color(0,0,0))); // black
+  physics.add_platform(new Platform(new PVector(960, 450), 300, 20, color(0,255,0))); // green
   
   
   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
@@ -113,12 +113,10 @@ void keyPressed() {
     itemShop.opened();
   }
   
-<<<<<<< HEAD
   if (key == 's'){
     loop();
   }
-=======
->>>>>>> 1cf88ad8f9c2272ce04e1e979708ae1013ee5fd4
+
 }
 
 void keyReleased() {

@@ -59,23 +59,23 @@ class PlayBlock extends Platform {
 
   }
   
-  void display(){
+  //void display(){
 
     
-    color color_to_use;
-    if (!this.jumping){
-      color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
-    }
-    else{
-      color_to_use = this.colour;
-    }
-    PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
-    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+    //color color_to_use;
+    //if (!this.jumping){
+    //  color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
+    //}
+    //else{
+    //  color_to_use = this.colour;
+    //}
+    //PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
+    //PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
     
-    stroke(color_to_use);
-    fill(color_to_use);
-    rect(top_left.x, top_left.y, this.width_, height_);
+    //stroke(color_to_use);
+    //fill(color_to_use);
+    //rect(top_left.x, top_left.y, this.width_, height_);
 
 
-  }
+  //}
 }

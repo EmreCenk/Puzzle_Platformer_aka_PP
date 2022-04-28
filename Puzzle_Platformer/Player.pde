@@ -15,7 +15,7 @@ class Player extends Circle{
     this.moving_right = false;
     this.moving_left = false;
     this.walking_speed = walking_speed_;
-    this.dynamic_colours = true;
+    this.dynamic_colours = false;
     
     this.jump_power = 6;
 
