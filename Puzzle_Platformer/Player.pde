@@ -93,7 +93,7 @@ class Player extends Circle{
       x += size;
       
       if(j%4 == 3){
-        x = 0;
+        x = 200;
         y += size;
       }
     }  
