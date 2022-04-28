@@ -12,6 +12,7 @@ Pickaxe pick;
 Pickaxe pick2;
 Block dirt;
 Block diamond;
+Block emreBlock;
 
 //-----------------------------------------------
 
@@ -40,7 +41,8 @@ void setup() {
   pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
-  diamond = new Block(30, loadImage("images/diamond.png"), "DIAMOND AAAAAAA", 10);
+  diamond = new Block(30, loadImage("images/diamond.png"), " BLUE BLOCK AAAAAAA", 10);
+  emreBlock = new Block(30, loadImage("images/emre.png"), " EMREEEEEEEEEEEEEE", 90);
 
   //--------------------------------------------------------------\\
 
@@ -52,6 +54,7 @@ void setup() {
   itemShop.addToStock(pick2);
   itemShop.addToStock(dirt);
   itemShop.addToStock(diamond);
+  itemShop.addToStock(emreBlock);
   //---------------------------------------------------------------------------\\
 
 
@@ -95,10 +98,11 @@ void setup() {
   itemShop.update();
 }
 void draw() {
+  
   //frameRate(1);
   //println(frameRate);
-  mouse = MouseInfo.getPointerInfo().getLocation();
   //println(mouse.x, mouse.y);
+  mouse = MouseInfo.getPointerInfo().getLocation();
   background(255);
   
   physics.update_universe();
