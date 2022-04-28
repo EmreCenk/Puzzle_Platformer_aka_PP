@@ -73,21 +73,25 @@ void setup() {
   physics.add_circle(goal_ball);
   physics.add_player(emre);
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255,0,0))); // red
-  physics.add_platform(new Platform(new PVector(530, 430), 400, 50, color(0,0,0))); // black
-  physics.add_platform(new Platform(new PVector(960, 450), 300, 20, color(0,255,0))); // green
+  physics.add_platform(new Platform(new PVector(530, 400), 400, 50, color(0,0,0))); // black
+  physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
   
-  
+/////////////////////////////////
+  // STEP 1:
   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   
-  PlayBlock b = new PlayBlock(new PVector(570, 380), 50, color(0));
-  physics.add_block(b);
   
-  b = new PlayBlock(new PVector(630, 380), 50, color(0));
-  physics.add_block(b);
+  // STEP 2:
+  //PlayBlock b = new PlayBlock(new PVector(730, width - 30), 50, color(0));
+  //physics.add_block(b);
+  
+  //b = new PlayBlock(new PVector(750, width-30), 50, color(0));
+  //physics.add_block(b);
 
+/////////////////////////////
   physics.add_prison(my_prison);
-  itemShop.update();
-  physics.display_universe();
+  //itemShop.update();
+  //physics.display_universe();
   noLoop();
 }
 void draw() {
