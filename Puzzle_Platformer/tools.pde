@@ -11,7 +11,7 @@ class Tool{
     i.resize(50, 50);
     icon = i;
     desc = d;
-    hardness = u;
+    hardness = h;
   }
   
   void clicked(){
@@ -74,20 +74,16 @@ class Pickaxe extends Tool{
   void explain(){
     usesLabel.setText("uses :" + str(hardness));
     super.explain();
-    
   }
-  
 }
 
+//----------------------------------------Block---------------------------------------------------
 class Block extends Tool{
   Block(int p, PImage i, String d, int u){
     super(p, i, d, u);
   }
-  
   void explain(){
     usesLabel.setText("blocks :" + str(hardness));
     super.explain();
-    
   }
-  
 }
