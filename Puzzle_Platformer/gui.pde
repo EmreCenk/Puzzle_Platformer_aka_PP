@@ -19,11 +19,12 @@ synchronized public void draw_shop(PApplet appc, GWinData data) {
 }
 
 synchronized public void windowMouse(PApplet appc, GWinData data, MouseEvent event) {
-  if (event.getAction() == MouseEvent.CLICK){ //?? 
+  if (event.getAction() == MouseEvent.CLICK){ 
     iconClicked();
     for(int i = 0; i < itemShop.stock.size(); i ++){
       itemShop.stock.get(i).buyButtClicked();
     }
+    
   }
   
 }
@@ -69,23 +70,9 @@ public void createGUI(){
   
   shopWindow.background(255);
   shopWindow.frameRate(60);
+  shopWindow.setVisible(open);
   shopWindow.loop();
-  for(int i = 0; i < 20; i++){
-    int x = 0;
-    int y = 0;
-    PImage temp = loadImage("images/money.png");
-    temp.resize(50, 50);
-    shopWindow.image(temp, 200, 0);
-    for( int j = 0 ; j < itemShop.stock.size(); j++){ 
-      outline(x, y, size, 0);
-      shopWindow.image(itemShop.stock.get(j).icon, x, y);
-      x += size;
-      if(i%4 == 3){
-        x = 0;
-        y += size;
-      }
-    }  
-  }
+  
   
 }
 

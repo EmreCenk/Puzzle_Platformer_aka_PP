@@ -42,6 +42,7 @@ class Substance{
     this.previous_coordinate = new PVector(this.coordinate.x, this.coordinate.y);
     this.coordinate.add(this.velocity);
   }
+  
   void draw_velocity(){
     line(this.coordinate.x, this.coordinate.y, this.coordinate.x + this.velocity.x, this.coordinate.y + this.velocity.y);
   }

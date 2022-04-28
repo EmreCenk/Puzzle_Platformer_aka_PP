@@ -105,6 +105,7 @@ class PhysicsManager{
       this.blocks.get(i).display();
     }
   }
+  
   void apply_gravity_to_universe(){
     /* 
     we use a = g as our acceleration and derive a formula to find the new velocity
