@@ -84,7 +84,7 @@ class Player extends Circle{
   
   void displayInventory(){
     int x = 200;
-    int y = 400;
+    int y = 300;
     shopWindow.stroke(255);
     shopWindow.fill(255);
     for( int j = 0 ; j < inventory.size(); j++){ 

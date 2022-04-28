@@ -39,11 +39,11 @@ void setup() {
   //shopWindow.setVisible(open);
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
-  pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
-  pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
+  pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe.", 10);
+  pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe.", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
-  bouncy = new Block(30, loadImage("images/diamond.png"), " BLUE BOUNCY BLOCK AAAAAAA", 10);
-  emreBlock = new Block(90, loadImage("images/emre.png"), " EMREEEEEEEEEEEEEE", 1);
+  bouncy = new Block(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
+  emreBlock = new Block(90, loadImage("images/emre.png"), "EMREEEEEEEEEEEEEE.", 1);
   
   //--------------------------------------------------------------\\
 
