@@ -39,7 +39,7 @@ void setup() {
   //shopWindow.setVisible(open);
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
-  pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe.", 10);
+  pick = new Pickaxe(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
   pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe.", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   bouncy = new Block(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
@@ -88,6 +88,7 @@ void setup() {
   physics.add_prison(my_prison);
   itemShop.update();
   physics.display_universe();
+  itemShop.stock.get(0).clicked();
   noLoop();
 }
 
@@ -116,10 +117,6 @@ void keyPressed() {
   if (key == 's'){
     loop();
   }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }
 
 void keyReleased() {

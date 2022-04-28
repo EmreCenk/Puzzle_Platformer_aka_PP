@@ -15,7 +15,7 @@
  */
 
 synchronized public void draw_shop(PApplet appc, GWinData data) {
-  
+  mouse = MouseInfo.getPointerInfo().getLocation();
 }
 
 synchronized public void windowMouse(PApplet appc, GWinData data, MouseEvent event) {
@@ -44,11 +44,7 @@ public void createGUI(){
   shopWindow.addDrawHandler(this, "draw_shop");
   shopWindow.addMouseHandler(this, "windowMouse");
   
-<<<<<<< Updated upstream
-  //shopWindow.background(255);
-=======
   shopBackground();
->>>>>>> Stashed changes
   
   label = new GLabel(shopWindow, 200, 145, 200, 500);
   label.setFont(new Font("Monospaced", Font.PLAIN, 20));
@@ -85,7 +81,8 @@ public void createGUI(){
   usesLabel.setTextAlign(GAlign.LEFT, GAlign.TOP);
   usesLabel.setText("");
   
- 
+   
+  
   shopWindow.frameRate(60);
   shopWindow.setVisible(open);
   shopWindow.loop();
