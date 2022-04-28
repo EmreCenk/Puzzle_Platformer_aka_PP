@@ -144,6 +144,7 @@ void iconClicked() {
       }
     }
   }
+  
 }
 
 void shopBackground() {
