@@ -31,18 +31,18 @@ void elastic_collision_2d(Substance obj1, Substance obj2){
   // note: since this is 2d we have to do each component individually :(
   float [] x_components = elastic_collision_1d(obj1.mass, obj1.velocity.x, obj2.mass, obj2.velocity.x);  
   float [] y_components = elastic_collision_1d(obj1.mass, obj1.velocity.y, obj2.mass, obj2.velocity.y);
-
-  //println("collision before");
-  //println(obj1, obj1.velocity);
-  //println(obj2, obj2.velocity); 
+  println(obj1.mass, obj2.mass);
+  println("collision before");
+  println(obj1, obj1.velocity);
+  println(obj2, obj2.velocity); 
 
   obj1.velocity  = new PVector(x_components[0], y_components[0]).mult(1);
   obj2.velocity = new PVector(x_components[1], y_components[1]).mult(1);
   
-  //println("collision");
-  //println(obj1, obj1.velocity);
-  //println(obj2, obj2.velocity); 
-  //println();
+  println("collision");
+  println(obj1, obj1.velocity);
+  println(obj2, obj2.velocity); 
+  println();
 }
 
 PVector get_pendulum_velocity(Pendulum pendulum){

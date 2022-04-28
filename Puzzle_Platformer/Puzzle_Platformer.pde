@@ -46,7 +46,7 @@ void setup() {
   //--------------------------------------------------------------\\
 
   b = new PlayBlock(new PVector(100, 300), 50, color(0));
-  b.mass = 2;
+  //b.mass = 2;
   //------------------------ add items to shop -------------------------------\\
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
@@ -76,10 +76,11 @@ void setup() {
 
   my_prison = new Prison();
   emre = new Player(new PVector(width*0.01, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money);
+  
   //emre.velocity = new PVector(70, 0);
 
   physics = new PhysicsManager();
-  physics.add_obj(emre);
+  physics.add_player(emre);
 
   physics.add_pendulum(mp1);
   physics.add_pendulum(mp2);
@@ -99,11 +100,7 @@ void draw() {
   //println(mouse.x, mouse.y);
   background(255);
 
-  physics.apply_friction_to_universe();
-  physics.apply_gravity_to_universe();
-  physics.update_positions_in_universe();
-  physics.apply_collision_in_universe();
-  physics.display_universe();
+  physics.update_universe();
 }
 
 void keyPressed() {

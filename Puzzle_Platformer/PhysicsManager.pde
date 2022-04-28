@@ -8,10 +8,11 @@ class PhysicsManager{
   ArrayList<Platform> platforms;
   ArrayList<Prison> prisons;
   ArrayList<Pendulum> pendulums;
-  Player player;
+  ArrayList<Player> players;
   float gravity_intensity, mu;
   
   PhysicsManager(){
+    this.players = new ArrayList<Player>();
     this.blocks = new ArrayList<PlayBlock>();
     this.pendulums = new ArrayList<Pendulum>();
     this.prisons = new ArrayList<Prison>();
@@ -22,6 +23,25 @@ class PhysicsManager{
     this.mu = DEFAULT_MU; // coefficient of friction
   }
   
+  void update_universe(){
+    this.deal_with_players();
+    this.apply_friction_to_universe();
+    this.apply_gravity_to_universe();
+    this.update_positions_in_universe();
+    this.apply_collision_in_universe();
+    this.display_universe();
+  }
+  void deal_with_players(){
+    for (int i = 0; i<this.players.size(); i++){
+      this.players.get(i).jumping = true;
+    }
+    
+    for (int i = 0; i<this.blocks.size(); i++){
+      this.blocks.get(i).jumping = true;
+    }
+        
+  
+  }
   void apply_collision_in_universe(){
     // circle collision
     for (int i = 0; i < this.circles.size(); i++){
@@ -182,4 +202,8 @@ class PhysicsManager{
     //this.add_circle(pendulum.pivot);
   }
   
+  void add_player(Player pl){
+    this.players.add(pl);
+    this.objs.add(pl);
+  }
 }

@@ -15,8 +15,14 @@ class PlayBlock extends Platform {
     // lifts the substance
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
     PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
-    if (!circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 1)) return;
+    boolean valid = circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 1.01);
+    if (!valid) return;
+    
+    //println(frameCount);
     elastic_collision_2d(this, some_substance);
+    //println(some_substance.velocity);
+    //println(this.velocity);
+    //println();
     boolean outside_y = (some_substance.coordinate.y < top_left.y - some_substance.radius * 0.5 || some_substance.coordinate.y > bottom_right.y + some_substance.radius * 0.5);
 
     if (!outside_y){
@@ -25,7 +31,7 @@ class PlayBlock extends Platform {
       else if (abs(bottom_right.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = bottom_right.x + some_substance.radius;
     }
     
-    if (circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 0.5) ){
+    if (valid){
       // could be more efficient if we only checked if they are parralel but that is too much typing lol
    
 
@@ -37,8 +43,8 @@ class PlayBlock extends Platform {
         //some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
 
-      some_substance.velocity.y *= -sqrt(bounciness * some_substance.bounciness);      
-      some_substance.jumping = false;
+      //some_substance.velocity.y *= -sqrt(bounciness * some_substance.bounciness);      
+      some_substance.jumping = this.jumping;
     }
     return; // for better readability
 
@@ -51,6 +57,26 @@ class PlayBlock extends Platform {
     //elastic_collision_2d(some_substance, this);
     
   
+
+  }
+  
+  void display(){
+
+    
+    color color_to_use;
+    if (!this.jumping){
+      color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
+    }
+    else{
+      color_to_use = this.colour;
+    }
+    PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
+    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+    
+    stroke(color_to_use);
+    fill(color_to_use);
+    rect(top_left.x, top_left.y, this.width_, height_);
+
 
   }
 }
