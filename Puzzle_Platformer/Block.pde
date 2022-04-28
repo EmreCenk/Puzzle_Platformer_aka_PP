@@ -41,7 +41,8 @@ class PlayBlock extends Platform {
         //println(some_substance);
         //some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
-
+      
+      //some_substance.velocity.mult(sqrt(bounciness * some_substance.bounciness));
       //some_substance.velocity.y *= -sqrt(bounciness * some_substance.bounciness);      
       some_substance.jumping = this.jumping;
     }
