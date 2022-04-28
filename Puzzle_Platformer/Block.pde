@@ -10,9 +10,7 @@ class PlayBlock extends Platform {
     // NEW FEATURE: BLOCKS ARE MADE OUT OF SOLID OOBLECK:
     // WHEN YOU RUN INTO IT FAST, IT ACTS LIKE A LIQUID
     // WHEN YOU RUN INTO IT SLOW, YOU CAN ENTER IT. (not a bug, a feature)
-    
-
-    
+   
     // lifts the substance
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
     PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
