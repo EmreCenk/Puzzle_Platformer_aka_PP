@@ -15,7 +15,6 @@ Block diamond;
 
 //-----------------------------------------------
 
-
 //-------------- emre stuff idk------------------
 Player emre;
 PhysicsManager physics;
