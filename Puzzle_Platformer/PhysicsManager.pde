@@ -48,12 +48,18 @@ class PhysicsManager{
       for (int j = 0; j < this.objs.size(); j++){
         this.prisons.get(i).imprison(this.objs.get(j));
       }
+      for (int j = 0; j<this.blocks.size(); j++){
+        this.prisons.get(i).imprison(this.blocks.get(j));
+      }
     }
     
     //pendulum collision
     for (int i = 0; i < this.pendulums.size(); i++){
       for (int j = 0; j < this.objs.size(); j++){
         this.pendulums.get(i).collide(this.objs.get(j));
+      }
+      for (int j = 0; j<this.blocks.size(); j++){
+        this.pendulums.get(i).collide(this.blocks.get(j));
       }
     }
     

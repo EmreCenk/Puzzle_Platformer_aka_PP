@@ -46,6 +46,7 @@ void setup() {
   //--------------------------------------------------------------\\
 
   b = new PlayBlock(new PVector(100, 300), 50, color(0));
+  b.mass = 2;
   //------------------------ add items to shop -------------------------------\\
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
