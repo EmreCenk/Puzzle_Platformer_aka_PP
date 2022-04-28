@@ -66,8 +66,6 @@ class Player extends Circle{
   }
   
   void display(){
-
-    
     color color_to_use;
     if (this.dynamic_colours && !this.jumping){
       color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
@@ -78,7 +76,6 @@ class Player extends Circle{
     stroke(color_to_use);
     fill(color_to_use);
     circle(this.coordinate.x, this.coordinate.y, 2*this.radius);
-    displayInventory();
   }
   
   void addItemToInv(Tool a){
@@ -87,14 +84,16 @@ class Player extends Circle{
   
   void displayInventory(){
     int x = 200;
-    int y = 400;
+    int y = 260;
+    shopWindow.stroke(255);
+    shopWindow.fill(255);
     for( int j = 0 ; j < inventory.size(); j++){ 
       outline(x, y, size, 0);
       shopWindow.image(inventory.get(j).icon, x, y);
       x += size;
       
       if(j%4 == 3){
-        x = 0;
+        x = 200;
         y += size;
       }
     }  
