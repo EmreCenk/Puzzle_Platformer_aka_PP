@@ -2,8 +2,8 @@ import g4p_controls.*;
 import java.awt.*;
 
 
-int inventorySize = 4;
-int money = 100;
+int inventorySize = 8;
+int money = 200;
 boolean open = false;
 Shop itemShop = new Shop();
 
@@ -11,7 +11,7 @@ Shop itemShop = new Shop();
 Pickaxe pick;
 Pickaxe pick2;
 Block dirt;
-Block diamond;
+Block bouncy;
 Block emreBlock;
 
 //-----------------------------------------------
@@ -42,7 +42,7 @@ void setup() {
   pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
-  diamond = new Block(30, loadImage("images/diamond.png"), " BLUE BLOCK AAAAAAA", 10);
+  bouncy = new Block(30, loadImage("images/diamond.png"), " BLUE BOUNCY BLOCK AAAAAAA", 10);
   emreBlock = new Block(90, loadImage("images/emre.png"), " EMREEEEEEEEEEEEEE", 1);
   
   //--------------------------------------------------------------\\
@@ -54,7 +54,7 @@ void setup() {
   itemShop.addToStock(pick);
   itemShop.addToStock(pick2);
   itemShop.addToStock(dirt);
-  itemShop.addToStock(diamond);
+  itemShop.addToStock(bouncy);
   itemShop.addToStock(emreBlock);
   //---------------------------------------------------------------------------\\
 
@@ -120,7 +120,7 @@ void draw() {
 
 void keyPressed() {
   emre.key_press_movement();
-  if (key == 'p') {
+  if (key == 'p' || key == 'P') {
     itemShop.opened();
   }
   
