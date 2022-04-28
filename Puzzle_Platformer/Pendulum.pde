@@ -3,6 +3,7 @@
 class Pendulum{
   
   Circle hanging_thing, pivot;
+  
   float current_theta, string_length, time_period, max_theta;
   float angular_speed;
   float angular_acceleration, minimum_h, maximum_h;

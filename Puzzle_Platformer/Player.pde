@@ -7,7 +7,7 @@ class Player extends Circle{
   float walking_speed, jump_power, terminal_velocity;
   boolean dynamic_colours;
   
-  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m){
+  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m, float weight){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
     invSize = inv;
     money = m;
@@ -17,10 +17,11 @@ class Player extends Circle{
     this.walking_speed = walking_speed_;
     this.dynamic_colours = true;
     
-    this.jump_power = 8;
+    this.jump_power = 6;
 
     this.terminal_velocity = DEFAULT_TERMINAL_VELOCITY;
     this.bounciness = DEFAULT_PLAYER_BOUNCINESS;
+    this.mass = weight;
 }
   
 

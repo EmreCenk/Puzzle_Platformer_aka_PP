@@ -76,7 +76,7 @@ void setup() {
   p3 = new Platform(new PVector(width*0.6, 200), 100, 20, color(0, 0, 0));
 
   my_prison = new Prison();
-  emre = new Player(new PVector(width*0.01, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money);
+  emre = new Player(new PVector(width*0.01, 90 + mp2.string_length), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   
   //emre.velocity = new PVector(70, 0);
 
