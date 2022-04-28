@@ -43,7 +43,7 @@ void setup() {
   pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   diamond = new Block(30, loadImage("images/diamond.png"), " BLUE BLOCK AAAAAAA", 10);
-  emreBlock = new Block(30, loadImage("images/emre.png"), " EMREEEEEEEEEEEEEE", 90);
+  emreBlock = new Block(90, loadImage("images/emre.png"), " EMREEEEEEEEEEEEEE", 1);
   
   //--------------------------------------------------------------\\
 
@@ -99,6 +99,7 @@ void setup() {
 
   physics.add_prison(my_prison);
   itemShop.update();
+  
 }
 void draw() {
   
@@ -122,6 +123,7 @@ void keyPressed() {
   if (key == 'p') {
     itemShop.opened();
   }
+  
 }
 
 void keyReleased() {

@@ -7,11 +7,9 @@ class Shop{
     open = !open;
     shopWindow.setVisible(open);
     shopWindow.fill(255);
-    fill(255);
     update();
     displayIcons();
-    
-}
+  }
   
   void addToStock(Tool a){
     this.stock.add(a);
