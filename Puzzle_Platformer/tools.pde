@@ -2,15 +2,16 @@ class Tool{
   int price;
   PImage icon;
   String desc;
-  int uses;
+  int hardness; // number of time the item can be used
+  int used = 0;
   boolean selected = false;
   
-  Tool(int p, PImage i, String d, int u){
+  Tool(int p, PImage i, String d, int h){
     price = p;
     i.resize(50, 50);
     icon = i;
     desc = d;
-    uses = u;
+    hardness = h;
   }
   
   void clicked(){
@@ -71,22 +72,18 @@ class Pickaxe extends Tool{
     super(p, i, d, u);
   }
   void explain(){
-    usesLabel.setText("uses :" + str(uses));
+    usesLabel.setText("uses :" + str(hardness));
     super.explain();
-    
   }
-  
 }
 
+//----------------------------------------Block---------------------------------------------------
 class Block extends Tool{
   Block(int p, PImage i, String d, int u){
     super(p, i, d, u);
   }
-  
   void explain(){
-    usesLabel.setText("blocks :" + str(uses));
+    usesLabel.setText("blocks :" + str(hardness));
     super.explain();
-    
   }
-  
 }
