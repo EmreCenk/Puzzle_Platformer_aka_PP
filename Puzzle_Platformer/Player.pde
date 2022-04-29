@@ -7,7 +7,7 @@ class Player extends Circle{
   float walking_speed, jump_power, terminal_velocity;
   boolean dynamic_colours;
   
-  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m){
+  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m, float weight){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
     invSize = inv;
     money = m;
@@ -15,12 +15,13 @@ class Player extends Circle{
     this.moving_right = false;
     this.moving_left = false;
     this.walking_speed = walking_speed_;
-    this.dynamic_colours = true;
+    this.dynamic_colours = false;
     
-    this.jump_power = 8;
+    this.jump_power = 6;
 
     this.terminal_velocity = DEFAULT_TERMINAL_VELOCITY;
     this.bounciness = DEFAULT_PLAYER_BOUNCINESS;
+    this.mass = weight;
 }
   
 
@@ -65,8 +66,6 @@ class Player extends Circle{
   }
   
   void display(){
-
-    
     color color_to_use;
     if (this.dynamic_colours && !this.jumping){
       color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
@@ -77,7 +76,6 @@ class Player extends Circle{
     stroke(color_to_use);
     fill(color_to_use);
     circle(this.coordinate.x, this.coordinate.y, 2*this.radius);
-    displayInventory();
   }
   
   void addItemToInv(Tool a){
@@ -85,8 +83,23 @@ class Player extends Circle{
   }
   
   void displayInventory(){
-    //println("displaying inventory");
+    int x = 200;
+    int y = 260;
+    shopWindow.stroke(255);
+    shopWindow.fill(255);
+    for( int j = 0 ; j < inventory.size(); j++){ 
+      outline(x, y, size, 0);
+      shopWindow.image(inventory.get(j).icon, x, y);
+      x += size;
+      
+      if(j%4 == 3){
+        x = 200;
+        y += size;
+      }
+    }  
+    
   }
+ 
  
   
   

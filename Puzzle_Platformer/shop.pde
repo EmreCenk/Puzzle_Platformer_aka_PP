@@ -6,23 +6,28 @@ class Shop{
   void opened(){
     open = !open;
     shopWindow.setVisible(open);
-    this.displayIcons();
-}
+    shopWindow.fill(255);
+    update();
+    displayIcons();
+  }
   
   void addToStock(Tool a){
     this.stock.add(a);
   }
   
   void displayIcons(){
+    emre.displayInventory();
     int x = 0;
     int y = 0;
     PImage temp = loadImage("images/money.png");
-    temp.resize(50, 50);
+    temp.resize(size, size);
     shopWindow.image(temp, 200, 0);
     moneyLabel.setText(str(emre.money));
     for( int i = 0 ; i < stock.size(); i++){ 
       outline(x, y, size, 0);
-      shopWindow.image(stock.get(i).icon, x, y);
+      PImage tempShop = stock.get(i).icon;
+      tempShop.resize(size, size);
+      shopWindow.image(tempShop, x, y);
       
       x += size;
       if(i%4 == 3){
@@ -31,6 +36,7 @@ class Shop{
       }
     }  
   }
+  
   void update(){
     shopBackground();
     buyLabel.setText("");
@@ -40,7 +46,6 @@ class Shop{
   void itemBought(Tool a){
     stock.remove(a);
     update();
-    
   }
 
 }

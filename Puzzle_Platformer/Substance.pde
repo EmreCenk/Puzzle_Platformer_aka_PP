@@ -7,7 +7,7 @@ class Substance{
   boolean jumping;
   PVector previous_coordinate; // stores position in previous frame
   float mass;
-
+  boolean effected_by_gravity;
 
   Substance(PVector velocity_, PVector coordinates_, float radius_, color colour_){
     this.velocity = velocity_;
@@ -20,6 +20,7 @@ class Substance{
     this.mass = DEFAULT_MASS;
     this.jumping = false;  
     this.previous_coordinate = new PVector(coordinates_.x, coordinates_.y);
+    this.effected_by_gravity = true;
   }
   
   Substance(PVector velocity_, PVector coordinates_, float radius_, color colour_, float bounciness_, float mass_){
@@ -41,9 +42,12 @@ class Substance{
     this.previous_coordinate = new PVector(this.coordinate.x, this.coordinate.y);
     this.coordinate.add(this.velocity);
   }
+  
   void draw_velocity(){
     line(this.coordinate.x, this.coordinate.y, this.coordinate.x + this.velocity.x, this.coordinate.y + this.velocity.y);
   }
-  
+    
+  void display(){}// is overwritten when a new substance is created
+  void collide(Substance sub){};
 
 }
