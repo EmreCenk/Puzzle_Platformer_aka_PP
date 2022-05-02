@@ -156,7 +156,6 @@ void iconClicked() {
 }
 
 void shopBackground() {
-  shopWindow.loop();
   shopWindow.background(255);
 }
 

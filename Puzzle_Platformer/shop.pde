@@ -7,8 +7,9 @@ class Shop{
     open = !open;
     shopWindow.setVisible(open);
     shopWindow.fill(255);
-    update();
+    
     displayIcons();
+    update();
   }
   
   void addToStock(Tool a){
@@ -38,8 +39,6 @@ class Shop{
   }
   
   void update(){
-    shopBackground();
-    buyLabel.setText("");
     displayIcons();
   }
   
