@@ -70,8 +70,8 @@ void setup() {
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
   
-  emre = new Player(new PVector(width/2, height*0.3), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  emre.mass = 5;
+  emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
+  emre.mass = 1000;
   emre.jump_power = 10; //for debugging
   physics.add_player(emre);
   
@@ -157,7 +157,7 @@ void iconClicked() {
 
 void shopBackground() {
   shopWindow.loop();
-  shopWindow.background(255);
+  //shopWindow.background(255); // we somtimes get null pointer exception here for some reason
 }
 
 int size = 50;

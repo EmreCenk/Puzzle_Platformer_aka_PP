@@ -13,7 +13,7 @@ class PlayBlock extends Platform {
     // lifts the substance
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
     PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
-    boolean valid = circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 1.01);
+    boolean valid = circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 0.65);
     if (!valid) return;
     
     //println(frameCount);
