@@ -52,11 +52,12 @@ class Platform extends Substance{
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
     PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
     
-    stroke(this.colour);
+    stroke(color(255, 0, 0));
+    strokeWeight(2);
     fill(this.colour);
     rect(top_left.x, top_left.y, this.width_, height_);
-    circle(top_left.x, top_left.y, 10);
-    circle(bottom_right.x, bottom_right.y, 10);
+    //circle(top_left.x, top_left.y, 10);
+    //circle(bottom_right.x, bottom_right.y, 10);
     stroke(255);
     fill(255);
     
