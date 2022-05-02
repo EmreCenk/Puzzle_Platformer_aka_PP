@@ -88,6 +88,7 @@ class PhysicsManager{
       for (int j = i+1; j<this.blocks.size(); j++){
         this.blocks.get(i).collide(this.blocks.get(j));
       }
+      
       for (int j = 0; j < this.objs.size(); j++){
         this.blocks.get(i).collide(this.objs.get(j));
       }
@@ -121,19 +122,20 @@ class PhysicsManager{
     v2 = a*t + v1
     v2 = 9.81/FPS + vy
     */
+    float f = 60;
     for (int i = 0; i < this.objs.size(); i++){
       if (!this.objs.get(i).effected_by_gravity) continue;
       //println(this.objs.get(i), this.objs.get(i).effected_by_gravity);
-      this.objs.get(i).velocity.y += this.gravity_intensity/frameRate; // gravity
+      this.objs.get(i).velocity.y += this.gravity_intensity/f; // gravity
     }
     
     for (int i = 0; i < this.blocks.size(); i++){
       if (!this.blocks.get(i).effected_by_gravity) continue;
-      this.blocks.get(i).velocity.y += this.gravity_intensity/frameRate; // gravity
+      this.blocks.get(i).velocity.y += this.gravity_intensity/f; // gravity
     }
     for (int i = 0; i < this.platforms.size(); i++){
       if (!this.platforms.get(i).effected_by_gravity) continue;
-      this.platforms.get(i).velocity.y += this.gravity_intensity/frameRate; // gravity
+      this.platforms.get(i).velocity.y += this.gravity_intensity/f; // gravity
     }
     for (int i = 0; i < this.pendulums.size(); i++){
       pendulums.get(i).swing();

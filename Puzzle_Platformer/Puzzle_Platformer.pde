@@ -39,7 +39,7 @@ void setup() {
   //shopWindow.setVisible(open);
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
-  pick = new Pickaxe(20, loadImage("images/pick.png"), "A sexy pickaxe.", 10);
+  pick = new Pickaxe(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
   pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe.", 10);
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   bouncy = new Block(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
@@ -59,44 +59,47 @@ void setup() {
 
   //mp1 = new Pendulum(new PVector(width*0.4, 100), 10, 150, PI/20, 10);
   //p2 = new Platform(new PVector(width*0.3, 350), 1300, 20, color(0, 0, 0));
-  emre = new Player(new PVector(130, 170), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  emre.mass = 5;
-  goal_ball = new Circle(new PVector(0,0), new PVector(230, 185), 10, color(100, 100, 0));
-  goal_ball.mass = 4;
 
-  my_prison = new Prison();
+
+
   //emre.velocity = new PVector(70, 0);
   //b = new PlayBlock(new PVector(100, 300), 50, color(0));
-  emre.mass = 3;
+
+  goal_ball = new Circle(new PVector(width/2, height*0.4), 10, color(100, 100, 0));
   goal_ball.mass = 4;
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
+  
+  emre = new Player(new PVector(width/2, height*0.3), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
+  emre.mass = 5;
+  emre.jump_power = 10; //for debugging
   physics.add_player(emre);
+  
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255,0,0))); // red
-  physics.add_platform(new Platform(new PVector(530, 400), 400, 50, color(0,0,0))); // black
+  physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
   
-/////////////////////////////////
-  // STEP 1:
-  physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   
-  
-  // STEP 2:
-  //PlayBlock b = new PlayBlock(new PVector(730, width - 30), 50, color(0));
-  //physics.add_block(b);
-  
-  //b = new PlayBlock(new PVector(750, width-30), 50, color(0));
-  //physics.add_block(b);
+  PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
+  println(b.bounciness, emre.bounciness);
+  physics.add_block(b);
 
-/////////////////////////////
+
+  //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+  //physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
+  
+ physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+  
   physics.add_prison(my_prison);
-  //itemShop.update();
+  physics.display_universe();
+  itemShop.stock.get(0).clicked();
+  itemShop.update();
   //physics.display_universe();
   noLoop();
 }
 
 void draw() {
-  //frameRate(1);
+  frameRate(60);
   //println(frameRate);
   //println(mouse.x, mouse.y);
   mouse = MouseInfo.getPointerInfo().getLocation();
@@ -109,6 +112,10 @@ void draw() {
   physics.apply_collision_in_universe();
   physics.display_universe();
   
+  stroke(color(255, 0, 0));
+  line(emre.coordinate.x, emre.coordinate.y, emre.previous_coordinate.x, emre.previous_coordinate.y);
+  
+  //saveFrame("export/frame####.png");
 }
 
 void keyPressed() {
@@ -120,10 +127,6 @@ void keyPressed() {
   if (key == 's'){
     loop();
   }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }
 
 void keyReleased() {
