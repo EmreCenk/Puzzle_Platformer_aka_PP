@@ -88,9 +88,9 @@ void setup() {
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   //physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   
- physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   
-  physics.add_prison(my_prison);
+  physics.add_prison(new Prison());
   physics.display_universe();
   itemShop.stock.get(0).clicked();
   itemShop.update();
