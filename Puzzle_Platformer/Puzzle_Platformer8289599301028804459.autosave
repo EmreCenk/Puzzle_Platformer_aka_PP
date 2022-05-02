@@ -70,8 +70,8 @@ void setup() {
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
   
-  emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  emre.mass = 1000;
+  emre = new Player(new PVector(width/2, height*0.3), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
+  emre.mass = 5;
   emre.jump_power = 10; //for debugging
   physics.add_player(emre);
   
@@ -88,9 +88,8 @@ void setup() {
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   //physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   
-   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
-  
-  physics.add_prison(new Prison());
+  physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+  //physics.add_prison(my_prison);
   physics.display_universe();
   itemShop.stock.get(0).clicked();
   itemShop.update();
@@ -156,10 +155,8 @@ void iconClicked() {
 }
 
 void shopBackground() {
-
   shopWindow.loop();
-  //shopWindow.background(255); // we somtimes get null pointer exception here for some reason
-
+  shopWindow.background(255);
 }
 
 int size = 50;
