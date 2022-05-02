@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 int inventorySize = 8;
-int money = 200;
+int money = 2000;
 boolean open = false;
 Shop itemShop = new Shop();
 
@@ -13,6 +13,7 @@ Pickaxe pick2;
 Block dirt;
 Block bouncy;
 Block emreBlock;
+Pend_block pe;
 
 //-----------------------------------------------
 
@@ -45,7 +46,7 @@ void setup() {
   dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   bouncy = new Block(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
   emreBlock = new Block(90, loadImage("images/emre.png"), "EMREEEEEEEEEEEEEE.", 1);
-  
+  pe = new Pend_block(100, loadImage("images/pend.png"), "A pendulum", 1);
   //--------------------------------------------------------------\\
 
 
@@ -55,6 +56,7 @@ void setup() {
   itemShop.addToStock(dirt);
   itemShop.addToStock(bouncy);
   itemShop.addToStock(emreBlock);
+  itemShop.addToStock(pe);
   //---------------------------------------------------------------------------\\
 
 
@@ -115,7 +117,7 @@ void draw() {
   
   stroke(color(255, 0, 0));
   line(emre.coordinate.x, emre.coordinate.y, emre.previous_coordinate.x, emre.previous_coordinate.y);
-  
+  showInvMain(width - size * min(emre.inventory.size(), 4), 0);
   //saveFrame("export/frame####.png");
 }
 
@@ -165,4 +167,25 @@ void outline(int x, int y, int size, color col) {
   shopWindow.stroke(col);
   shopWindow.strokeWeight(2);
   shopWindow.rect(x, y, size, size);
+}
+
+void outlineMain(int x, int y, int size, color col) {
+  stroke(col);
+  strokeWeight(2);
+  rect(x, y, size, size);
+}
+
+void showInvMain(int x, int y){
+  int tempX = x;
+  shopWindow.stroke(255);
+  shopWindow.fill(255);
+  for( int j = 0 ; j < emre.inventory.size(); j++){ 
+    outlineMain(x, y, size, 0);
+    image(emre.inventory.get(j).icon, x, y);
+    x += size;
+    if(j%4 == 3){
+      x = tempX;
+      y += size;
+    }
+  } 
 }
