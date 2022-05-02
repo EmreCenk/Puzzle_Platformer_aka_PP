@@ -83,42 +83,18 @@ void setup() {
   PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
   println(b.bounciness, emre.bounciness);
   physics.add_block(b);
-/////////////////////////////////
-  // STEP 1:
-<<<<<<< Updated upstream
+
+
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   //physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   
-  
-  // STEP 2:
-
-=======
  physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   
-  
-  // STEP 2:
-  PlayBlock b = new PlayBlock(new PVector(730, width - 30), 50, color(0));
-  physics.add_block(b);
->>>>>>> Stashed changes
-  
-  b = new PlayBlock(new PVector(750, width-30), 50, color(0));
-  physics.add_block(b);
-
-/////////////////////////////
-<<<<<<< Updated upstream
-  physics.add_prison(new Prison());
-  itemShop.update();
-  physics.display_universe();
-  itemShop.stock.get(0).clicked();
-
-=======
   physics.add_prison(my_prison);
-  itemShop.update();
   physics.display_universe();
   itemShop.stock.get(0).clicked();
-  //itemShop.update();
+  itemShop.update();
   //physics.display_universe();
->>>>>>> Stashed changes
   noLoop();
 }
 
