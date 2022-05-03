@@ -1,5 +1,6 @@
 
 class Substance{
+  ArrayList<Line> lines;
   color colour;
   PVector velocity, coordinate;
   float radius;
@@ -14,6 +15,7 @@ class Substance{
     this.coordinate = coordinates_;
     this.radius = radius_;
     this.colour = colour_;
+    this.lines = new ArrayList<Line>();
     
     //default values:
     this.bounciness = SUBSTANCE_DEFAULT_BOUNCE;
@@ -39,6 +41,11 @@ class Substance{
   }
 
   void move(){
+    for (int i = 0; i<this.lines.size(); i++){
+      this.lines.get(i).p1.add(this.velocity);
+      this.lines.get(i).p2.add(this.velocity);
+    }
+    
     this.previous_coordinate = new PVector(this.coordinate.x, this.coordinate.y);
     this.coordinate.add(this.velocity);
   }

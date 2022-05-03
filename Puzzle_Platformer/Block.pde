@@ -5,6 +5,15 @@ class PlayBlock extends Platform {
     super(center_, height_, height_, colour_); 
     this.effected_by_gravity = true;
     this.bounciness = DEFAULT_PLAYBLOCK_BOUNCE;
+
+    PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
+    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+
+    this.lines.add(new Line(new PVector(top_left.x, top_left.y), new PVector(top_left.x, bottom_right.y))); // top
+    this.lines.add(new Line(new PVector(top_left.x, top_left.y), new PVector(bottom_right.x, top_left.y))); // left
+    this.lines.add(new Line(new PVector(bottom_right.x, bottom_right.y), new PVector(bottom_right.x, top_left.y))); // right
+    this.lines.add(new Line(new PVector(bottom_right.x, bottom_right.y), new PVector(top_left.x, bottom_right.y))); // bottom
+    
   }
   
   void collide(Substance some_substance){
@@ -48,24 +57,14 @@ class PlayBlock extends Platform {
     return; // for better readability
 
   }
+ 
+  void display(){
   
-  //void display(){
-
-    
-    //color color_to_use;
-    //if (!this.jumping){
-    //  color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
-    //}
-    //else{
-    //  color_to_use = this.colour;
-    //}
-    //PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
-    //PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
-    
-    //stroke(color_to_use);
-    //fill(color_to_use);
-    //rect(top_left.x, top_left.y, this.width_, height_);
-
-
-  //}
+    super.display();
+    stroke(color(100, 100, 100));
+    strokeWeight(3);
+    for (int i = 0; i<this.lines.size(); i++){
+      line(this.lines.get(i).p1.x, this.lines.get(i).p1.y, this.lines.get(i).p2.x, this.lines.get(i).p2.y);
+    }
+  }
 }
