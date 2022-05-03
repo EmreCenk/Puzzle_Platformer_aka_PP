@@ -35,7 +35,6 @@ void setup() {
   fill(0);
   size(1200, 500);
   createGUI();
-  //shopWindow.setVisible(open);
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
   pick = new Pickaxe(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
@@ -54,13 +53,6 @@ void setup() {
   itemShop.addToStock(emreBlock);
   itemShop.addToStock(pe);
   //---------------------------------------------------------------------------\\
-
-  //mp1 = new Pendulum(new PVector(width*0.4, 100), 10, 150, PI/20, 10);
-  //p2 = new Platform(new PVector(width*0.3, 350), 1300, 20, color(0, 0, 0));
-
-  //emre.velocity = new PVector(70, 0);
-  //b = new PlayBlock(new PVector(100, 300), 50, color(0));
-
   goal_ball = new Circle(new PVector(width/2, height*0.4), 10, color(100, 100, 0));
   goal_ball.mass = 4;
   physics = new PhysicsManager();
@@ -90,7 +82,6 @@ void setup() {
   physics.display_universe();
   itemShop.stock.get(0).shopClicked();
   itemShop.update();
-  //physics.display_universe();
   noLoop();
 }
 
@@ -145,9 +136,6 @@ void keyReleased() {
   emre.key_up_movement();
 }
 
-// raw top left of gui : (0, 230), bottom right : (400, 730)
-// icons start at top left : (0, 228), stop at bottom right : (200, 728)
-
 int tdToOd(int x, int y) {
   return(x + 4*y);
 }
@@ -164,14 +152,10 @@ void iconClicked() {
       }
     }
   }
-  
 }
 
 void shopBackground() {
-
-  //shopWindow.loop();
-  shopWindow.background(255); // we sometimes get null pointer exception here for some reason
-
+  shopWindow.background(255);
 }
 
 int size = 50;
