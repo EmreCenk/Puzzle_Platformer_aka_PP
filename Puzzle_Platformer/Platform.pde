@@ -50,7 +50,7 @@ class Platform extends Substance{
   
   void display(){
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
-    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+    //PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
     
     stroke(color(255, 0, 0));
     strokeWeight(2);

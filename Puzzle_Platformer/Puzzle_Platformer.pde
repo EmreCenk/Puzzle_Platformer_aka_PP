@@ -60,16 +60,17 @@ void setup() {
 
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   emre.mass = 10;
-  emre.jump_power = 15; //for debugging
+  emre.jump_power = 7; //for debugging
+  emre.velocity = new PVector(0, -10000);
   physics.add_player(emre);
 
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255, 0, 0))); // red
-  physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0, 0, 0))); // black
+  //physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0, 0, 0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0, 255, 0))); // green
 
   physics.add_domino(new Domino(new PVector(100, 100), 100));
-  PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
-  println(b.bounciness, emre.bounciness);
+  b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
+  b.velocity = new PVector(0, 100);
   physics.add_block(b);
 
 
@@ -86,7 +87,7 @@ void setup() {
 }
 
 void draw() {
-  frameRate(60);
+  frameRate(1);
   //println(frameRate);
   //println(mouse.x, mouse.y);
   mouse = MouseInfo.getPointerInfo().getLocation();
@@ -97,6 +98,8 @@ void draw() {
 
   stroke(color(255, 0, 0));
   line(emre.coordinate.x, emre.coordinate.y, emre.previous_coordinate.x, emre.previous_coordinate.y);
+  line(b.coordinate.x, b.coordinate.y, b.previous_coordinate.x, b.previous_coordinate.y);
+
   showInvMain(width - size * min(emre.inventory.size(), 4), 0);
   //saveFrame("export/frame####.png");
 }
@@ -122,6 +125,7 @@ void keyPressed() {
 
   if (key == 's') {
     loop();
+    println("yes");
   }
 }
 

@@ -83,6 +83,18 @@ boolean line_segments_intersect(PVector line1_p1, PVector line1_p2, PVector line
     return (point_on_line1 && point_on_line2);
 }
 
+PVector get_line_segment_intersection(PVector line1_p1, PVector line1_p2, PVector line2_p1, PVector line2_p2){
+    // checks if two lines segments intersect
+    PVector intersection = find_line_intersection(line1_p1, line1_p2, line2_p1, line2_p2);
+    if (intersection == null) return null;
+    
+    //todo: checking only one of the conditions should be enough?
+    boolean point_on_line1 = point_is_on_line_segment(line1_p1, line1_p2, intersection);
+    boolean point_on_line2 = point_is_on_line_segment(line2_p1, line2_p2, intersection);
+    if (point_on_line1 && point_on_line2) return intersection;
+    return null;
+}
+
 float[] solve_quadratic(float a, float b, float c){
   // solves a*x^2 + bx + c = 0
   if (b*b - 4*a*c < 0) return new float[]{-b/(2*a), -b/(2*a)}; // oh no (due to rounding errors you sometimes get a value like -0.0001 in the discriminant. I'm just rounding it to 0)
