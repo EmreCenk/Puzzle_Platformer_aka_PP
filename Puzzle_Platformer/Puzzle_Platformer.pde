@@ -79,7 +79,7 @@ void setup() {
   physics.add_player(emre);
   
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255,0,0))); // red
-  physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
+  //physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
   
   

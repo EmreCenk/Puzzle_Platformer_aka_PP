@@ -59,6 +59,21 @@ class Substance{
     this.coordinate.add(this.velocity);
   }
   
+  boolean intersects(Substance obj){
+    PVector a, b, c, d;
+    for (int i = 0; i < this.lines.size(); i++){
+      a = this.lines.get(i).p1;
+      b = this.lines.get(i).p2;
+      for (int j = 0; j < obj.lines.size(); j++){
+        c = this.lines.get(j).p1;
+        d = this.lines.get(j).p2;
+        if (line_segments_intersect(a, b, c, d)) return true;
+      }
+    }
+    return false;
+  
+  }
+  
   void draw_velocity(){
     line(this.coordinate.x, this.coordinate.y, this.coordinate.x + this.velocity.x, this.coordinate.y + this.velocity.y);
   }

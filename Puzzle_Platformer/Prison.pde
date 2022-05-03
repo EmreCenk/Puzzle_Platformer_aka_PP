@@ -28,12 +28,13 @@ class Prison{
     
     if (obj.coordinate.y < this.top_left.y + obj.width_){
       ////top wall
-      obj.coordinate.y = this.top_left.y + obj.width_;
-      obj.velocity.y *= (-(this.bounciness + obj.bounciness) / 2);      
+      obj.change_position(new PVector(obj.coordinate.x, this.top_left.y + obj.width_));
+      obj.velocity.y *= (-(this.bounciness + obj.bounciness) / 2);
+
     }
     else if (obj.coordinate.y > this.bottom_right.y - obj.width_){
       //bottom wall
-      obj.coordinate.y = this.bottom_right.y - obj.width_;
+      obj.change_position(new PVector(obj.coordinate.x, this.bottom_right.y - obj.width_));
       obj.velocity.y *= (-(this.bounciness + obj.bounciness) / 2);
       obj.jumping = false;
 
