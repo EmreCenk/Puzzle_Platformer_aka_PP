@@ -93,11 +93,7 @@ void draw() {
   background(255);
 
   physics.update_universe();
-  physics.apply_friction_to_universe();
-  physics.apply_gravity_to_universe();
-  physics.update_positions_in_universe();
-  physics.apply_collision_in_universe();
-  physics.display_universe();
+
 
   stroke(color(255, 0, 0));
   line(emre.coordinate.x, emre.coordinate.y, emre.previous_coordinate.x, emre.previous_coordinate.y);
