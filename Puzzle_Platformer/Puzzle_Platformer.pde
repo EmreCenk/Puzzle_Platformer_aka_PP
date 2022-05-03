@@ -75,10 +75,7 @@ void setup() {
   physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
   
-<<<<<<< HEAD
-=======
   physics.add_domino(new Domino(new PVector(100, 100), 100));
->>>>>>> abad515e9c9cfb3308b80539a446c16a96335ab1
   PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
   println(b.bounciness, emre.bounciness);
   physics.add_block(b);
@@ -91,7 +88,7 @@ void setup() {
   
   physics.add_prison(new Prison());
   physics.display_universe();
-  itemShop.stock.get(0).clicked();
+  itemShop.stock.get(0).shopClicked();
   itemShop.update();
   //physics.display_universe();
   noLoop();
@@ -115,13 +112,17 @@ void draw() {
   line(emre.coordinate.x, emre.coordinate.y, emre.previous_coordinate.x, emre.previous_coordinate.y);
   showInvMain(width - size * min(emre.inventory.size(), 4), 0);
   //saveFrame("export/frame####.png");
+  
 }
 
 void mousePressed(){
   for(int i = 0; i < 4; i ++){
-    for(int j = 0; j < ceil(emre.inventory.size() / 4.0); i ++){
+    for(int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++){
       if(mouseX < width - size * i && mouseX > width - size - size * i){
-        println("asdf", i, j);
+        if(mouseY > size * j && mouseY < size + size * j){
+          int index = min(emre.inventory.size(), 4) - 1 - i + 4 * j;
+          emre.inventory.get(index).mainClicked();
+        }
       }
     }
   }
@@ -136,6 +137,8 @@ void keyPressed() {
   if (key == 's'){
     loop();
   }
+  
+  
 }
 
 void keyReleased() {
@@ -156,7 +159,7 @@ void iconClicked() {
     for (int x = 0; x < 4; x++) {
       if (mouse.x > xOffset + x * size && mouse.x < xOffset + size + x * size) {
         if (mouse.y > yOffset + y * size && mouse.y < yOffset + size + y * size) {
-          itemShop.stock.get(tdToOd(x, y)).clicked();
+          itemShop.stock.get(tdToOd(x, y)).shopClicked();
         }
       }
     }

@@ -14,7 +14,7 @@ class Tool{
     hardness = h;
   }
   
-  void clicked(){
+  void shopClicked(){
     shopBackground();
     for(int i = 0; i < itemShop.stock.size(); i ++){
       itemShop.stock.get(i).selected = false;
@@ -75,6 +75,10 @@ class Tool{
   void displayTool(int x, int y, int w, int h){
     icon.resize(w, h);
     image(this.icon, x, y);
+  }
+  
+  void mainClicked(){
+    println(this.desc);
   }
   
   
