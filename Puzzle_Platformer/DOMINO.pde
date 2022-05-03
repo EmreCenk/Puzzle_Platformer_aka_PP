@@ -11,11 +11,14 @@ class Domino{
   }
   
   void move(){
-    if (this.theta < 0) return;
-    this.angular_acceleration = 0.1 * cos(this.theta);
-    this.theta = (this.theta - this.angular_speed);
-    this.angular_speed  += this.angular_acceleration;    
-    
+    if (this.theta <= 0){
+      this.theta = 0;
+    }
+    else{
+      this.angular_acceleration = 0.8 * cos(this.theta)/this.length_;
+      this.theta = (this.theta - this.angular_speed);
+      this.angular_speed  += this.angular_acceleration;    
+    }
     //rotate_around_pivot(this.ground.coordinate, this.hanging_thing.coordinate, this.theta);
     this.hanging_thing.change_position(new PVector(this.ground.coordinate.x + this.length_*cos(this.theta),
                                                    this.ground.coordinate.y - this.length_*sin(this.theta)));
