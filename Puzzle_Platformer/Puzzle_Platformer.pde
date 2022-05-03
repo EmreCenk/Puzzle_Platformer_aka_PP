@@ -66,15 +66,19 @@ void setup() {
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
   
-  emre = new Player(new PVector(width/2, height*0.3), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  emre.mass = 5;
-  emre.jump_power = 10; //for debugging
+  emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
+  emre.mass = 10;
+  emre.jump_power = 15; //for debugging
   physics.add_player(emre);
   
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255,0,0))); // red
   physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
   
+<<<<<<< HEAD
+=======
+  physics.add_domino(new Domino(new PVector(100, 100), 100));
+>>>>>>> abad515e9c9cfb3308b80539a446c16a96335ab1
   PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
   println(b.bounciness, emre.bounciness);
   physics.add_block(b);
@@ -82,6 +86,7 @@ void setup() {
 
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   //physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
+  physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   
   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   
@@ -161,7 +166,10 @@ void iconClicked() {
 }
 
 void shopBackground() {
-  shopWindow.background(255);
+
+  //shopWindow.loop();
+  shopWindow.background(255); // we sometimes get null pointer exception here for some reason
+
 }
 
 int size = 50;
