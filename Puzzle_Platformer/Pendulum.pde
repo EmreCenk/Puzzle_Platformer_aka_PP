@@ -15,7 +15,6 @@ class Pendulum{
     //this.pivot.mass = 1;
     this.hanging_thing = new Circle(new PVector(0, 0), new PVector(0, 0), 10, colour);
     this.string_length = length_of_string;
-    this.time_period = 2*PI*sqrt(this.string_length/g); 
     
     this.max_theta = theta;
     this.current_theta = theta;
