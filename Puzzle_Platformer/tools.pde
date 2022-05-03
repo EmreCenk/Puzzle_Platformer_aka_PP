@@ -59,6 +59,7 @@ class Tool{
               usesLabel.setText("");
               emre.displayInventory();
               buyLabel.setText("");
+              redraw();
             }else{
               println("YOU ARE BROKE");
             }
@@ -99,4 +100,16 @@ class Block extends Tool{
     usesLabel.setText("blocks :" + str(hardness));
     super.explain();
   }
+}
+
+//-------------------------------pend-------------------------------
+class Pend_block extends Tool{
+  Pend_block(int p, PImage i, String d, int u){
+    super(p, i, d, u);
+  }
+  void explain(){
+    usesLabel.setText("uses :" + str(hardness));
+    super.explain();
+  }
+  
 }

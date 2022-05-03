@@ -5,13 +5,15 @@
 //  float max_theta;
 //  Domino(float theta){ 
 
-//  this.max_theta = theta;
-//  this.current_theta = theta;
-//  this.angular_acceleration = 0;
-//  this.angular_speed = 0;
+  //  this.max_theta = theta;
+  //  this.current_theta = theta;
+  //  this.angular_acceleration = 0;
+  //  this.angular_speed = 0;
+
 //  }
+
 //  Domino (float theta){ 
-//    this( theta);
+//    this(theta);
 //  }
 
 //}
