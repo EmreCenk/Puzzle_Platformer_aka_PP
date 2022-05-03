@@ -33,7 +33,6 @@ Point mouse;
 
 void setup() {
   fill(0);
-
   size(1200, 500);
   createGUI();
   //shopWindow.setVisible(open);
@@ -56,11 +55,8 @@ void setup() {
   itemShop.addToStock(pe);
   //---------------------------------------------------------------------------\\
 
-
   //mp1 = new Pendulum(new PVector(width*0.4, 100), 10, 150, PI/20, 10);
   //p2 = new Platform(new PVector(width*0.3, 350), 1300, 20, color(0, 0, 0));
-
-
 
   //emre.velocity = new PVector(70, 0);
   //b = new PlayBlock(new PVector(100, 300), 50, color(0));
@@ -79,7 +75,6 @@ void setup() {
   physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
   
-  
   PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
   println(b.bounciness, emre.bounciness);
   physics.add_block(b);
@@ -88,7 +83,7 @@ void setup() {
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   //physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   
-   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+  physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   
   physics.add_prison(new Prison());
   physics.display_universe();
@@ -118,6 +113,16 @@ void draw() {
   //saveFrame("export/frame####.png");
 }
 
+void mousePressed(){
+  for(int i = 0; i < 4; i ++){
+    for(int j = 0; j < ceil(emre.inventory.size() / 4.0); i ++){
+      if(mouseX < width - size * i && mouseX > width - size - size * i){
+        println("asdf", i, j);
+      }
+    }
+  }
+}
+
 void keyPressed() {
   emre.key_press_movement();
   if (key == 'p' || key == 'P') {
@@ -145,8 +150,8 @@ void iconClicked() {
   int yOffset = 230;
   for (int y = 0; y < ceil(itemShop.stock.size() / 4.0); y++) {
     for (int x = 0; x < 4; x++) {
-      if (mouse.x > xOffset + x * 50 && mouse.x < xOffset + 50 + x * 50) {
-        if (mouse.y > yOffset + y*50 && mouse.y < yOffset + 50 + y * 50) {
+      if (mouse.x > xOffset + x * size && mouse.x < xOffset + size + x * size) {
+        if (mouse.y > yOffset + y * size && mouse.y < yOffset + size + y * size) {
           itemShop.stock.get(tdToOd(x, y)).clicked();
         }
       }
