@@ -1,6 +1,7 @@
 
 
 
+
 class Physics{
   ArrayList<Substance> objs;
   float gravity_intensity, mu;
@@ -40,6 +41,5 @@ class Physics{
   
   void add_obj(Substance some_object){
     this.objs.add(some_object);
-  }
-  
+  } 
 }

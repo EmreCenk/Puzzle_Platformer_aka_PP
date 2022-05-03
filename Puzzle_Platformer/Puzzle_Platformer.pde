@@ -71,8 +71,8 @@ void setup() {
   physics.add_circle(goal_ball);
   
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  emre.mass = 1000;
-  emre.jump_power = 10; //for debugging
+  emre.mass = 10;
+  emre.jump_power = 15; //for debugging
   physics.add_player(emre);
   
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255,0,0))); // red
@@ -86,7 +86,7 @@ void setup() {
 
 
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
-  //physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
+  physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   
    physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   
@@ -157,8 +157,8 @@ void iconClicked() {
 
 void shopBackground() {
 
-  shopWindow.loop();
-  //shopWindow.background(255); // we somtimes get null pointer exception here for some reason
+  //shopWindow.loop();
+  shopWindow.background(255); // we sometimes get null pointer exception here for some reason
 
 }
 
