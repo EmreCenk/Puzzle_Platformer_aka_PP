@@ -38,6 +38,15 @@ class Substance{
   void change_position(PVector new_coordinate){
     this.previous_coordinate = new PVector(this.coordinate.x, this.coordinate.y);
     this.coordinate = new_coordinate;
+    
+    //todo: test the following code (it may be buggy, it hasn't been tested)
+    PVector shift = new PVector(this.coordinate.x - this.previous_coordinate.x, this.coordinate.y - this.previous_coordinate.y);
+    for (int i = 0; i<this.lines.size(); i++){
+      this.lines.get(i).p1.add(shift);
+      this.lines.get(i).p2.add(shift);
+    }
+    // untested section finished //
+    
   }
 
   void move(){
