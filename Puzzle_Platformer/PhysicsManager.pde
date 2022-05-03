@@ -9,6 +9,7 @@ class PhysicsManager{
   ArrayList<Prison> prisons;
   ArrayList<Pendulum> pendulums;
   ArrayList<Player> players;
+  ArrayList<Domino> dominos;
   float gravity_intensity, mu;
   
   PhysicsManager(){
@@ -19,6 +20,7 @@ class PhysicsManager{
     this.objs = new ArrayList<Substance>();
     this.circles = new ArrayList<Circle>();
     this.platforms = new ArrayList<Platform>();
+    this.dominos = new ArrayList<Domino>();
     this.gravity_intensity = g;
     this.mu = DEFAULT_MU; // coefficient of friction
   }
@@ -102,6 +104,10 @@ class PhysicsManager{
     for (int i = 0; i < this.platforms.size(); i++){
       this.platforms.get(i).display();
     }
+    for (int i = 0; i<this.dominos.size(); i++){
+      this.dominos.get(i).display();
+    }
+    
     for (int i = 0; i < this.pendulums.size(); i++){
       this.pendulums.get(i).display();
     }
@@ -140,6 +146,10 @@ class PhysicsManager{
     for (int i = 0; i < this.pendulums.size(); i++){
       pendulums.get(i).swing();
     }
+    for (int i = 0; i < this.dominos.size(); i++){
+      this.dominos.get(i).move();
+    }
+    
   }
   void apply_friction_to_universe(){
     // todo: refactor bc same thing is copy pasted 4 times
@@ -207,7 +217,9 @@ class PhysicsManager{
     //this.add_circle(pendulum.hanging_thing);
     //this.add_circle(pendulum.pivot);
   }
-  
+  void add_domino(Domino d){
+    this.dominos.add(d);
+  }
   void add_player(Player pl){
     this.players.add(pl);
     this.objs.add(pl);

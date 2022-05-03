@@ -79,7 +79,7 @@ void setup() {
   physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
   
-  
+  physics.add_domino(new Domino(new PVector(100, 100), 100));
   PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
   println(b.bounciness, emre.bounciness);
   physics.add_block(b);
