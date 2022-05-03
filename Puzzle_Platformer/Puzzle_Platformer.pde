@@ -1,7 +1,6 @@
 import g4p_controls.*;
 import java.awt.*;
 
-
 int inventorySize = 8;
 int money = 2000;
 boolean open = false;
@@ -32,7 +31,6 @@ Circle goal_ball;
 
 Point mouse;
 
-
 void setup() {
   fill(0);
 
@@ -47,8 +45,7 @@ void setup() {
   bouncy = new Block(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
   emreBlock = new Block(90, loadImage("images/emre.png"), "EMREEEEEEEEEEEEEE.", 1);
   pe = new Pend_block(100, loadImage("images/pend.png"), "A pendulum", 1);
-  //--------------------------------------------------------------\\
-
+  //--------------------------------------------------------------\\xs
 
   //------------------------ add items to shop -------------------------------\\
   itemShop.addToStock(pick);
