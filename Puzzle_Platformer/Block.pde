@@ -22,7 +22,7 @@ class PlayBlock extends Platform {
     // lifts the substance
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
     PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
-    boolean valid = circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 1.01);
+    boolean valid = circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.width_, 1.01);
     if (!valid) return;
     
     //println(frameCount);
@@ -30,12 +30,12 @@ class PlayBlock extends Platform {
     //println(some_substance.velocity);
     //println(this.velocity);
     //println();
-    boolean outside_y = (some_substance.coordinate.y < top_left.y - some_substance.radius * 0.5 || some_substance.coordinate.y > bottom_right.y + some_substance.radius * 0.5);
+    boolean outside_y = (some_substance.coordinate.y < top_left.y - some_substance.width_ * 0.5 || some_substance.coordinate.y > bottom_right.y + some_substance.width_ * 0.5);
 
     if (!outside_y){
     //if (!outside_y){
-      if (abs(top_left.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = top_left.x - some_substance.radius;
-      else if (abs(bottom_right.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = bottom_right.x + some_substance.radius;
+      if (abs(top_left.x - some_substance.coordinate.x) < some_substance.width_) some_substance.coordinate.x = top_left.x - some_substance.width_;
+      else if (abs(bottom_right.x - some_substance.coordinate.x) < some_substance.width_) some_substance.coordinate.x = bottom_right.x + some_substance.width_;
     }
     
     if (valid){
@@ -43,11 +43,11 @@ class PlayBlock extends Platform {
    
 
       if (abs(some_substance.coordinate.y - top_left.y) < abs(some_substance.coordinate.y - bottom_right.y) ){
-        some_substance.coordinate.y = top_left.y - some_substance.radius;
+        some_substance.coordinate.y = top_left.y - some_substance.width_;
       }
       else{
         //println(some_substance);
-        //some_substance.coordinate.y = bottom_right.y + some_substance.radius;
+        //some_substance.coordinate.y = bottom_right.y + some_substance.width_;
       }
       
       //some_substance.velocity.mult(sqrt(bounciness * some_substance.bounciness));

@@ -75,7 +75,7 @@ class Player extends Circle{
     }
     stroke(color_to_use);
     fill(color_to_use);
-    circle(this.coordinate.x, this.coordinate.y, 2*this.radius);
+    circle(this.coordinate.x, this.coordinate.y, 2*this.width_);
   }
   
   void addItemToInv(Tool a){

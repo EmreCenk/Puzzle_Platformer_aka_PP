@@ -3,17 +3,17 @@ class Substance{
   ArrayList<Line> lines;
   color colour;
   PVector velocity, coordinate;
-  float radius;
+  float width_;
   float bounciness; // how much it bounces when it hits a surface
   boolean jumping;
   PVector previous_coordinate; // stores position in previous frame
   float mass;
   boolean effected_by_gravity;
 
-  Substance(PVector velocity_, PVector coordinates_, float radius_, color colour_){
+  Substance(PVector velocity_, PVector coordinates_, float w, color colour_){
     this.velocity = velocity_;
     this.coordinate = coordinates_;
-    this.radius = radius_;
+    this.width_ = w;
     this.colour = colour_;
     this.lines = new ArrayList<Line>();
     

@@ -26,32 +26,32 @@ class Prison{
     // TODO: IF LET AND RIGHT WALL RESET THE JUMP, WE CAN ENABLE WALL JUMPS
     // TODO: ADD FRICTION TO WALLS SO WALL JUMPS BECOME BIG BRAIN MECHANICS
     
-    if (obj.coordinate.y < this.top_left.y + obj.radius){
+    if (obj.coordinate.y < this.top_left.y + obj.width_){
       ////top wall
-      obj.coordinate.y = this.top_left.y + obj.radius;
+      obj.coordinate.y = this.top_left.y + obj.width_;
       obj.velocity.y *= (-(this.bounciness + obj.bounciness) / 2);      
     }
-    else if (obj.coordinate.y > this.bottom_right.y - obj.radius){
+    else if (obj.coordinate.y > this.bottom_right.y - obj.width_){
       //bottom wall
-      obj.coordinate.y = this.bottom_right.y - obj.radius;
+      obj.coordinate.y = this.bottom_right.y - obj.width_;
       obj.velocity.y *= (-(this.bounciness + obj.bounciness) / 2);
       obj.jumping = false;
 
     }
     
-  //  if (obj.coordinate.x < this.top_left.x + obj.radius){
+  //  if (obj.coordinate.x < this.top_left.x + obj.width_){
   //    // left wall
   //    obj.set_velocity(new PVector(-obj.velocity.x, obj.velocity.y)); // reflect along line
-  //    obj.set_center(new PVector(this.top_left.x + obj.radius, obj.coordinate.y));
+  //    obj.set_center(new PVector(this.top_left.x + obj.width_, obj.coordinate.y));
   //    obj.set_velocity(obj.velocity.mult(this.bounciness)); 
   //    obj.set_angular_speed(obj.angular_speed * this.angular_loss);
 
   //  }
     
-  //  else if (obj.coordinate.x > this.bottom_right.x - obj.radius){
+  //  else if (obj.coordinate.x > this.bottom_right.x - obj.width_){
   //    // right wall
   //    obj.set_velocity(new PVector(-obj.velocity.x, obj.velocity.y)); // reflect line
-  //    obj.set_center(new PVector(this.bottom_right.x - obj.radius, obj.coordinate.y));
+  //    obj.set_center(new PVector(this.bottom_right.x - obj.width_, obj.coordinate.y));
   //    obj.set_velocity(obj.velocity.mult(this.bounciness)); 
   //    obj.set_angular_speed(obj.angular_speed * this.angular_loss);
 

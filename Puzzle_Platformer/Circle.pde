@@ -11,15 +11,15 @@ class Circle extends Substance{
   }
   
   boolean is_colliding(Substance some_object){
-    //return line_intersects_circle(some_object.previous_coordinate, some_object.coordinate, this.coordinate, this.radius, some_object.radius);
+    //return line_intersects_circle(some_object.previous_coordinate, some_object.coordinate, this.coordinate, this.width_, some_object.width_);
 
-    return dist(this.coordinate.x, this.coordinate.y, some_object.coordinate.x, some_object.coordinate.y) < this.radius + some_object.radius;
+    return dist(this.coordinate.x, this.coordinate.y, some_object.coordinate.x, some_object.coordinate.y) < this.width_ + some_object.width_;
   }
   
   void display(){
     stroke(this.colour);
     fill(this.colour);
-    circle(this.coordinate.x, this.coordinate.y, 2*this.radius);
+    circle(this.coordinate.x, this.coordinate.y, 2*this.width_);
   }
   
   void collide(Substance obj){
@@ -29,7 +29,7 @@ class Circle extends Substance{
     // before anything we need to make sure that the objects aren't inside each other:
     
     // how much we need to move the external object so that it is tangent to "this" circle
-    float delta_d = obj.radius+this.radius - dist(this.coordinate.x, this.coordinate.y, obj.coordinate.x, obj.coordinate.y);
+    float delta_d = obj.width_+this.width_ - dist(this.coordinate.x, this.coordinate.y, obj.coordinate.x, obj.coordinate.y);
     
     // what angle we need to move the object at:
     float theta = atan2(obj.coordinate.y - this.coordinate.y, obj.coordinate.x - this.coordinate.x);    
