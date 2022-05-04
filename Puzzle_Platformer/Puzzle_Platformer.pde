@@ -88,8 +88,8 @@ void setup() {
 
 void draw() {
   frameRate(60);
-  //println(frameRate);
-  //println(mouse.x, mouse.y);
+  //ln(frameRate);
+  //ln(mouse.x, mouse.y);
   mouse = MouseInfo.getPointerInfo().getLocation();
   background(255);
 
@@ -115,6 +115,7 @@ void mousePressed() {
       }
     }
   }
+  
 }
 
 void keyPressed() {
@@ -124,7 +125,7 @@ void keyPressed() {
   }
 
   if (key == 's') {
-    println("yes");
+    //println("yes");
     loop();
   }
 }
@@ -170,10 +171,13 @@ void outlineMain(int x, int y, int size, color col) {
 
 void showInvMain(int x, int y) {
   int tempX = x;
-  shopWindow.stroke(255);
-  shopWindow.fill(255);
-  for ( int j = 0; j < emre.inventory.size(); j++) { 
-    outlineMain(x, y, size, 0);
+  for( int j = 0; j < emre.inventory.size(); j++) { 
+    if(emre.inventory.get(j).mainSelected){
+      outlineMain(x, y, size, color(255, 0, 0));
+    }else{
+      outlineMain(x, y, size, 0);
+    }
+    
     image(emre.inventory.get(j).icon, x, y);
     x += size;
     if (j%4 == 3) {
@@ -181,4 +185,5 @@ void showInvMain(int x, int y) {
       y += size;
     }
   }
+  
 }

@@ -1,4 +1,5 @@
 class Tool{
+  boolean mainSelected = false;
   int price;
   PImage icon;
   String desc;
@@ -78,7 +79,13 @@ class Tool{
   }
   
   void mainClicked(){
-    println(this.desc);
+    for(int i = 0; i < emre.inventory.size(); i ++){
+      emre.inventory.get(i).mainSelected = false;
+    }
+    
+    this.mainSelected = true;
+    redraw();
+    
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
