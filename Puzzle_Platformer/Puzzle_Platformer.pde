@@ -33,10 +33,8 @@ Point mouse;
 
 void setup() {
   fill(0);
-
   size(1200, 500);
   createGUI();
-  //shopWindow.setVisible(open);
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
   pick = new Pickaxe(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
@@ -55,46 +53,36 @@ void setup() {
   itemShop.addToStock(emreBlock);
   itemShop.addToStock(pe);
   //---------------------------------------------------------------------------\\
-
-
-  //mp1 = new Pendulum(new PVector(width*0.4, 100), 10, 150, PI/20, 10);
-  //p2 = new Platform(new PVector(width*0.3, 350), 1300, 20, color(0, 0, 0));
-
-
-
-  //emre.velocity = new PVector(70, 0);
-  //b = new PlayBlock(new PVector(100, 300), 50, color(0));
-
-  goal_ball = new Circle(new PVector(width/2, height*0.4), 10, color(100, 100, 0));
+  goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
   goal_ball.mass = 4;
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
-  
+
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   emre.mass = 10;
-  emre.jump_power = 15; //for debugging
+  emre.jump_power = 7; //for debugging
+  //emre.velocity = new PVector(10, -10000);
   physics.add_player(emre);
-  
-  physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255,0,0))); // red
-  physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0,0,0))); // black
-  physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0,255,0))); // green
-  
+
+  physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255, 0, 0))); // red
+  //physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0, 0, 0))); // black
+  physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0, 255, 0))); // green
+
   physics.add_domino(new Domino(new PVector(100, 100), 100));
-  PlayBlock b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
-  println(b.bounciness, emre.bounciness);
+  b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
+  b.velocity = new PVector(0, 0);
   physics.add_block(b);
 
 
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
-  
-   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
-  
+
+  physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+
   physics.add_prison(new Prison());
   physics.display_universe();
-  itemShop.stock.get(0).clicked();
+  itemShop.stock.get(0).shopClicked();
   itemShop.update();
-  //physics.display_universe();
   noLoop();
 }
 
@@ -104,18 +92,29 @@ void draw() {
   //println(mouse.x, mouse.y);
   mouse = MouseInfo.getPointerInfo().getLocation();
   background(255);
-  
+
   physics.update_universe();
-  physics.apply_friction_to_universe();
-  physics.apply_gravity_to_universe();
-  physics.update_positions_in_universe();
-  physics.apply_collision_in_universe();
-  physics.display_universe();
-  
+
+
   stroke(color(255, 0, 0));
   line(emre.coordinate.x, emre.coordinate.y, emre.previous_coordinate.x, emre.previous_coordinate.y);
+  line(b.coordinate.x, b.coordinate.y, b.previous_coordinate.x, b.previous_coordinate.y);
+
   showInvMain(width - size * min(emre.inventory.size(), 4), 0);
   //saveFrame("export/frame####.png");
+}
+
+void mousePressed() {
+  for (int i = 0; i < 4; i ++) {
+    for (int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++) {
+      if (mouseX < width - size * i && mouseX > width - size - size * i) {
+        if (mouseY > size * j && mouseY < size + size * j) {
+          int index = min(emre.inventory.size(), 4) - 1 - i + 4 * j;
+          emre.inventory.get(index).mainClicked();
+        }
+      }
+    }
+  }
 }
 
 void keyPressed() {
@@ -123,8 +122,9 @@ void keyPressed() {
   if (key == 'p' || key == 'P') {
     itemShop.opened();
   }
-  
-  if (key == 's'){
+
+  if (key == 's') {
+    println("yes");
     loop();
   }
 }
@@ -132,9 +132,6 @@ void keyPressed() {
 void keyReleased() {
   emre.key_up_movement();
 }
-
-// raw top left of gui : (0, 230), bottom right : (400, 730)
-// icons start at top left : (0, 228), stop at bottom right : (200, 728)
 
 int tdToOd(int x, int y) {
   return(x + 4*y);
@@ -145,21 +142,17 @@ void iconClicked() {
   int yOffset = 230;
   for (int y = 0; y < ceil(itemShop.stock.size() / 4.0); y++) {
     for (int x = 0; x < 4; x++) {
-      if (mouse.x > xOffset + x * 50 && mouse.x < xOffset + 50 + x * 50) {
-        if (mouse.y > yOffset + y*50 && mouse.y < yOffset + 50 + y * 50) {
-          itemShop.stock.get(tdToOd(x, y)).clicked();
+      if (mouse.x > xOffset + x * size && mouse.x < xOffset + size + x * size) {
+        if (mouse.y > yOffset + y * size && mouse.y < yOffset + size + y * size) {
+          itemShop.stock.get(tdToOd(x, y)).shopClicked();
         }
       }
     }
   }
-  
 }
 
 void shopBackground() {
-
-  //shopWindow.loop();
-  shopWindow.background(255); // we sometimes get null pointer exception here for some reason
-
+  shopWindow.background(255);
 }
 
 int size = 50;
@@ -175,17 +168,17 @@ void outlineMain(int x, int y, int size, color col) {
   rect(x, y, size, size);
 }
 
-void showInvMain(int x, int y){
+void showInvMain(int x, int y) {
   int tempX = x;
   shopWindow.stroke(255);
   shopWindow.fill(255);
-  for( int j = 0 ; j < emre.inventory.size(); j++){ 
+  for ( int j = 0; j < emre.inventory.size(); j++) { 
     outlineMain(x, y, size, 0);
     image(emre.inventory.get(j).icon, x, y);
     x += size;
-    if(j%4 == 3){
+    if (j%4 == 3) {
       x = tempX;
       y += size;
     }
-  } 
+  }
 }

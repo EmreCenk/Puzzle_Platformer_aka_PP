@@ -27,6 +27,7 @@ class Circle extends Substance{
     if (!this.is_colliding(obj)) return;
     
     // before anything we need to make sure that the objects aren't inside each other:
+    
     obj.jumping = this.jumping;
     // how much we need to move the external object so that it is tangent to "this" circle
     float delta_d = obj.radius+this.radius - dist(this.coordinate.x, this.coordinate.y, obj.coordinate.x, obj.coordinate.y);

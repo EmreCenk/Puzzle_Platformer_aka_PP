@@ -50,7 +50,7 @@ class Platform extends Substance{
   
   void display(){
     PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
-    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+    //PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
     
     stroke(color(255, 0, 0));
     strokeWeight(2);
@@ -64,3 +64,38 @@ class Platform extends Substance{
   }
 
 }
+
+class PlayBlock extends Platform {
+  
+  float price;
+  PlayBlock (PVector center_, float height_, color colour_){
+    super(center_, height_, height_, colour_); 
+    this.effected_by_gravity = true;
+    this.bounciness = DEFAULT_PLAYBLOCK_BOUNCE;
+  }
+  
+  void player_activated(Substance pl){
+  // specific types of blocks will overwrite this
+  }
+
+  //void display(){
+
+
+    //color color_to_use;
+    //if (!this.jumping){
+    //  color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
+    //}
+    //else{
+    //  color_to_use = this.colour;
+    //}
+    //PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
+    //PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+
+    //stroke(color_to_use);
+    //fill(color_to_use);
+    //rect(top_left.x, top_left.y, this.width_, height_);
+
+
+  //}
+}
+  

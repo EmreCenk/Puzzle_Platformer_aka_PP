@@ -23,6 +23,9 @@ class Substance{
     this.effected_by_gravity = true;
   }
   
+  Substance(){
+    this(new PVector(0, 0), new PVector(0, 0), 0, color(0, 0, 0));
+  }
   Substance(PVector velocity_, PVector coordinates_, float radius_, color colour_, float bounciness_, float mass_){
     this(velocity_, coordinates_, radius_, colour_, bounciness_);
     this.mass = mass_;
