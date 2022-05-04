@@ -51,8 +51,6 @@ class Substance{
   }
     
   void display(){}// is overwritten when a new substance is created
-  void collide(Substance sub){
-    
-  };
+
 
 }
