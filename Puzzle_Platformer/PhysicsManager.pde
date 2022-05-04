@@ -88,19 +88,19 @@ class PhysicsManager {
     }
     
     //block collision
-    for (int i = 0; i < this.blocks.size(); i++){
-      for (int j = i+1; j<this.blocks.size(); j++){
-        this.blocks.get(i).collide(this.blocks.get(j));
-      }
+    //for (int i = 0; i < this.blocks.size(); i++){
+    //  for (int j = i+1; j<this.blocks.size(); j++){
+    //    this.blocks.get(i).collide(this.blocks.get(j));
+    //  }
       
-      for (int j = 0; j < this.objs.size(); j++){
-        this.blocks.get(i).collide(this.objs.get(j));
-      }
-    }
+    //  for (int j = 0; j < this.objs.size(); j++){
+    //    this.blocks.get(i).collide(this.objs.get(j));
+    //  }
+    //}
      //ORDER MATTERS:
 
     //this.prison_collision();
-    //this.block_collision();
+    this.block_collision();
   }
 
   void prison_collision() {
@@ -127,6 +127,7 @@ class PhysicsManager {
       top_left = new PVector(this.blocks.get(i).coordinate.x - this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y - this.blocks.get(i).height_/2);
       bottom_right = new PVector(this.blocks.get(i).coordinate.x + this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y + this.blocks.get(i).height_/2);
       min_dist_collision = INFINITY;
+      collision_to_process = null;
       
       for (int j = 0; j < this.players.size(); j++) {
 
@@ -216,6 +217,7 @@ class PhysicsManager {
           }
         }
       }
+      if (collision_to_process == null) continue;
       elastic_collision_2d(collision_to_process, this.blocks.get(i));
       if (collision_to_process instanceof Platform){collision_to_process.velocity = new PVector(0, 0);}
       if (collision_to_process instanceof Player){
