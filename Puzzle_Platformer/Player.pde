@@ -65,6 +65,10 @@ class Player extends Circle{
     else if (keyCode == LEFT) this.moving_left = false;
   }
   
+  void clicked_screen(PhysicsManager phys){
+    phys.add_block(new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0)));
+  }
+  
   void display(){
     color color_to_use;
     if (this.dynamic_colours && !this.jumping){

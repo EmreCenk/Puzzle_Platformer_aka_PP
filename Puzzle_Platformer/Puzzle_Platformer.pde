@@ -116,6 +116,8 @@ void mousePressed() {
     }
   }
   
+  emre.clicked_screen(physics);
+  
 }
 
 void keyPressed() {
