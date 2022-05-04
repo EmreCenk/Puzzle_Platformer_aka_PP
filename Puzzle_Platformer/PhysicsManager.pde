@@ -102,7 +102,11 @@ class PhysicsManager {
       for (int j = 0; j < this.players.size(); j++){
         this.blocks.get(i).collide(this.players.get(j));
         this.blocks.get(i).keep_object_above_platform(this.players.get(j));
-
+      }
+      
+      for (int j = i + 1; j < this.blocks.size(); j++){
+        this.blocks.get(i).collide(this.blocks.get(j));
+        this.blocks.get(i).keep_object_above_platform(this.blocks.get(j));
       }
 
     }
