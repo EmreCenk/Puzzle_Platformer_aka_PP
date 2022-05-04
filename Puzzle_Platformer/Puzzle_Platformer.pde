@@ -61,7 +61,7 @@ void setup() {
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   emre.mass = 10;
   emre.jump_power = 7; //for debugging
-  emre.velocity = new PVector(0, -10000);
+  emre.velocity = new PVector(10, -10000);
   physics.add_player(emre);
 
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255, 0, 0))); // red
@@ -70,7 +70,7 @@ void setup() {
 
   physics.add_domino(new Domino(new PVector(100, 100), 100));
   b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
-  b.velocity = new PVector(0, 100);
+  b.velocity = new PVector(0, 10);
   physics.add_block(b);
 
 
@@ -124,8 +124,8 @@ void keyPressed() {
   }
 
   if (key == 's') {
-    loop();
     println("yes");
+    loop();
   }
 }
 

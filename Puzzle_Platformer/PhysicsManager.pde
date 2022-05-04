@@ -97,36 +97,80 @@ class PhysicsManager {
   }
   void block_collision() {
     //block collision
-    float min_collision_dist = 10000;
-    PVector intersection, top_left, bottom_right;
-
-
+    PVector intersection, top_left, bottom_right, prev_top, prev_bot;
+    float[] d1, d2, d3, d4;
+    float dd1, dd2, min_d;
+    PVector closest_player, closest_block; // coordinates for when the player and block are closest to each other
+    
     for (int i = 0; i < this.blocks.size(); i++) {
       for (int j = 0; j < this.players.size(); j++) {
         top_left = new PVector(this.blocks.get(i).coordinate.x - this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y - this.blocks.get(i).height_/2);
         bottom_right = new PVector(this.blocks.get(i).coordinate.x + this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y + this.blocks.get(i).height_/2);
 
+        prev_top = new PVector(this.blocks.get(i).previous_coordinate.x - this.blocks.get(i).width_/2, this.blocks.get(i).previous_coordinate.y - this.blocks.get(i).height_/2);
+        prev_bot = new PVector(this.blocks.get(i).previous_coordinate.x + this.blocks.get(i).width_/2, this.blocks.get(i).previous_coordinate.y + this.blocks.get(i).height_/2);
+        
         //continous detection
         intersection = get_line_segment_intersection(this.blocks.get(i).coordinate, this.blocks.get(i).previous_coordinate,
-                                                     this.players.get(i).coordinate, this.players.get(i).previous_coordinate);
+                                                     this.players.get(j).coordinate, this.players.get(j).previous_coordinate);
         if (intersection != null) {
           println("intersection1", frameCount);
           continue;
         }
 
+        dd1 = dist(this.blocks.get(i).coordinate.x, this.blocks.get(i).coordinate.y, this.players.get(j).coordinate.x, this.players.get(j).coordinate.y);
+        dd2 = dist(this.blocks.get(i).previous_coordinate.x, this.blocks.get(i).previous_coordinate.y, this.players.get(j).previous_coordinate.x, this.players.get(j).previous_coordinate.y); 
+      
+        d1 = closest_distance_from_point_to_line_segment(this.blocks.get(i).coordinate, this.players.get(j).coordinate, this.players.get(j).previous_coordinate);
+        d2 = closest_distance_from_point_to_line_segment(this.blocks.get(i).previous_coordinate, this.players.get(j).coordinate, this.players.get(j).previous_coordinate);
 
-        if (circle_in_rect(top_left, bottom_right, this.players.get(i).coordinate, this.players.get(i).radius, 1)) {
-          println("intersects2", frameCount);
+        d3 = closest_distance_from_point_to_line_segment(this.players.get(j).coordinate, this.blocks.get(i).coordinate, this.blocks.get(i).previous_coordinate);
+        d4 = closest_distance_from_point_to_line_segment(this.players.get(j).previous_coordinate, this.blocks.get(i).coordinate, this.blocks.get(i).previous_coordinate);
+        
+        min_d = min(min(min(min(min(dd1, dd2), d1[0]), d2[0]), d3[0]), d4[0]); // apparently you can't have more than 2 arguments into the min() function
+        
+        if (min_d == dd1){
+          closest_player = new PVector(this.players.get(j).coordinate.x, this.players.get(j).coordinate.y);
+          closest_block = new PVector(this.blocks.get(i).coordinate.x, this.blocks.get(i).coordinate.y);
         }
-        //they don't intersect so we're gonna check the 2 extreme positions
-      }
-      //for (int j = i+1; j<this.blocks.size(); j++){
-      //  this.blocks.get(i).collide(this.blocks.get(j));
-      //}
+        else if (min_d == dd2){
+          closest_player = new PVector(this.players.get(j).previous_coordinate.x, this.players.get(j).previous_coordinate.y);
+          closest_block = new PVector(this.blocks.get(i).previous_coordinate.x, this.blocks.get(i).previous_coordinate.y);        
+        }
 
-      //for (int j = 0; j < this.objs.size(); j++){
-      //this.blocks.get(i).collide(this.objs.get(j));
-      //}
+        else if (min_d == d1[0]){
+          closest_player = new PVector(d1[1], d1[2]);
+          closest_block = new PVector(this.blocks.get(i).coordinate.x, this.blocks.get(i).coordinate.y);
+        }
+        else if (min_d == d2[0]){
+          closest_player = new PVector(d2[1], d2[2]);
+          closest_block = new PVector(this.blocks.get(i).previous_coordinate.x, this.blocks.get(i).previous_coordinate.y);
+        }
+        
+        else if (min_d == d3[0]){
+          closest_player = new PVector(this.players.get(j).coordinate.x, this.players.get(j).coordinate.y);
+          closest_block = new PVector(d3[1], d3[2]);
+
+        }
+        else if (min_d == d4[0]){
+          closest_player = new PVector(this.players.get(j).previous_coordinate.x, this.players.get(j).previous_coordinate.y);
+          closest_block = new PVector(d4[1], d4[2]); 
+        }
+        else{
+          closest_block = new PVector();
+          closest_player = new PVector();
+          println("oh fuck");
+          stop();
+        }
+        
+        top_left = new PVector(closest_block.x - this.blocks.get(i).width_/2, closest_block.y - this.blocks.get(i).height_/2);
+        bottom_right = new PVector(closest_block.x + this.blocks.get(i).width_/2, closest_block.y + this.blocks.get(i).height_/2);
+
+        if (circle_in_rect(top_left, bottom_right, closest_player, this.players.get(j).radius, 1)){
+          println("INTERSECTING", frameCount);
+        }
+      }
+
     }
   }
 

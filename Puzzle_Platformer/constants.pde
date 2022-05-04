@@ -8,3 +8,4 @@ float DEFAULT_MU = 0.005; // default coefficient of friction value
 float DEFAULT_TERMINAL_VELOCITY = 2; // default player horizontal terminal velocity
 float DEFAULT_PLAYER_BOUNCINESS = 0;
 float g = 9.81;
+float INFINITY = 100000;

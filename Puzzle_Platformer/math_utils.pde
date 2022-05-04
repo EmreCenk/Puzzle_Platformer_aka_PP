@@ -85,6 +85,8 @@ boolean line_segments_intersect(PVector line1_p1, PVector line1_p2, PVector line
 
 PVector get_line_segment_intersection(PVector line1_p1, PVector line1_p2, PVector line2_p1, PVector line2_p2){
     // checks if two lines segments intersect
+    // TODO: DOESN'T HANDLE COINCIDING LINES
+    
     PVector intersection = find_line_intersection(line1_p1, line1_p2, line2_p1, line2_p2);
     if (intersection == null) return null;
     
@@ -126,7 +128,7 @@ PVector subtract(PVector a, PVector b){
 
 PVector project(PVector a, PVector b){
   // projecting vector a onto vector b
-  // this is equivalent to finding where the point would fall if a perpendicular line was drawn vector a to vector b
+  // this is equivalent to finding where the point would fall if a perpendicular line was drawn from vector a to vector b
   // Here's a neat proof: https://www.youtube.com/watch?v=aTBtgW7U-Y8
   
   float k = dot_product(a, b) / dot_product(b, b);
@@ -144,4 +146,50 @@ boolean line_intersects_circle(PVector line_point_1, PVector line_point_2, PVect
   float distance = dist(circle_center.x, circle_center.y, projected_point.x, projected_point.y);
   return (distance < radius1 + radius2);
 
+}
+
+
+
+float[] closest_distance_from_point_to_line_segment(PVector point, PVector l1, PVector l2){
+  // after an excrutiatingly painful amount of time trying to get this to work, I realized there must have been other people who have had the same issue
+  // Long story short: god bless whoever wrote the following forum entry 
+  // https://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment
+  
+  float A, B, C, D, dot, len_sq, param, xx, yy, dx, dy;  
+  
+  float x = point.x;
+  float y = point.y;
+  float x1 = l1.x;
+  float y1 = l1.y;
+  float x2 = l2.x;
+  float y2 = l2.y;
+  
+  A = x - x1;
+  B = y - y1;
+  C = x2 - x1;
+  D = y2 - y1;
+
+  dot = A * C + B * D;
+  len_sq = C * C + D * D;
+  param = -1;
+  if(len_sq != 0) //in case of 0 length line
+     param = dot / len_sq;
+
+
+  if (param < 0) {
+    xx = x1;
+    yy = y1;
+  }
+  else if (param > 1) {
+    xx = x2;
+    yy = y2;
+  }
+  else {
+    xx = x1 + param * C;
+    yy = y1 + param * D;
+  }
+
+  dx = x - xx;
+  dy = y - yy;
+  return new float[] {sqrt(dx * dx + dy * dy), xx, yy};
 }
