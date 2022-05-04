@@ -47,42 +47,60 @@ class PhysicsManager {
     }
   }
   void apply_collision_in_universe() {
-    //// circle collision
-    //for (int i = 0; i < this.objs.size(); i++){
-    //  for (int j = i+1; j < this.objs.size(); j++){
-    //    this.objs.get(i).collide(this.objs.get(j));
-    //  }
-    //}
+   // circle collision
+    for (int i = 0; i < this.objs.size(); i++){
+      for (int j = i+1; j < this.objs.size(); j++){
+        this.objs.get(i).collide(this.objs.get(j));
+      }
+    }
+    
+    //keeping things above and below platforms:
+    for (int i = 0; i < this.platforms.size(); i++){
+      for (int j = 0; j < this.objs.size(); j++){
+        //if ((this.objs.get(j) instanceof Platform)) continue;
+        //println(this.objs.get(j));
+        this.platforms.get(i).keep_object_above_platform(this.objs.get(j));
+      }
+      
+      for (int j = 0; j<this.blocks.size(); j++){
+        this.platforms.get(i).keep_object_above_platform(this.blocks.get(j));
+      }
+    }
+    
+    //prison imprisonment
+    for (int i = 0; i < this.prisons.size(); i++){
+      for (int j = 0; j < this.objs.size(); j++){
+        this.prisons.get(i).imprison(this.objs.get(j));
+      }
+      for (int j = 0; j<this.blocks.size(); j++){
+        this.prisons.get(i).imprison(this.blocks.get(j));
+      }
+    }
+    
+    //pendulum collision
+    for (int i = 0; i < this.pendulums.size(); i++){
+      for (int j = 0; j < this.objs.size(); j++){
+        this.pendulums.get(i).collide(this.objs.get(j));
+      }
+      for (int j = 0; j<this.blocks.size(); j++){
+        this.pendulums.get(i).collide(this.blocks.get(j));
+      }
+    }
+    
+    //block collision
+    for (int i = 0; i < this.blocks.size(); i++){
+      for (int j = i+1; j<this.blocks.size(); j++){
+        this.blocks.get(i).collide(this.blocks.get(j));
+      }
+      
+      for (int j = 0; j < this.objs.size(); j++){
+        this.blocks.get(i).collide(this.objs.get(j));
+      }
+    }
+     //ORDER MATTERS:
 
-    ////keeping things above and below platforms:
-    //for (int i = 0; i < this.platforms.size(); i++){
-    //  for (int j = 0; j < this.objs.size(); j++){
-    //    //if ((this.objs.get(j) instanceof Platform)) continue;
-    //    //println(this.objs.get(j));
-    //    this.platforms.get(i).keep_object_above_platform(this.objs.get(j));
-    //  }
-
-    //  for (int j = 0; j<this.blocks.size(); j++){
-    //    this.platforms.get(i).keep_object_above_platform(this.blocks.get(j));
-    //  }
-    //}
-
-
-
-    ////pendulum collision
-    //for (int i = 0; i < this.pendulums.size(); i++){
-    //  for (int j = 0; j < this.objs.size(); j++){
-    //    this.pendulums.get(i).collide(this.objs.get(j));
-    //  }
-    //  for (int j = 0; j<this.blocks.size(); j++){
-    //    this.pendulums.get(i).collide(this.blocks.get(j));
-    //  }
-    //}
-
-    // ORDER MATTERS:
-
-    this.prison_collision();
-    this.block_collision();
+    //this.prison_collision();
+    //this.block_collision();
   }
 
   void prison_collision() {
@@ -122,7 +140,8 @@ class PhysicsManager {
           println("INTERSECTING1", frameCount);
           continue;
         }
-
+        
+        // 
         dd1 = dist(this.blocks.get(i).coordinate.x, this.blocks.get(i).coordinate.y, this.players.get(j).coordinate.x, this.players.get(j).coordinate.y);
         dd2 = dist(this.blocks.get(i).previous_coordinate.x, this.blocks.get(i).previous_coordinate.y, this.players.get(j).previous_coordinate.x, this.players.get(j).previous_coordinate.y); 
       
@@ -170,7 +189,7 @@ class PhysicsManager {
         println("ya");
         temp_top_left = new PVector(closest_block.x - this.blocks.get(i).width_/2, closest_block.y - this.blocks.get(i).height_/2);
         temp_bottom_right = new PVector(closest_block.x + this.blocks.get(i).width_/2, closest_block.y + this.blocks.get(i).height_/2);
-
+        // todo: check time of collision and make sure they actually collide 
         if (circle_in_rect(temp_top_left, temp_bottom_right, closest_player, this.players.get(j).radius, 1)){
           println("INTERSECTING2", frameCount);
           if (dist(closest_player.x, closest_player.y, closest_block.x, closest_block.y) < min_dist_collision){
@@ -199,6 +218,9 @@ class PhysicsManager {
       }
       elastic_collision_2d(collision_to_process, this.blocks.get(i));
       if (collision_to_process instanceof Platform){collision_to_process.velocity = new PVector(0, 0);}
+      if (collision_to_process instanceof Player){
+
+      }
     }
   }
 
