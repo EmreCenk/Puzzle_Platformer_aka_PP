@@ -68,8 +68,7 @@ class Player extends Circle{
     if (keyCode == RIGHT) this.moving_right = false;
     else if (keyCode == LEFT) this.moving_left = false;
   }
-  
-  void clicked_screen(PhysicsManager phys){
+    void clicked_screen(PhysicsManager phys){
     if (this.equipped_tool instanceof Block){
       phys.add_block(new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0)));
     }
@@ -119,7 +118,7 @@ class Player extends Circle{
     inventory.add(a);
   }
   
-  void displayInventory(){
+  void display_inveontory_in_shop_window(){
     int x = 200;
     int y = 260;
     for( int j = 0 ; j < inventory.size(); j++){ 

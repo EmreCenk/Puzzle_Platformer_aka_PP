@@ -17,16 +17,17 @@ class Shop{
   }
   
   void displayIcons(){
-    emre.displayInventory();
+    emre.display_inveontory_in_shop_window();
     int x = 0;
     int y = 0;
     PImage temp = loadImage("images/money.png");
     temp.resize(size, size);
     shopWindow.image(temp, 200, 0);
+    PImage tempShop;
     moneyLabel.setText(str(emre.money));
     for( int i = 0 ; i < stock.size(); i++){ 
       outline(x, y, size, 0);
-      PImage tempShop = stock.get(i).icon;
+      tempShop = stock.get(i).icon;
       tempShop.resize(size, size);
       shopWindow.image(tempShop, x, y);
       

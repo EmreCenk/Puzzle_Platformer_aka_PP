@@ -58,7 +58,7 @@ class Tool{
               label.setText("");
               priceLabel.setText("");
               usesLabel.setText("");
-              emre.displayInventory();
+              emre.display_inveontory_in_shop_window();
               buyLabel.setText("");
               redraw();
             }else{
