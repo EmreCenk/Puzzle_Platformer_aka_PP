@@ -82,17 +82,16 @@ class Tool{
     for(int i = 0; i < emre.inventory.size(); i ++){
       emre.inventory.get(i).mainSelected = false;
     }
+    
     this.mainSelected = true;
     redraw();
     
-    emre.select_tool(this);
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
-    
   }
   
   
