@@ -106,6 +106,10 @@ class PlayBlock extends Platform {
       if (abs(top_left.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = top_left.x - some_substance.radius;
       else if (abs(bottom_right.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = bottom_right.x + some_substance.radius;
     }
+    
+    this.velocity.x = sign(this.velocity.x) * min(abs(this.velocity.x), BLOCK_TERMINAL_VELOCITY);
+    this.velocity.y = sign(this.velocity.y) * min(abs(this.velocity.y), BLOCK_TERMINAL_VELOCITY);
+    
     return; // for better readability
   }
 
