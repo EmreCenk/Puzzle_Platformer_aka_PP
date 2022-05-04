@@ -10,7 +10,7 @@ Shop itemShop = new Shop();
 //----------------- create items-----------------
 Pickaxe pick;
 Pickaxe pick2;
-Block dirt;
+Block normal_block;
 Block bouncy;
 Block emreBlock;
 Pend_block pe;
@@ -65,20 +65,16 @@ void setup() {
   createGUI();
   //----------------- create items ------------------------------\\
   // Tool(price, PImage, description, uses) 
-  pick = new Pickaxe(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
-  //pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe.", 10);
-  dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
-  bouncy = new Block(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
-  emreBlock = new Block(90, loadImage("images/emre.png"), "EMREEEEEEEEEEEEEE.", 1);
-  pe = new Pend_block(100, loadImage("images/pend.png"), "A pendulum", 1);
+  pick = new Pickaxe();
+  normal_block = new NormalBlock();
+  bouncy = new BouncyBlock();
+  pe = new Pend_block();
   //--------------------------------------------------------------\\xs
 
   //------------------------ add items to shop -------------------------------\\
   itemShop.addToStock(pick);
-  //itemShop.addToStock(pick2);
-  itemShop.addToStock(dirt);
+  itemShop.addToStock(normal_block);
   itemShop.addToStock(bouncy);
-  itemShop.addToStock(emreBlock);
   itemShop.addToStock(pe);
   //---------------------------------------------------------------------------\\
 
