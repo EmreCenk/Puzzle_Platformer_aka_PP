@@ -78,6 +78,7 @@ class Player extends Circle{
     else if (this.equipped_tool instanceof Pickaxe){
       ArrayList<PlayBlock> to_remove = new ArrayList<PlayBlock>();
       for (PlayBlock b: phys.blocks){
+        if (b.indestructible) continue;
         if (circle_in_rect(b.get_top_left(), b.get_bottom_right(), new PVector(mouseX, mouseY), 0, 0)){
           to_remove.add(b);
         }
@@ -88,6 +89,8 @@ class Player extends Circle{
       
       ArrayList<Pendulum> to_remove2 = new ArrayList<Pendulum>();
       for (Pendulum b: phys.pendulums){
+        if (b.indestructible) continue;
+
         if (circle_in_rect(new PVector(b.pivot.coordinate.x - b.string_length, b.pivot.coordinate.y - b.string_length),
                            new PVector(b.pivot.coordinate.x + b.string_length, b.pivot.coordinate.y + b.string_length),
                            new PVector(mouseX, mouseY), 0, 0)){

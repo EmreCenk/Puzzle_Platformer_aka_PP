@@ -136,6 +136,8 @@ void mousePressed() {
 boolean calibrated = false;
 
 void calibrate() throws AWTException {
+  // for some reason our gui doesn't load until an icon is clicked
+  // to bypass this, we will literally drag the mouse and click an icon manually:
   if (!calibrated) {
     robot = new Robot();
     robot.mouseMove(20, 273);
@@ -148,6 +150,7 @@ void keyPressed() {
   emre.key_press_movement();
   if (key == 'p' || key == 'P') {
     itemShop.opened();
+    
     try{calibrate();}
     catch (Exception E){println("oof: ", E);}
   }

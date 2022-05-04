@@ -8,6 +8,8 @@ class Pendulum{
   float angular_speed;
   float angular_acceleration, minimum_h, maximum_h;
   float usefullness_coefficient;
+  boolean indestructible;
+  
   Pendulum(PVector coordinate_, float circle_radius, float length_of_string, float theta, color colour){
     
     //note: theta in radians
@@ -25,6 +27,7 @@ class Pendulum{
     this.initialize_height();
     
     this.swing(); // we call swing once to properly initialize the coordinates of the hanging_thing
+    this.indestructible = false;
   }
   Pendulum(PVector coordinate_, float circle_radius, float length_of_string, float theta){
     this(coordinate_, circle_radius, length_of_string, theta, color(0,0,0));
