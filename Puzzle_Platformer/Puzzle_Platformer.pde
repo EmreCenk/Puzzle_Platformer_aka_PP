@@ -105,18 +105,21 @@ void draw() {
 }
 
 void mousePressed() {
+  boolean something_clicked = false;
   for (int i = 0; i < 4; i ++) {
     for (int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++) {
       if (mouseX < width - size * i && mouseX > width - size - size * i) {
         if (mouseY > size * j && mouseY < size + size * j) {
           int index = min(emre.inventory.size(), 4) - 1 - i + 4 * j;
-          emre.inventory.get(index).mainClicked();
+          println(emre.inventory.size(), -1, -i, 4*j);
+          emre.inventory.get(index).mainClicked(); // sometimes gives "ArrayIndexOutOfBoundsException: -1"
+          something_clicked = true;
         }
       }
     }
   }
-  
-  emre.clicked_screen(physics);
+  if (!something_clicked)
+    emre.clicked_screen(physics);
   
 }
 
