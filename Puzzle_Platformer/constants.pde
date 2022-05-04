@@ -9,4 +9,3 @@ float DEFAULT_TERMINAL_VELOCITY = 2; // default player horizontal terminal veloc
 float DEFAULT_PLAYER_BOUNCINESS = 0;
 float g = 9.81;
 float INFINITY = 100000;
-float BLOCK_TERMINAL_VELOCITY = 5;
