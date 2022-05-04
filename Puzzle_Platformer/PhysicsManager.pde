@@ -57,13 +57,15 @@ class PhysicsManager {
     //keeping things above and below platforms:
     for (int i = 0; i < this.platforms.size(); i++){
       for (int j = 0; j < this.objs.size(); j++){
-        //if ((this.objs.get(j) instanceof Platform)) continue;
-        //println(this.objs.get(j));
         this.platforms.get(i).keep_object_above_platform(this.objs.get(j));
       }
       
       for (int j = 0; j<this.blocks.size(); j++){
         this.platforms.get(i).keep_object_above_platform(this.blocks.get(j));
+      }
+      
+      for (int j = 0; j<this.players.size(); j++){
+        this.platforms.get(i).keep_object_above_platform(this.players.get(j));
       }
     }
     
@@ -88,19 +90,26 @@ class PhysicsManager {
     }
     
     //block collision
-    //for (int i = 0; i < this.blocks.size(); i++){
-    //  for (int j = i+1; j<this.blocks.size(); j++){
-    //    this.blocks.get(i).collide(this.blocks.get(j));
-    //  }
+    for (int i = 0; i < this.blocks.size(); i++){
+      for (int j = i+1; j<this.blocks.size(); j++){
+        this.blocks.get(i).collide(this.blocks.get(j));
+      }
       
-    //  for (int j = 0; j < this.objs.size(); j++){
-    //    this.blocks.get(i).collide(this.objs.get(j));
-    //  }
-    //}
+      for (int j = 0; j < this.objs.size(); j++){
+        this.blocks.get(i).collide(this.objs.get(j));
+      }
+
+      for (int j = 0; j < this.players.size(); j++){
+        this.blocks.get(i).collide(this.players.get(j));
+        this.blocks.get(i).keep_object_above_platform(this.players.get(j));
+
+      }
+
+    }
      //ORDER MATTERS:
 
     //this.prison_collision();
-    this.block_collision();
+    //this.block_collision();
   }
 
   void prison_collision() {
