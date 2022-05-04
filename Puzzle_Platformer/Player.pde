@@ -21,7 +21,7 @@ class Player extends Circle{
     
     this.jump_power = 6;
 
-    this.terminal_velocity = DEFAULT_TERMINAL_VELOCITY;
+    this.terminal_velocity = DEFAULT_PLAYER_HORIZONTAL_TERMINAL_VELOCITY;
     this.bounciness = DEFAULT_PLAYER_BOUNCINESS;
     this.mass = weight;
     
@@ -73,7 +73,7 @@ class Player extends Circle{
       println("block equipped");
       PlayBlock some_block;
       if (this.equipped_tool instanceof BouncyBlock){
-        some_block = new BouncyPlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0));
+        some_block = new BouncyPlayBlock(new PVector(mouseX, mouseY), 30);
       }
       else{
         some_block = new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0));

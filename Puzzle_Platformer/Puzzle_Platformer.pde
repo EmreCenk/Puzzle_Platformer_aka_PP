@@ -52,7 +52,7 @@ void setup() {
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0, 255, 0))); // green
 
   physics.add_domino(new Domino(new PVector(100, 100), 100));
-  b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50, color(0));
+  b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
   b.velocity = new PVector(0, 0);
   physics.add_block(b);
 

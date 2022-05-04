@@ -55,14 +55,14 @@ class PlayBlock extends Platform {
 class BouncyPlayBlock extends PlayBlock{
   float bounce_power;
 
-  BouncyPlayBlock (PVector center_, float height_, color colour_){
-    super(center_, height_, colour_);
+  BouncyPlayBlock (PVector center_, float height_){
+    super(center_, height_, color(0,206,209));
     this.bounce_power = 10;
 
   }
   void substance_collided(Substance pl){
     println("boo", frameCount);
-    pl.velocity.y -= this.bounce_power;
+    pl.velocity.y = min(DEFAULT_PLAYER_VERTICAL_TERMINAL_VELOCITY, pl.velocity.y - this.bounce_power);
     println(pl, pl.velocity);
   }
 }
