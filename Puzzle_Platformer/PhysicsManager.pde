@@ -14,6 +14,7 @@ class PhysicsManager {
 
   PhysicsManager() {
     this.prisons = new ArrayList<Prison>();
+    
     this.blocks = new ArrayList<PlayBlock>();
     this.players = new ArrayList<Player>();
     this.pendulums = new ArrayList<Pendulum>();
@@ -97,15 +98,19 @@ class PhysicsManager {
   }
   void block_collision() {
     //block collision
-    PVector intersection, top_left, bottom_right, prev_top, prev_bot;
+    PVector intersection, top_left, bottom_right, prev_top, prev_bot, temp_bottom_right, temp_top_left;
     float[] d1, d2, d3, d4;
     float dd1, dd2, min_d;
     PVector closest_player, closest_block; // coordinates for when the player and block are closest to each other
+    Substance collision_to_process = new Substance();
+    float min_dist_collision = INFINITY;
     
     for (int i = 0; i < this.blocks.size(); i++) {
+      top_left = new PVector(this.blocks.get(i).coordinate.x - this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y - this.blocks.get(i).height_/2);
+      bottom_right = new PVector(this.blocks.get(i).coordinate.x + this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y + this.blocks.get(i).height_/2);
+      min_dist_collision = INFINITY;
+      
       for (int j = 0; j < this.players.size(); j++) {
-        top_left = new PVector(this.blocks.get(i).coordinate.x - this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y - this.blocks.get(i).height_/2);
-        bottom_right = new PVector(this.blocks.get(i).coordinate.x + this.blocks.get(i).width_/2, this.blocks.get(i).coordinate.y + this.blocks.get(i).height_/2);
 
         prev_top = new PVector(this.blocks.get(i).previous_coordinate.x - this.blocks.get(i).width_/2, this.blocks.get(i).previous_coordinate.y - this.blocks.get(i).height_/2);
         prev_bot = new PVector(this.blocks.get(i).previous_coordinate.x + this.blocks.get(i).width_/2, this.blocks.get(i).previous_coordinate.y + this.blocks.get(i).height_/2);
@@ -114,7 +119,7 @@ class PhysicsManager {
         intersection = get_line_segment_intersection(this.blocks.get(i).coordinate, this.blocks.get(i).previous_coordinate,
                                                      this.players.get(j).coordinate, this.players.get(j).previous_coordinate);
         if (intersection != null) {
-          println("intersection1", frameCount);
+          println("INTERSECTING1", frameCount);
           continue;
         }
 
@@ -162,15 +167,38 @@ class PhysicsManager {
           println("oh fuck");
           stop();
         }
-        
-        top_left = new PVector(closest_block.x - this.blocks.get(i).width_/2, closest_block.y - this.blocks.get(i).height_/2);
-        bottom_right = new PVector(closest_block.x + this.blocks.get(i).width_/2, closest_block.y + this.blocks.get(i).height_/2);
+        println("ya");
+        temp_top_left = new PVector(closest_block.x - this.blocks.get(i).width_/2, closest_block.y - this.blocks.get(i).height_/2);
+        temp_bottom_right = new PVector(closest_block.x + this.blocks.get(i).width_/2, closest_block.y + this.blocks.get(i).height_/2);
 
-        if (circle_in_rect(top_left, bottom_right, closest_player, this.players.get(j).radius, 1)){
-          println("INTERSECTING", frameCount);
+        if (circle_in_rect(temp_top_left, temp_bottom_right, closest_player, this.players.get(j).radius, 1)){
+          println("INTERSECTING2", frameCount);
+          if (dist(closest_player.x, closest_player.y, closest_block.x, closest_block.y) < min_dist_collision){
+            min_dist_collision = dist(closest_player.x, closest_player.y, closest_block.x, closest_block.y); // dist technically computed twice but I can't be bothered to put it in a variable
+            collision_to_process = this.players.get(j);
+          }
         }
       }
-
+      
+      for (int j = 0; j < this.platforms.size(); j++){
+        //this is collision is easier since platforms don't move
+        temp_top_left = new PVector(this.platforms.get(j).coordinate.x - this.platforms.get(j).width_/2, this.platforms.get(j).coordinate.y - this.platforms.get(j).height_/2);
+        temp_bottom_right = new PVector(this.platforms.get(j).coordinate.x + this.platforms.get(j).width_/2, this.platforms.get(j).coordinate.y + this.platforms.get(j).height_/2);
+        if (rectangles_overlap(top_left, bottom_right, temp_top_left, temp_bottom_right)){
+          float ds = min(min(min(
+                         abs(temp_top_left.x - this.blocks.get(i).coordinate.x), 
+                         abs(temp_bottom_right.x - this.blocks.get(i).coordinate.x)), 
+                         abs(temp_top_left.y - this.blocks.get(i).coordinate.y)),
+                         abs(temp_bottom_right.y - this.blocks.get(i).coordinate.y));
+  
+          if (ds < min_dist_collision){
+            min_dist_collision = ds;
+            collision_to_process = this.platforms.get(j);
+          }
+        }
+      }
+      elastic_collision_2d(collision_to_process, this.blocks.get(i));
+      if (collision_to_process instanceof Platform){collision_to_process.velocity = new PVector(0, 0);}
     }
   }
 

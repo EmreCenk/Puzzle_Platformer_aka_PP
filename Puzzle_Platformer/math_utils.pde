@@ -193,3 +193,27 @@ float[] closest_distance_from_point_to_line_segment(PVector point, PVector l1, P
   dy = y - yy;
   return new float[] {sqrt(dx * dx + dy * dy), xx, yy};
 }
+
+boolean rectangles_overlap(PVector top_left1, PVector bottom_right1, PVector top_left2, PVector bottom_right2){
+  float x1 = top_left1.x;
+  float y1 = top_left1.y;
+  
+  float x2 = bottom_right1.x;
+  float y2 = bottom_right1.y;
+  
+  float xx1 = top_left2.x;
+  float yy1 = top_left2.y;
+  
+  float xx2 = bottom_right2.x;
+  float yy2 = bottom_right2.y;
+  if (x1 == x2 || y1 == y2 ||
+      xx1 == xx2 || yy1 == yy2) {
+      return false;
+  }
+
+  return !(x2 <= xx1 ||   // left
+           x1 >= xx2 ||   // right
+           y2 <= yy1 ||   // bottom
+           y1 >= yy2);    // top
+
+}
