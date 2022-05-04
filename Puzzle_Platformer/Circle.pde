@@ -6,6 +6,10 @@ class Circle extends Substance{
     super(velocity_, coordinates_, radius_, colour_); 
   }
   
+  Circle(PVector coordinates_, float radius_, color colour_){
+    super(new PVector(0, 0), coordinates_, radius_, colour_); 
+  }
+  
   boolean is_colliding(Substance some_object){
     //return line_intersects_circle(some_object.previous_coordinate, some_object.coordinate, this.coordinate, this.radius, some_object.radius);
 
@@ -24,6 +28,7 @@ class Circle extends Substance{
     
     // before anything we need to make sure that the objects aren't inside each other:
     
+    obj.jumping = this.jumping;
     // how much we need to move the external object so that it is tangent to "this" circle
     float delta_d = obj.radius+this.radius - dist(this.coordinate.x, this.coordinate.y, obj.coordinate.x, obj.coordinate.y);
     

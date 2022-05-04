@@ -14,26 +14,31 @@ class Tool{
     hardness = h;
   }
   
-  void clicked(){
+  void shopClicked(){
+    shopBackground();
     for(int i = 0; i < itemShop.stock.size(); i ++){
       itemShop.stock.get(i).selected = false;
     }
-    selected = true;
-    itemShop.update();
+    this.selected = true;
     explain();
+    itemShop.update();
   }
   
   void explain(){
+    shopBackground();
     label.setText(desc);
     priceLabel.setText("$"+ str(price));
     itemShop.update();
     displayBuyButton();
     outline(275, 70, size, 0);
     shopWindow.image(icon, 275, 70);
+    
   }
   
   void displayBuyButton(){
+    shopBackground();
     buyLabel.setText("buy");
+    buyLabel.setVisible(true);
     outline(223, 70, 50, color(0, 255, 0));
   }
   
@@ -44,6 +49,7 @@ class Tool{
         if(itemShop.stock.contains(this)){
           if(emre.inventory.size() < emre.invSize){
             if(emre.money >= price){
+              shopBackground();
               emre.money -= price;
               emre.addItemToInv(this);
               itemShop.stock.remove(this);
@@ -52,6 +58,8 @@ class Tool{
               priceLabel.setText("");
               usesLabel.setText("");
               emre.displayInventory();
+              buyLabel.setText("");
+              redraw();
             }else{
               println("YOU ARE BROKE");
             }
@@ -63,9 +71,20 @@ class Tool{
       }
     }
   }
+  
   void displayTool(int x, int y, int w, int h){
     icon.resize(w, h);
     image(this.icon, x, y);
+  }
+  
+  void mainClicked(){
+    println(this.desc);
+    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
+    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
+    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
+    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
+    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
+    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
   }
   
   
@@ -91,4 +110,16 @@ class Block extends Tool{
     usesLabel.setText("blocks :" + str(hardness));
     super.explain();
   }
+}
+
+//-------------------------------pend-------------------------------
+class Pend_block extends Tool{
+  Pend_block(int p, PImage i, String d, int u){
+    super(p, i, d, u);
+  }
+  void explain(){
+    usesLabel.setText("uses :" + str(hardness));
+    super.explain();
+  }
+  
 }

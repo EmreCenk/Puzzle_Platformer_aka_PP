@@ -15,7 +15,6 @@ class Pendulum{
     //this.pivot.mass = 1;
     this.hanging_thing = new Circle(new PVector(0, 0), new PVector(0, 0), 10, colour);
     this.string_length = length_of_string;
-    this.time_period = 2*PI*sqrt(this.string_length/g); 
     
     this.max_theta = theta;
     this.current_theta = theta;
@@ -40,7 +39,11 @@ class Pendulum{
     this.pivot.display();
     this.hanging_thing.display();
     line(this.pivot.coordinate.x, this.pivot.coordinate.y, this.hanging_thing.coordinate.x, this.hanging_thing.coordinate.y);
-    //this.draw_velocity();
+    stroke(color(255, 0, 0));
+    strokeWeight(3);
+    this.draw_velocity();
+    strokeWeight(1);
+
   }
   
   void update_velocity(){
@@ -108,7 +111,7 @@ class Pendulum{
     //println("3", this.angular_speed);
     //println("-------------------------------");
     //println();println();
-    this.draw_velocity();
+    //this.draw_velocity();
     
 }
   
