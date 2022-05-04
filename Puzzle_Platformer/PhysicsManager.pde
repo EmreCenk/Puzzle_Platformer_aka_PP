@@ -218,11 +218,32 @@ class PhysicsManager {
         }
       }
       if (collision_to_process == null) continue;
-      elastic_collision_2d(collision_to_process, this.blocks.get(i));
-      if (collision_to_process instanceof Platform){collision_to_process.velocity = new PVector(0, 0);}
-      if (collision_to_process instanceof Player){
-
+      PVector prev = new PVector(this.blocks.get(i).velocity.x, this.blocks.get(i).velocity.y);
+      
+      if (collision_to_process instanceof Platform){
+        elastic_collision_2d(collision_to_process, this.blocks.get(i));
+        collision_to_process.velocity = new PVector(0, 0);
       }
+      else if (collision_to_process instanceof Player){
+        
+        float magnitude = this.blocks.get(i).width_/2 + collision_to_process.radius - dist(collision_to_process.coordinate.x,
+                                                                                                       collision_to_process.coordinate.y,
+                                                                                                       this.blocks.get(i).coordinate.x,
+                                                                                                       this.blocks.get(i).coordinate.y);
+ //<>//
+        PVector w = polar_to_cartesian(magnitude, atan2(collision_to_process.velocity.y, collision_to_process.velocity.x));
+        collision_to_process.change_position(new PVector(collision_to_process.coordinate.x - w.x, collision_to_process.coordinate.y - w.y));
+        collision_to_process.jumping = this.blocks.get(i).jumping;
+        this.blocks.get(i).player_activated(collision_to_process);
+        
+        float [] y_components = elastic_collision_1d(this.blocks.get(i).mass, this.blocks.get(i).velocity.y, collision_to_process.mass, collision_to_process.velocity.y);      
+        this.blocks.get(i).velocity.y = y_components[0];
+        collision_to_process.velocity.y = y_components[1];
+  
+        //elastic_collision_2d(collision_to_process, this.blocks.get(i));
+
+    }
+      else elastic_collision_2d(collision_to_process, this.blocks.get(i));
     }
   }
 

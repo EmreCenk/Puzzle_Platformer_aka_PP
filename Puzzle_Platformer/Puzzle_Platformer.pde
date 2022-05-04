@@ -53,7 +53,7 @@ void setup() {
   itemShop.addToStock(emreBlock);
   itemShop.addToStock(pe);
   //---------------------------------------------------------------------------\\
-  goal_ball = new Circle(new PVector(width/2, height*0.4), 10, color(100, 100, 0));
+  goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
   goal_ball.mass = 4;
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
