@@ -7,6 +7,8 @@ class Player extends Circle{
   float walking_speed, jump_power, terminal_velocity;
   boolean dynamic_colours;
   
+  Tool equipped_tool;
+  
   Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m, float weight){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
     invSize = inv;
@@ -22,6 +24,8 @@ class Player extends Circle{
     this.terminal_velocity = DEFAULT_TERMINAL_VELOCITY;
     this.bounciness = DEFAULT_PLAYER_BOUNCINESS;
     this.mass = weight;
+    
+    this.equipped_tool = null;
 }
   
 
@@ -66,7 +70,13 @@ class Player extends Circle{
   }
   
   void clicked_screen(PhysicsManager phys){
-    phys.add_block(new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0)));
+    if (this.equipped_tool instanceof Block){
+      phys.add_block(new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0)));
+    }
+    else if (this.equipped_tool instanceof Pend_block){
+      phys.add_pendulum(new Pendulum(new PVector(mouseX, mouseY), 10, 30, 30));
+    }
+  
   }
   
   void display(){

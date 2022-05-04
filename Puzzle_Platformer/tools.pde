@@ -85,7 +85,7 @@ class Tool{
     
     this.mainSelected = true;
     redraw();
-    
+    emre.equipped_tool = this;
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
