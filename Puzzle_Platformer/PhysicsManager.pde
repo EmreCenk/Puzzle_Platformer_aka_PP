@@ -154,7 +154,7 @@ class PhysicsManager {
         
         min_d = min(min(min(min(min(dd1, dd2), d1[0]), d2[0]), d3[0]), d4[0]); // apparently you can't have more than 2 arguments into the min() function
         
-        if (min_d == dd1){
+        if (abs(min_d - dd1) < epsilon){
           closest_player = new PVector(this.players.get(j).coordinate.x, this.players.get(j).coordinate.y);
           closest_block = new PVector(this.blocks.get(i).coordinate.x, this.blocks.get(i).coordinate.y);
         }
@@ -218,28 +218,27 @@ class PhysicsManager {
         }
       }
       if (collision_to_process == null) continue;
-      PVector prev = new PVector(this.blocks.get(i).velocity.x, this.blocks.get(i).velocity.y);
       
       if (collision_to_process instanceof Platform){
         elastic_collision_2d(collision_to_process, this.blocks.get(i));
         collision_to_process.velocity = new PVector(0, 0);
       }
       else if (collision_to_process instanceof Player){
+        this.blocks.get(i).keep_object_above_platform(collision_to_process);
+//        float magnitude = this.blocks.get(i).width_/2 + collision_to_process.radius - dist(collision_to_process.coordinate.x,
+//                                                                                                       collision_to_process.coordinate.y,
+//                                                                                                       this.blocks.get(i).coordinate.x,
+//                                                                                                       this.blocks.get(i).coordinate.y);
+//        PVector w = polar_to_cartesian(magnitude, atan2(collision_to_process.velocity.y, collision_to_process.velocity.x));
+//        collision_to_process.change_position(new PVector(collision_to_process.coordinate.x - w.x, collision_to_process.coordinate.y - w.y));
+//        collision_to_process.jumping = this.blocks.get(i).jumping;
+//        this.blocks.get(i).player_activated(collision_to_process);
         
-        float magnitude = this.blocks.get(i).width_/2 + collision_to_process.radius - dist(collision_to_process.coordinate.x,
-                                                                                                       collision_to_process.coordinate.y,
-                                                                                                       this.blocks.get(i).coordinate.x,
-                                                                                                       this.blocks.get(i).coordinate.y);
- //<>//
-        PVector w = polar_to_cartesian(magnitude, atan2(collision_to_process.velocity.y, collision_to_process.velocity.x));
-        collision_to_process.change_position(new PVector(collision_to_process.coordinate.x - w.x, collision_to_process.coordinate.y - w.y));
-        collision_to_process.jumping = this.blocks.get(i).jumping;
-        this.blocks.get(i).player_activated(collision_to_process);
+//        float [] y_components = elastic_collision_1d(this.blocks.get(i).mass, this.blocks.get(i).velocity.y, collision_to_process.mass, collision_to_process.velocity.y);      
+//        this.blocks.get(i).velocity.y = y_components[0];
+//        collision_to_process.velocity.y = y_components[1];
         
-        float [] y_components = elastic_collision_1d(this.blocks.get(i).mass, this.blocks.get(i).velocity.y, collision_to_process.mass, collision_to_process.velocity.y);      
-        this.blocks.get(i).velocity.y = y_components[0];
-        collision_to_process.velocity.y = y_components[1];
-  
+       
         //elastic_collision_2d(collision_to_process, this.blocks.get(i));
 
     }
