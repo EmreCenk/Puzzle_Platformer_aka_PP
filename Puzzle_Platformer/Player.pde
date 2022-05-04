@@ -7,8 +7,6 @@ class Player extends Circle{
   float walking_speed, jump_power, terminal_velocity;
   boolean dynamic_colours;
   
-  Tool equipped_tool;
-  
   Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m, float weight){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
     invSize = inv;
@@ -67,11 +65,6 @@ class Player extends Circle{
     else if (keyCode == LEFT) this.moving_left = false;
   }
   
-  void clicked_mouse(PhysicsManager phys){
-    
-    phys.add_block(new PlayBlock(new PVector(mouseX, mouseY), 50, color(0, 0, 0)));
-  }
-  
   void display(){
     color color_to_use;
     if (this.dynamic_colours && !this.jumping){
@@ -88,14 +81,7 @@ class Player extends Circle{
   void addItemToInv(Tool a){
     inventory.add(a);
   }
-    
-  void select_tool(Tool t){
-    this.equipped_tool = t;
-  }
- 
-  Tool get_tool(){
-    return this.equipped_tool; // I don't like typing "equipped"
-  }
+  
   void displayInventory(){
     int x = 200;
     int y = 260;

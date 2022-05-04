@@ -31,12 +31,10 @@ class PhysicsManager {
 
   void update_universe() {
     this.deal_with_players();
-    this.apply_collision_in_universe();
     this.apply_friction_to_universe();
     this.apply_gravity_to_universe();
-
     this.update_positions_in_universe();
-    this.imprison_objects();
+    this.apply_collision_in_universe();
     this.display_universe();
   }
   void deal_with_players() {
@@ -52,7 +50,7 @@ class PhysicsManager {
    // circle collision
     for (int i = 0; i < this.objs.size(); i++){
       for (int j = i+1; j < this.objs.size(); j++){
-        //this.objs.get(i).collide(this.objs.get(j));
+        this.objs.get(i).collide(this.objs.get(j));
       }
     }
     
@@ -71,7 +69,15 @@ class PhysicsManager {
       }
     }
     
-
+    //prison imprisonment
+    for (int i = 0; i < this.prisons.size(); i++){
+      for (int j = 0; j < this.objs.size(); j++){
+        this.prisons.get(i).imprison(this.objs.get(j));
+      }
+      for (int j = 0; j<this.blocks.size(); j++){
+        this.prisons.get(i).imprison(this.blocks.get(j));
+      }
+    }
     
     //pendulum collision
     for (int i = 0; i < this.pendulums.size(); i++){
@@ -86,17 +92,15 @@ class PhysicsManager {
     //block collision
     for (int i = 0; i < this.blocks.size(); i++){
       for (int j = i+1; j<this.blocks.size(); j++){
-        this.blocks.get(i).keep_object_above_platform(this.blocks.get(j));
+        this.blocks.get(i).collide(this.blocks.get(j));
       }
       
       for (int j = 0; j < this.objs.size(); j++){
-        //this.blocks.get(i).collide(this.objs.get(j));
-        this.blocks.get(i).keep_object_above_platform(this.objs.get(j));
-
+        this.blocks.get(i).collide(this.objs.get(j));
       }
 
       for (int j = 0; j < this.players.size(); j++){
-
+        this.blocks.get(i).collide(this.players.get(j));
         this.blocks.get(i).keep_object_above_platform(this.players.get(j));
 
       }
@@ -115,18 +119,6 @@ class PhysicsManager {
         this.prisons.get(i).imprison(this.objs.get(j));
       }
       for (int j = 0; j<this.blocks.size(); j++) {
-        this.prisons.get(i).imprison(this.blocks.get(j));
-      }
-    }
-  }
-  
-  void imprison_objects(){
-    //prison imprisonment
-    for (int i = 0; i < this.prisons.size(); i++){
-      for (int j = 0; j < this.objs.size(); j++){
-        this.prisons.get(i).imprison(this.objs.get(j));
-      }
-      for (int j = 0; j<this.blocks.size(); j++){
         this.prisons.get(i).imprison(this.blocks.get(j));
       }
     }
