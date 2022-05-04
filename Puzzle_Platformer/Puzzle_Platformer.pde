@@ -108,12 +108,16 @@ void mousePressed() {
   boolean something_clicked = false;
   for (int i = 0; i < 4; i ++) {
     for (int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++) {
-      if (mouseX < width - size * i && mouseX > width - size - size * i) {
-        if (mouseY > size * j && mouseY < size + size * j) {
-          int index = min(emre.inventory.size(), 4) - 1 - i + 4 * j;
-          println(emre.inventory.size(), -1, -i, 4*j);
-          emre.inventory.get(index).mainClicked(); // sometimes gives "ArrayIndexOutOfBoundsException: -1"
+      if (mouseX < width - size * i && mouseX > width - size - size * i && mouseY > size * j && mouseY < size + size * j) {
+        int index = min(emre.inventory.size(), 4) - 1 - i + 4 * j;
+        try{
+          emre.inventory.get(index).mainClicked();
           something_clicked = true;
+        }
+        catch (Exception E){
+          // this error only happens when you click something that hasn't been bought yet, so we're bing chilling
+          println("some index error happened in mousePressed, but this is fine");
+          continue; //this is fine
         }
       }
     }
