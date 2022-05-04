@@ -89,9 +89,7 @@ class PlayBlock extends Platform {
       elastic_collision_2d(this, some_substance);
     if (circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 0.5) ){
       // could be more efficient if we only checked if they are parralel but that is too much typing lol
-    
-
-      println("inside", frameCount);
+      //println("inside", frameCount);
       if (abs(some_substance.coordinate.y - top_left.y) < abs(some_substance.coordinate.y - bottom_right.y) ){
         some_substance.coordinate.y = top_left.y - some_substance.radius;
       }
