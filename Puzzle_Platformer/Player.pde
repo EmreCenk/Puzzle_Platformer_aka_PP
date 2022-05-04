@@ -70,12 +70,22 @@ class Player extends Circle{
   }
     void clicked_screen(PhysicsManager phys){
     if (this.equipped_tool instanceof Block){
-      phys.add_block(new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0)));
+      println("block equipped");
+      PlayBlock some_block;
+      if (this.equipped_tool instanceof BouncyBlock){
+        some_block = new BouncyPlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0));
+      }
+      else{
+        some_block = new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0));
+      }
+      phys.add_block(some_block);
     }
     else if (this.equipped_tool instanceof Pend_block){
+      println("pendulum inserted");
       phys.add_pendulum(new Pendulum(new PVector(mouseX, mouseY), 10, 30, 30));
     }
     else if (this.equipped_tool instanceof Pickaxe){
+      println("pickaxe attempting to destroy");
       ArrayList<PlayBlock> to_remove = new ArrayList<PlayBlock>();
       for (PlayBlock b: phys.blocks){
         if (b.indestructible) continue;
