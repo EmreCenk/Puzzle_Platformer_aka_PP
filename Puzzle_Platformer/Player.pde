@@ -76,6 +76,17 @@ class Player extends Circle{
     else if (this.equipped_tool instanceof Pend_block){
       phys.add_pendulum(new Pendulum(new PVector(mouseX, mouseY), 10, 30, 30));
     }
+    else if (this.equipped_tool instanceof Pickaxe){
+      ArrayList<PlayBlock> to_remove = new ArrayList<PlayBlock>();
+      for (PlayBlock b: phys.blocks){
+        if (circle_in_rect(b.get_top_left(), b.get_bottom_right(), new PVector(mouseX, mouseY), 0, 0)){
+          to_remove.add(b);
+        }
+      }    
+      for (PlayBlock b: to_remove){
+        phys.blocks.remove(b);
+      }        
+    }
   
   }
   

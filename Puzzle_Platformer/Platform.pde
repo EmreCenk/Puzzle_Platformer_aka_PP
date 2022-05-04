@@ -15,7 +15,12 @@ class Platform extends Substance{
   }
   
 
-  
+  PVector get_top_left(){
+    return new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
+  }
+  PVector get_bottom_right(){
+    return new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+  }
   void keep_object_above_platform(Substance some_substance){
 
     // lifts the substance
