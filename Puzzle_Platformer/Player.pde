@@ -86,6 +86,18 @@ class Player extends Circle{
       for (PlayBlock b: to_remove){
         phys.blocks.remove(b);
       }        
+      
+      ArrayList<Pendulum> to_remove2 = new ArrayList<Pendulum>();
+      for (Pendulum b: phys.pendulums){
+        if (circle_in_rect(new PVector(b.pivot.coordinate.x - b.string_length, b.pivot.coordinate.y - b.string_length),
+                           new PVector(b.pivot.coordinate.x + b.string_length, b.pivot.coordinate.y + b.string_length),
+                           new PVector(mouseX, mouseY), 0, 0)){
+          to_remove2.add(b);
+        }
+      }    
+      for (Pendulum b: to_remove2){
+        phys.pendulums.remove(b);
+      }     
     }
   
   }
