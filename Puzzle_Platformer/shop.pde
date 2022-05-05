@@ -6,9 +6,9 @@ class Shop {
     open = !open;
     shopWindow.setVisible(open);
     shopWindow.fill(255);
-
     displayIcons();
     update();
+    
   }
 
   void addToStock(Tool a) {

@@ -1,7 +1,5 @@
 import g4p_controls.*;
 import java.awt.*;
-
-
 int inventorySize = 8;
 int money = 80;
 boolean open = false;
@@ -111,7 +109,13 @@ void keyPressed() {
   if ((key == 'p' || key == 'P') && landing.started_game) {
     // opening shop
     itemShop.opened();
-
+    if(!(emre.equipped_tool == null)){
+      emre.equipped_tool = null;
+      for( int i = 0; i < emre.inventory.size(); i ++){
+        emre.inventory.get(i).mainSelected = false;
+      }
+      
+    }
     //calibrating shop window:
     try {
       calibrate();
