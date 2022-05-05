@@ -75,31 +75,42 @@ class Player extends Circle{
     if (this.equipped_tool instanceof Block){
       // placing a block on the screen:
       PlayBlock some_block;
-      if (this.equipped_tool instanceof BouncyBlock){
+      if (this.equipped_tool instanceof BouncyBlock && this.equipped_tool.uses > 0){
         some_block = new BouncyPlayBlock(new PVector(mouseX, mouseY), 30);
+        phys.add_block(some_block);
+        this.equipped_tool.uses -= 1;
+      }else{
+        if(this.equipped_tool.uses > 0){
+          some_block = new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0));
+          phys.add_block(some_block);
+          this.equipped_tool.uses -= 1;
+        }
       }
-      else{
-        some_block = new PlayBlock(new PVector(mouseX, mouseY), 30, color(0, 0, 0));
-      }
-      phys.add_block(some_block);
+      
     }
-    else if (this.equipped_tool instanceof Pend_block){
-      // placing a pendulum:
+    
+    else if (this.equipped_tool instanceof Pend_block && this.equipped_tool.uses > 0){
       phys.add_pendulum(new Pendulum(new PVector(mouseX, mouseY), 10, 100, radians(30)));
+      this.equipped_tool.uses -= 1;
     }
-    else if (this.equipped_tool instanceof Pickaxe){
+    else if (this.equipped_tool instanceof Pickaxe && this.equipped_tool.uses > 0){
       // pickaxe destorying blocks
       ArrayList<PlayBlock> to_remove = new ArrayList<PlayBlock>();
       for (PlayBlock b: phys.blocks){ // loop through all blocks
-        if (b.indestructible) continue; // if indestructible we ignore
-        
-        if (circle_in_rect(b.get_top_left(), b.get_bottom_right(), new PVector(mouseX, mouseY), 0, 0)){ // checking if mouse is on the block
-          to_remove.add(b); // if the mouse is clicking the block, add the block to the list of blocks that are going to be deleted from the universe
+        if (!b.indestructible){ // if indestructible we ignore
+          if (circle_in_rect(b.get_top_left(), b.get_bottom_right(), new PVector(mouseX, mouseY), 0, 0) && this.equipped_tool.uses > 0){ // checking if mouse is on the block
+            to_remove.add(b); // if the mouse is clicking the block, add the block to the list of blocks that are going to be deleted from the universe
+            this.equipped_tool.uses -= 1;
+          }
         }
       }    
       
       for (PlayBlock b: to_remove){
-        phys.blocks.remove(b); // removing the block(s) that the pickaxe has selected
+        if(this.equipped_tool.uses > 0 ){
+          phys.blocks.remove(b); // removing the block(s) that the pickaxe has selected
+          
+        }
+        
       }        
       
       
@@ -112,13 +123,16 @@ class Player extends Circle{
                            new PVector(b.pivot.coordinate.x + b.string_length, b.pivot.coordinate.y + b.string_length),
                            new PVector(mouseX, mouseY), 0, 0)){
           to_remove2.add(b);
+          this.equipped_tool.uses -= 1;
         }
       }    
       for (Pendulum b: to_remove2){
-        phys.pendulums.remove(b);
-      }     
+        if(this.equipped_tool.uses > 0){
+          phys.pendulums.remove(b);
+        }
+      }  
     }
-
+    
   }
   
   void display(){
@@ -139,8 +153,9 @@ class Player extends Circle{
     inventory.add(a);
   }
   
-  void display_inveontory_in_shop_window(){
+  void display_inventory_in_shop_window(){
     // displays the player's inventory in the shop window
+    
     int x = 200;
     int y = 260;
 

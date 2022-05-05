@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 int inventorySize = 8;
-int money = 2000;
+int money = 80;
 boolean open = false;
 Shop itemShop = new Shop();
 
@@ -36,6 +36,34 @@ LandingPage landing;
 
 void settings(){
   size(1200, 500);
+<<<<<<< HEAD
+=======
+  
+  //initializing golden ball
+  goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
+  goal_ball.mass = 4;
+  physics = new PhysicsManager();
+  physics.add_circle(goal_ball);
+
+
+  // initializing player
+  emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
+  emre.mass = 10;
+  emre.jump_power = 10;
+  physics.add_player(emre);
+
+  // creating platforms:
+  physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255, 0, 0))); // red
+  physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0, 255, 0))); // green
+
+  //creating a domino:
+  physics.add_domino(new Domino(new PVector(100, 100), 100));
+  
+  //creating blocks:
+  b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
+  b.velocity = new PVector(0, 0);
+  physics.add_block(b);
+>>>>>>> 65a9f5545473a3cd876ee95ff4b8cbdadc9b894b
 
 }
 void setup() {
@@ -56,19 +84,8 @@ void draw() {
   mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
   physics.update_universe(); // increment the universe by 1 timestamp
   showInvMain(width - size * min(emre.inventory.size(), 4), 0); // show inventory
-  eq_info();
 }
 
-void eq_info(){
-  
-  if (emre.equipped_tool == null) return;
-  
-  textAlign(RIGHT);
-  textSize(32);
-  fill(color(0, 0, 0));
-  text("Selected: " + emre.equipped_tool.used,
-        width, (ceil(emre.inventory.size()/4.0) + 1) * size);
-}
 void mousePressed() {
    
   if (!landing.started_game){
@@ -165,18 +182,31 @@ void outlineMain(int x, int y, int size, color col) {
   rect(x, y, size, size);
 }
 
-void showInvMain(int x, int y) {
-  // todo: comment
+void showInvMain(int x, int y) {// displays the inventory to the main sketch window
+  
+  if(!(emre.equipped_tool == null)){
+    fill(0);
+    textSize(20);
+    text("Uses: " + emre.equipped_tool.uses, width - size * min(emre.inventory.size(), 4) - 100, 30);
+  }
+  fill(255);
+ 
   int tempX = x;
-      fill(color(255, 255, 255));
+  
+  for( int i = 0; i < emre.inventory.size(); i++){
+    if(emre.inventory.get(i).uses == 0){
+      emre.inventory.remove(emre.inventory.get(i));
+    }
+  }
 
-  for ( int j = 0; j < emre.inventory.size(); j++) { 
+
+  for ( int j = 0; j < emre.inventory.size(); j++) {
+    
     if (emre.inventory.get(j).mainSelected) {
       outlineMain(x, y, size, color(255, 0, 0));
     } else {
       outlineMain(x, y, size, 0);
     }
-
     image(emre.inventory.get(j).icon, x, y);
     x += size;
     if (j%4 == 3) {

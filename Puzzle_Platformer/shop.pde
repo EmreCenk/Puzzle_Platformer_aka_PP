@@ -17,7 +17,11 @@ class Shop{
   }
   
   void displayIcons(){
+<<<<<<< HEAD
     println(emre);
+=======
+    emre.display_inventory_in_shop_window();
+>>>>>>> 65a9f5545473a3cd876ee95ff4b8cbdadc9b894b
     int x = 0;
     int y = 0;
     PImage temp = loadImage("images/money.png");
