@@ -1,16 +1,16 @@
 
 
-class Level{
+class Level {
   PhysicsManager physics;
   Player player;
-  Level(PhysicsManager p, Player pl){
+  Level(PhysicsManager p, Player pl) {
     this.player = pl;
     this.physics = p;
   }
 }
 
-Level create_level1(){
-  
+Level create_level1() {
+
   PhysicsManager phys = new PhysicsManager();
   //initializing golden ball
   goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
@@ -30,13 +30,13 @@ Level create_level1(){
 
   //creating a domino:
   phys.add_domino(new Domino(new PVector(100, 100), 100));
-  
+
   //creating blocks:
   b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
   b.velocity = new PVector(0, 0);
   phys.add_block(b);
 
-  
+
   //creating pendulums:
   phys.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   phys.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
@@ -45,5 +45,4 @@ Level create_level1(){
   phys.add_prison(new Prison());
 
   return new Level(phys, emre);
-
 }

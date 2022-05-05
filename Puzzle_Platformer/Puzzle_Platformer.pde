@@ -34,10 +34,10 @@ Point mouse; // from library
 //landing page:
 LandingPage landing;
 
-void settings(){
+void settings() {
   size(1200, 500);
 
-  
+
   //initializing golden ball
   goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
   goal_ball.mass = 4;
@@ -57,23 +57,21 @@ void settings(){
 
   //creating a domino:
   physics.add_domino(new Domino(new PVector(100, 100), 100));
-  
+
   //creating blocks:
   b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
   b.velocity = new PVector(0, 0);
   physics.add_block(b);
-
 }
 void setup() {
-      
+
   Level current_level = create_level1();
   emre = current_level.player;
   physics = current_level.physics; // if the gamemode is sandbox then this gets emptied
   landing = new LandingPage();
   landing.draw_buttons();
-  
-  noLoop();
 
+  noLoop();
 }
 
 void draw() {
@@ -86,12 +84,12 @@ void draw() {
 }
 
 void mousePressed() {
-   
-  if (!landing.started_game){
+
+  if (!landing.started_game) {
     landing.check_clicked();
     return;
   }
-  
+
   boolean something_clicked = false;
   for (int i = 0; i < 4; i ++) {
     for (int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++) {
@@ -128,16 +126,19 @@ void calibrate() throws AWTException {
 
 void keyPressed() {
   emre.key_press_movement(); // what the player should do when a key is pressed
-  
+
   if ((key == 'p' || key == 'P') && landing.started_game) {
     // opening shop
     itemShop.opened();
-     
-    //calibrating shop window:
-    try{calibrate();}
-    catch (Exception E){println("oof: ", E);}
-  }
 
+    //calibrating shop window:
+    try {
+      calibrate();
+    }
+    catch (Exception E) {
+      println("oof: ", E);
+    }
+  }
 }
 
 void keyReleased() {
@@ -182,25 +183,25 @@ void outlineMain(int x, int y, int size, color col) {
 }
 
 void showInvMain(int x, int y) {// displays the inventory to the main sketch window
-  
-  if(!(emre.equipped_tool == null)){
+
+  if (!(emre.equipped_tool == null)) {
     fill(0);
     textSize(20);
     text("Uses: " + emre.equipped_tool.uses, width - size * min(emre.inventory.size(), 4) - 100, 30);
   }
   fill(255);
- 
+
   int tempX = x;
-  
-  for( int i = 0; i < emre.inventory.size(); i++){
-    if(emre.inventory.get(i).uses == 0){
+
+  for ( int i = 0; i < emre.inventory.size(); i++) {
+    if (emre.inventory.get(i).uses == 0) {
       emre.inventory.remove(emre.inventory.get(i));
     }
   }
 
 
   for ( int j = 0; j < emre.inventory.size(); j++) {
-    
+
     if (emre.inventory.get(j).mainSelected) {
       outlineMain(x, y, size, color(255, 0, 0));
     } else {
@@ -215,7 +216,7 @@ void showInvMain(int x, int y) {// displays the inventory to the main sketch win
   }
 }
 
-void set_up_gui_values(){
+void set_up_gui_values() {
 
   createGUI();
   //----------------- create items ------------------------------\\
@@ -237,6 +238,4 @@ void set_up_gui_values(){
   itemShop.stock.get(0).shopClicked();
 
   itemShop.update();
-  
-
 }
