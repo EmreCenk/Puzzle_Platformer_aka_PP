@@ -1,4 +1,5 @@
 class Tool{
+  boolean mainSelected = false;
   int price;
   PImage icon;
   String desc;
@@ -57,7 +58,7 @@ class Tool{
               label.setText("");
               priceLabel.setText("");
               usesLabel.setText("");
-              emre.displayInventory();
+              emre.display_inveontory_in_shop_window();
               buyLabel.setText("");
               redraw();
             }else{
@@ -78,7 +79,13 @@ class Tool{
   }
   
   void mainClicked(){
-    println(this.desc);
+    for(int i = 0; i < emre.inventory.size(); i ++){
+      emre.inventory.get(i).mainSelected = false;
+    }
+    
+    this.mainSelected = true;
+    redraw();
+    emre.equipped_tool = this;
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
     //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
@@ -92,8 +99,8 @@ class Tool{
 
 //--------------------------------------------PICKAXE---------------------------------------------------------\\
 class Pickaxe extends Tool{
-  Pickaxe(int p, PImage i, String d, int u){
-    super(p, i, d, u);
+  Pickaxe(){
+    super(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
   }
   void explain(){
     usesLabel.setText("uses :" + str(hardness));
@@ -114,8 +121,8 @@ class Block extends Tool{
 
 //-------------------------------pend-------------------------------
 class Pend_block extends Tool{
-  Pend_block(int p, PImage i, String d, int u){
-    super(p, i, d, u);
+  Pend_block(){
+    super(100, loadImage("images/pend.png"), "A pendulum", 1);
   }
   void explain(){
     usesLabel.setText("uses :" + str(hardness));
@@ -123,3 +130,22 @@ class Pend_block extends Tool{
   }
   
 }
+
+class BouncyBlock extends Block{
+  BouncyBlock(){
+    super(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
+  }
+  void explain(){
+    usesLabel.setText("blocks :" + str(hardness));
+    super.explain();
+  }
+}  
+class NormalBlock extends Block{
+  NormalBlock(){
+    super(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
+  }
+  void explain(){
+    usesLabel.setText("blocks :" + str(hardness));
+    super.explain();
+  }
+}  

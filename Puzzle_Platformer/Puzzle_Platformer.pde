@@ -1,6 +1,7 @@
 import g4p_controls.*;
 import java.awt.*;
 
+
 int inventorySize = 8;
 int money = 2000;
 boolean open = false;
@@ -9,11 +10,11 @@ Shop itemShop = new Shop();
 //----------------- create items-----------------
 Pickaxe pick;
 Pickaxe pick2;
-Block dirt;
+Block normal_block;
 Block bouncy;
 Block emreBlock;
 Pend_block pe;
-
+Robot robot;
 //-----------------------------------------------
 
 //-------------- emre stuff idk------------------
@@ -24,35 +25,17 @@ ArrayList<Pendulum> pendulums;
 Platform p, p2, p3;
 Pendulum mp1, mp2;
 Circle circle;
-PlayBlock b;
+BouncyPlayBlock b;
 Circle goal_ball;
 
 //-----------------------------------------------
 
-Point mouse;
+Point mouse; // from library
 
 void setup() {
   fill(0);
   size(1200, 500);
-  createGUI();
-  //----------------- create items ------------------------------\\
-  // Tool(price, PImage, description, uses) 
-  pick = new Pickaxe(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
-  pick2 = new Pickaxe(10, loadImage("images/badPick.png"), "An ugly pickaxe.", 10);
-  dirt = new Block(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
-  bouncy = new Block(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
-  emreBlock = new Block(90, loadImage("images/emre.png"), "EMREEEEEEEEEEEEEE.", 1);
-  pe = new Pend_block(100, loadImage("images/pend.png"), "A pendulum", 1);
-  //--------------------------------------------------------------\\xs
 
-  //------------------------ add items to shop -------------------------------\\
-  itemShop.addToStock(pick);
-  itemShop.addToStock(pick2);
-  itemShop.addToStock(dirt);
-  itemShop.addToStock(bouncy);
-  itemShop.addToStock(emreBlock);
-  itemShop.addToStock(pe);
-  //---------------------------------------------------------------------------\\
   goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
   goal_ball.mass = 4;
   physics = new PhysicsManager();
@@ -69,27 +52,48 @@ void setup() {
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0, 255, 0))); // green
 
   physics.add_domino(new Domino(new PVector(100, 100), 100));
-  b = new PlayBlock(new PVector(width/2, height*0.5), 50, color(0));
+  b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
   b.velocity = new PVector(0, 0);
   physics.add_block(b);
 
 
   //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
   physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
-
   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+
+
+  createGUI();
+  //----------------- create items ------------------------------\\
+  // Tool(price, PImage, description, uses) 
+  pick = new Pickaxe();
+  normal_block = new NormalBlock();
+  bouncy = new BouncyBlock();
+  pe = new Pend_block();
+  //--------------------------------------------------------------\\xs
+
+  //------------------------ add items to shop -------------------------------\\
+  itemShop.addToStock(pick);
+  itemShop.addToStock(normal_block);
+  itemShop.addToStock(bouncy);
+  itemShop.addToStock(pe);
+  //---------------------------------------------------------------------------\\
 
   physics.add_prison(new Prison());
   physics.display_universe();
+
+  mouse.x = 0;
   itemShop.stock.get(0).shopClicked();
+
+
+
   itemShop.update();
   noLoop();
 }
 
 void draw() {
   frameRate(60);
-  //println(frameRate);
-  //println(mouse.x, mouse.y);
+  //ln(frameRate);
+  //ln(mouse.x, mouse.y);
   mouse = MouseInfo.getPointerInfo().getLocation();
   background(255);
 
@@ -105,26 +109,50 @@ void draw() {
 }
 
 void mousePressed() {
+  boolean something_clicked = false;
   for (int i = 0; i < 4; i ++) {
     for (int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++) {
-      if (mouseX < width - size * i && mouseX > width - size - size * i) {
-        if (mouseY > size * j && mouseY < size + size * j) {
-          int index = min(emre.inventory.size(), 4) - 1 - i + 4 * j;
+      if (mouseX < width - size * i && mouseX > width - size - size * i && mouseY > size * j && mouseY < size + size * j) {
+        int index = min(emre.inventory.size(), 4) - 1 - i + 4 * j;
+        try {
           emre.inventory.get(index).mainClicked();
+          something_clicked = true;
+        }
+        catch (Exception E) {
+          // this error only happens when you click something that hasn't been bought yet, so we're bing chilling
+          println("some index error happened in mousePressed, but this is fine");
+          continue; //this is fine
         }
       }
     }
   }
+  if (!something_clicked)
+    emre.clicked_screen(physics);
 }
+boolean calibrated = false;
 
+void calibrate() throws AWTException {
+  // for some reason our gui doesn't load until an icon is clicked
+  // to bypass this, we will literally drag the mouse and click an icon manually:
+  if (!calibrated) {
+    robot = new Robot();
+    robot.mouseMove(20, 273);
+    robot.mousePress(java.awt.event.InputEvent.BUTTON1_MASK);
+    robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_MASK);
+    calibrated = true;
+  }
+}
 void keyPressed() {
   emre.key_press_movement();
   if (key == 'p' || key == 'P') {
     itemShop.opened();
+    
+    try{calibrate();}
+    catch (Exception E){println("oof: ", E);}
   }
 
   if (key == 's') {
-    println("yes");
+    //println("yes");
     loop();
   }
 }
@@ -170,10 +198,13 @@ void outlineMain(int x, int y, int size, color col) {
 
 void showInvMain(int x, int y) {
   int tempX = x;
-  shopWindow.stroke(255);
-  shopWindow.fill(255);
   for ( int j = 0; j < emre.inventory.size(); j++) { 
-    outlineMain(x, y, size, 0);
+    if (emre.inventory.get(j).mainSelected) {
+      outlineMain(x, y, size, color(255, 0, 0));
+    } else {
+      outlineMain(x, y, size, 0);
+    }
+
     image(emre.inventory.get(j).icon, x, y);
     x += size;
     if (j%4 == 3) {

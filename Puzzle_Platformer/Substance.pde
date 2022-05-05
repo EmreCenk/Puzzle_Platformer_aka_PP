@@ -7,8 +7,7 @@ class Substance{
   boolean jumping;
   PVector previous_coordinate; // stores position in previous frame
   float mass;
-  boolean effected_by_gravity;
-
+  boolean effected_by_gravity, indestructible;
   Substance(PVector velocity_, PVector coordinates_, float radius_, color colour_){
     this.velocity = velocity_;
     this.coordinate = coordinates_;
@@ -21,6 +20,7 @@ class Substance{
     this.jumping = false;  
     this.previous_coordinate = new PVector(coordinates_.x, coordinates_.y);
     this.effected_by_gravity = true;
+    this.indestructible = false;
   }
   
   Substance(){
@@ -51,6 +51,8 @@ class Substance{
   }
     
   void display(){}// is overwritten when a new substance is created
-  void collide(Substance sub){};
+  void collide(Substance sub){
+    
+  };
 
 }

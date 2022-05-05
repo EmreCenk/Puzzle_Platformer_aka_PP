@@ -8,6 +8,8 @@ class Pendulum{
   float angular_speed;
   float angular_acceleration, minimum_h, maximum_h;
   float usefullness_coefficient;
+  boolean indestructible;
+  
   Pendulum(PVector coordinate_, float circle_radius, float length_of_string, float theta, color colour){
     
     //note: theta in radians
@@ -25,6 +27,7 @@ class Pendulum{
     this.initialize_height();
     
     this.swing(); // we call swing once to properly initialize the coordinates of the hanging_thing
+    this.indestructible = false;
   }
   Pendulum(PVector coordinate_, float circle_radius, float length_of_string, float theta){
     this(coordinate_, circle_radius, length_of_string, theta, color(0,0,0));
@@ -90,7 +93,7 @@ class Pendulum{
     this.hanging_thing.velocity.mult(this.usefullness_coefficient);
     this.hanging_thing.collide(obj);
     this.hanging_thing.velocity.mult(1/(this.usefullness_coefficient));
-    //println("1", this.hanging_thing.velocity);
+    //ln("1", this.hanging_thing.velocity);
     //if (obj.getClass().getName() == "Puzzle_Platformer$Player"){
     obj.jumping = false;
     //}
@@ -98,7 +101,7 @@ class Pendulum{
       
     }
     PVector vel = get_pendulum_velocity(this);
-    //println("2", this.hanging_thing, this.hanging_thing.velocity, vel);
+    //ln("2", this.hanging_thing, this.hanging_thing.velocity, vel);
 
 
     PVector projected = project(this.hanging_thing.velocity, vel);
@@ -108,9 +111,9 @@ class Pendulum{
     // adding the following single line to fix a bug took us an extreme amount of time (the amount of pain that went into adding the following line is truly immeasurable)
     if (projected.x < 0) this.angular_speed *= -1; 
     
-    //println("3", this.angular_speed);
-    //println("-------------------------------");
-    //println();println();
+    //ln("3", this.angular_speed);
+    //ln("-------------------------------");
+    //ln();ln();
     //this.draw_velocity();
     
 }
@@ -119,7 +122,7 @@ class Pendulum{
     //we have to multiply by this or it's not even visible
     this.update_velocity();
     this.hanging_thing.velocity.mult(10*this.usefullness_coefficient);
-    //println(this.hanging_thing.velocity.mag());
+    //ln(this.hanging_thing.velocity.mag());
     this.hanging_thing.draw_velocity();
     this.hanging_thing.velocity.mult(1/(10*this.usefullness_coefficient));
 

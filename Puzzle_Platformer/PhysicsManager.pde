@@ -57,13 +57,15 @@ class PhysicsManager {
     //keeping things above and below platforms:
     for (int i = 0; i < this.platforms.size(); i++){
       for (int j = 0; j < this.objs.size(); j++){
-        //if ((this.objs.get(j) instanceof Platform)) continue;
-        //println(this.objs.get(j));
         this.platforms.get(i).keep_object_above_platform(this.objs.get(j));
       }
       
       for (int j = 0; j<this.blocks.size(); j++){
         this.platforms.get(i).keep_object_above_platform(this.blocks.get(j));
+      }
+      
+      for (int j = 0; j<this.players.size(); j++){
+        this.platforms.get(i).keep_object_above_platform(this.players.get(j));
       }
     }
     
@@ -88,19 +90,30 @@ class PhysicsManager {
     }
     
     //block collision
-    //for (int i = 0; i < this.blocks.size(); i++){
-    //  for (int j = i+1; j<this.blocks.size(); j++){
-    //    this.blocks.get(i).collide(this.blocks.get(j));
-    //  }
+    for (int i = 0; i < this.blocks.size(); i++){
+      for (int j = i+1; j<this.blocks.size(); j++){
+        this.blocks.get(i).collide(this.blocks.get(j));
+      }
       
-    //  for (int j = 0; j < this.objs.size(); j++){
-    //    this.blocks.get(i).collide(this.objs.get(j));
-    //  }
-    //}
+      for (int j = 0; j < this.objs.size(); j++){
+        this.blocks.get(i).collide(this.objs.get(j));
+      }
+
+      for (int j = 0; j < this.players.size(); j++){
+        this.blocks.get(i).collide(this.players.get(j));
+        this.blocks.get(i).keep_object_above_platform(this.players.get(j));
+      }
+      
+      for (int j = i + 1; j < this.blocks.size(); j++){
+        this.blocks.get(i).collide(this.blocks.get(j));
+        this.blocks.get(i).keep_object_above_platform(this.blocks.get(j));
+      }
+
+    }
      //ORDER MATTERS:
 
     //this.prison_collision();
-    this.block_collision();
+    //this.block_collision();
   }
 
   void prison_collision() {
@@ -138,7 +151,7 @@ class PhysicsManager {
         intersection = get_line_segment_intersection(this.blocks.get(i).coordinate, this.blocks.get(i).previous_coordinate,
                                                      this.players.get(j).coordinate, this.players.get(j).previous_coordinate);
         if (intersection != null) {
-          println("INTERSECTING1", frameCount);
+          //println("INTERSECTING1", frameCount);
           continue;
         }
         
@@ -184,15 +197,15 @@ class PhysicsManager {
         else{
           closest_block = new PVector();
           closest_player = new PVector();
-          println("oh fuck");
+          //println("oh fuck");
           stop();
         }
-        println("ya");
+        //println("ya");
         temp_top_left = new PVector(closest_block.x - this.blocks.get(i).width_/2, closest_block.y - this.blocks.get(i).height_/2);
         temp_bottom_right = new PVector(closest_block.x + this.blocks.get(i).width_/2, closest_block.y + this.blocks.get(i).height_/2);
         // todo: check time of collision and make sure they actually collide 
         if (circle_in_rect(temp_top_left, temp_bottom_right, closest_player, this.players.get(j).radius, 1)){
-          println("INTERSECTING2", frameCount);
+          //println("INTERSECTING2", frameCount);
           if (dist(closest_player.x, closest_player.y, closest_block.x, closest_block.y) < min_dist_collision){
             min_dist_collision = dist(closest_player.x, closest_player.y, closest_block.x, closest_block.y); // dist technically computed twice but I can't be bothered to put it in a variable
             collision_to_process = this.players.get(j);
