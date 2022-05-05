@@ -46,8 +46,10 @@ class LandingPage{
       emre.money = 999999; // infinite money
       set_up_gui_values();
       for(int i = 0; i < itemShop.stock.size(); i ++){
-        itemShop.stock.get(i).uses = 1000000000; // infinite uses
+        itemShop.stock.get(i).uses = 10000; // infinite uses
       }
+      itemShop.stock.get(0).shopClicked();
+      
       physics = new PhysicsManager(); // empty the universe
       physics.add_player(emre);
       physics.add_prison(new Prison());
