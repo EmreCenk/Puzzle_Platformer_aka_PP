@@ -47,6 +47,11 @@ void setup() {
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   emre.mass = 10;
   emre.jump_power = 10;
+=======
+  emre.mass = 1000000;
+  emre.jump_power = 15; //for debugging
+  //emre.velocity = new PVector(10, -10000);
+>>>>>>> Stashed changes
   physics.add_player(emre);
 
   // creating platforms:
