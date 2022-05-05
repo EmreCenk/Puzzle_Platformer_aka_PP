@@ -20,11 +20,11 @@ class Tool{
       itemShop.stock.get(i).selected = false;
     }
     this.selected = true;
-    showcase();
+    explain();
     itemShop.update();
   }
   
-  void showcase(){ // showcases the item in the shop window screen
+  void explain(){ // showcases the item in the shop window screen
     shopBackground();
     label.setText(desc);
     priceLabel.setText("$"+ str(price));
@@ -104,7 +104,7 @@ class Pickaxe extends Tool{
   }
   void explain(){
     usesLabel.setText("uses :" + str(uses));
-    super.showcase();
+    super.explain();
   }
 }
 
@@ -115,7 +115,7 @@ class Block extends Tool{
   }
   void explain(){
     usesLabel.setText("blocks :" + str(uses));
-    super.showcase();
+    super.explain();
   }
 }
 
@@ -126,7 +126,7 @@ class Pend_block extends Tool{
   }
   void explain(){
     usesLabel.setText("uses :" + str(uses));
-    super.showcase();
+    super.explain();
   }
   
 }
