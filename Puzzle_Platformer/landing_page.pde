@@ -50,6 +50,8 @@ class LandingPage{
       
       set_up_gui_values();
       physics = new PhysicsManager(); // empty the universe
+      physics.add_player(emre);
+      physics.add_prison(new Prison());
     }
     else if (circle_in_rect(this.get_top_left(this.but2_center), this.get_bottom_right(this.but2_center), new PVector(mouseX, mouseY), 0, 0)){
       loop();

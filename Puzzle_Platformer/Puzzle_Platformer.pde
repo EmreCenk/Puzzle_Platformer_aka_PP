@@ -129,7 +129,7 @@ void calibrate() throws AWTException {
 void keyPressed() {
   emre.key_press_movement(); // what the player should do when a key is pressed
   
-  if (key == 'p' || key == 'P') {
+  if ((key == 'p' || key == 'P') && landing.started_game) {
     // opening shop
     itemShop.opened();
      
