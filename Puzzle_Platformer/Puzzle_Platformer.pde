@@ -32,6 +32,9 @@ Circle goal_ball;
 
 Point mouse; // from library
 
+//landing page:
+LandingPage landing;
+
 void setup() {
   fill(0);
   size(1200, 500);
@@ -85,7 +88,7 @@ void setup() {
   //---------------------------------------------------------------------------\\
 
   physics.add_prison(new Prison());
-  physics.display_universe();
+
 
   mouse.x = 0;
   itemShop.stock.get(0).shopClicked();
@@ -93,10 +96,13 @@ void setup() {
 
 
   itemShop.update();
-  loop();
+  noLoop();
+  landing = new LandingPage();
+  landing.draw_buttons();
 }
 
 void draw() {
+  if (!landing.started_game) return;
   frameRate(60);
   background(255);
   mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
