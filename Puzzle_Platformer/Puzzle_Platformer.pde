@@ -27,7 +27,6 @@ Pendulum mp1, mp2;
 Circle circle;
 BouncyPlayBlock b;
 Circle goal_ball;
-
 //-----------------------------------------------
 
 Point mouse; // from library
@@ -35,9 +34,9 @@ Point mouse; // from library
 //landing page:
 LandingPage landing;
 
-void setup() {
-  fill(0);
+void settings(){
   size(1200, 500);
+
   
   //initializing golden ball
   goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
@@ -64,40 +63,16 @@ void setup() {
   b.velocity = new PVector(0, 0);
   physics.add_block(b);
 
+}
+void setup() {
+      
+  Level current_level = create_level1();
+  emre = current_level.player;
+  physics = current_level.physics; // if the gamemode is sandbox then this gets emptied
   
-  //creating pendulums:
-  physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
-  physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
-
-
-  createGUI();
-  //----------------- create items ------------------------------\\
-  // Tool(price, PImage, description, uses) 
-  pick = new Pickaxe();
-  normal_block = new NormalBlock();
-  bouncy = new BouncyBlock();
-  pe = new Pend_block();
-  //--------------------------------------------------------------\\xs
-
-  //------------------------ add items to shop -------------------------------\\
-  itemShop.addToStock(pick);
-  itemShop.addToStock(normal_block);
-  itemShop.addToStock(bouncy);
-  itemShop.addToStock(pe);
-  //---------------------------------------------------------------------------\\
-
-  physics.add_prison(new Prison());
-
-
-  mouse.x = 0;
-  itemShop.stock.get(0).shopClicked();
-
-
-
-  itemShop.update();
+  set_up_gui_values();
   noLoop();
-  landing = new LandingPage();
-  landing.draw_buttons();
+
 }
 
 void draw() {
@@ -237,4 +212,31 @@ void showInvMain(int x, int y) {// displays the inventory to the main sketch win
       y += size;
     }
   }
+}
+
+void set_up_gui_values(){
+
+  createGUI();
+  //----------------- create items ------------------------------\\
+  // Tool(price, PImage, description, uses) 
+  pick = new Pickaxe();
+  normal_block = new NormalBlock();
+  bouncy = new BouncyBlock();
+  pe = new Pend_block();
+  //--------------------------------------------------------------\\xs
+
+  //------------------------ add items to shop -------------------------------\\
+  itemShop.addToStock(pick);
+  itemShop.addToStock(normal_block);
+  itemShop.addToStock(bouncy);
+  itemShop.addToStock(pe);
+  //---------------------------------------------------------------------------\\
+
+  mouse.x = 0;
+  itemShop.stock.get(0).shopClicked();
+
+  itemShop.update();
+  landing = new LandingPage();
+  landing.draw_buttons();
+
 }

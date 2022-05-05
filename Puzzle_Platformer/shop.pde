@@ -17,6 +17,7 @@ class Shop{
   }
   
   void displayIcons(){
+
     emre.display_inventory_in_shop_window();
     int x = 0;
     int y = 0;
