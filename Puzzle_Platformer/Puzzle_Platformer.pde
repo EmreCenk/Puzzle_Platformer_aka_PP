@@ -47,11 +47,7 @@ void setup() {
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   emre.mass = 10;
   emre.jump_power = 10;
-=======
-  emre.mass = 1000000;
-  emre.jump_power = 15; //for debugging
-  //emre.velocity = new PVector(10, -10000);
->>>>>>> Stashed changes
+
   physics.add_player(emre);
 
   // creating platforms:
@@ -102,13 +98,23 @@ void setup() {
 
 void draw() {
   frameRate(60);
-  mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
   background(255);
+  mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
   physics.update_universe(); // increment the universe by 1 timestamp
   showInvMain(width - size * min(emre.inventory.size(), 4), 0); // show inventory
-
+  eq_info();
 }
 
+void eq_info(){
+  
+  if (emre.equipped_tool == null) return;
+  
+  textAlign(RIGHT);
+  textSize(32);
+  fill(color(0, 0, 0));
+  text("Selected: " + emre.equipped_tool.used,
+        width, (ceil(emre.inventory.size()/4.0) + 1) * size);
+}
 void mousePressed() {
   boolean something_clicked = false;
   for (int i = 0; i < 4; i ++) {
