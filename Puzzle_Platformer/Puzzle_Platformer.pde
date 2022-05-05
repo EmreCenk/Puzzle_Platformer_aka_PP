@@ -35,29 +35,34 @@ Point mouse; // from library
 void setup() {
   fill(0);
   size(1200, 500);
-
+  
+  //initializing golden ball
   goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
   goal_ball.mass = 4;
   physics = new PhysicsManager();
   physics.add_circle(goal_ball);
 
+
+  // initializing player
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   emre.mass = 10;
-  emre.jump_power = 7; //for debugging
-  //emre.velocity = new PVector(10, -10000);
+  emre.jump_power = 10;
   physics.add_player(emre);
 
+  // creating platforms:
   physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255, 0, 0))); // red
-  //physics.add_platform(new Platform(new PVector(width/2, 400), 400, 50, color(0, 0, 0))); // black
   physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0, 255, 0))); // green
 
+  //creating a domino:
   physics.add_domino(new Domino(new PVector(100, 100), 100));
+  
+  //creating blocks:
   b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
   b.velocity = new PVector(0, 0);
   physics.add_block(b);
 
-
-  //physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
+  
+  //creating pendulums:
   physics.add_pendulum(new Pendulum(new PVector(450, 130), 10, 200, -PI/20, 8));
   physics.add_pendulum(new Pendulum(new PVector(130, 0), 10, 175, -PI/4, 8));
 
@@ -87,25 +92,16 @@ void setup() {
 
 
   itemShop.update();
-  noLoop();
+  loop();
 }
 
 void draw() {
   frameRate(60);
-  //ln(frameRate);
-  //ln(mouse.x, mouse.y);
-  mouse = MouseInfo.getPointerInfo().getLocation();
+  mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
   background(255);
+  physics.update_universe(); // increment the universe by 1 timestamp
+  showInvMain(width - size * min(emre.inventory.size(), 4), 0); // show inventory
 
-  physics.update_universe();
-
-
-  stroke(color(255, 0, 0));
-  line(emre.coordinate.x, emre.coordinate.y, emre.previous_coordinate.x, emre.previous_coordinate.y);
-  line(b.coordinate.x, b.coordinate.y, b.previous_coordinate.x, b.previous_coordinate.y);
-
-  showInvMain(width - size * min(emre.inventory.size(), 4), 0);
-  //saveFrame("export/frame####.png");
 }
 
 void mousePressed() {
@@ -133,39 +129,40 @@ boolean calibrated = false;
 
 void calibrate() throws AWTException {
   // for some reason our gui doesn't load until an icon is clicked
-  // to bypass this, we will literally drag the mouse and click an icon manually:
+  // to bypass this, we will literally drag the mouse and click an icon manually
   if (!calibrated) {
     robot = new Robot();
-    robot.mouseMove(20, 273);
-    robot.mousePress(java.awt.event.InputEvent.BUTTON1_MASK);
-    robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_MASK);
-    calibrated = true;
+    robot.mouseMove(20, 273); //drag mouse to icon
+    robot.mousePress(java.awt.event.InputEvent.BUTTON2_MASK); //click icon
+    robot.mouseRelease(java.awt.event.InputEvent.BUTTON2_MASK); // release icon
+    calibrated = true; // we only have to do this the first time, after that you don't need to repeat it
   }
 }
+
 void keyPressed() {
-  emre.key_press_movement();
+  emre.key_press_movement(); // what the player should do when a key is pressed
+  
   if (key == 'p' || key == 'P') {
+    // opening shop
     itemShop.opened();
-    
+     
+    //calibrating shop window:
     try{calibrate();}
     catch (Exception E){println("oof: ", E);}
   }
 
-  if (key == 's') {
-    //println("yes");
-    loop();
-  }
 }
 
 void keyReleased() {
-  emre.key_up_movement();
+  emre.key_up_movement(); // what the player should do when a key is released
 }
 
 int tdToOd(int x, int y) {
-  return(x + 4*y);
+  return(x + 4*y); // utility function
 }
 
 void iconClicked() {
+  // todo: comment
   int xOffset = 0;
   int yOffset = 230;
   for (int y = 0; y < ceil(itemShop.stock.size() / 4.0); y++) {
@@ -185,18 +182,21 @@ void shopBackground() {
 
 int size = 50;
 void outline(int x, int y, int size, color col) {
+  //draws outline for an icon in the shop window
   shopWindow.stroke(col);
   shopWindow.strokeWeight(2);
   shopWindow.rect(x, y, size, size);
 }
 
 void outlineMain(int x, int y, int size, color col) {
+  //draws icon on the game window
   stroke(col);
   strokeWeight(2);
   rect(x, y, size, size);
 }
 
 void showInvMain(int x, int y) {
+  // todo: comment
   int tempX = x;
   for ( int j = 0; j < emre.inventory.size(); j++) { 
     if (emre.inventory.get(j).mainSelected) {
