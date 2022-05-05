@@ -36,8 +36,7 @@ LandingPage landing;
 
 void settings(){
   size(1200, 500);
-<<<<<<< HEAD
-=======
+
   
   //initializing golden ball
   goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
@@ -63,7 +62,6 @@ void settings(){
   b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
   b.velocity = new PVector(0, 0);
   physics.add_block(b);
->>>>>>> 65a9f5545473a3cd876ee95ff4b8cbdadc9b894b
 
 }
 void setup() {
