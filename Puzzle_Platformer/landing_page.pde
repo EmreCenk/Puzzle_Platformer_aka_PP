@@ -40,9 +40,13 @@ class LandingPage{
   void check_clicked(){
 
     if (circle_in_rect(this.get_top_left(this.but1_center), this.get_bottom_right(this.but1_center), new PVector(mouseX, mouseY), 0, 0)){
+      loop();
+      this.started_game = true;
       println("sandbox mode");
     }
-    if (circle_in_rect(this.get_top_left(this.but2_center), this.get_bottom_right(this.but2_center), new PVector(mouseX, mouseY), 0, 0)){
+    else if (circle_in_rect(this.get_top_left(this.but2_center), this.get_bottom_right(this.but2_center), new PVector(mouseX, mouseY), 0, 0)){
+      loop();
+      this.started_game = true;
       println("level mode");
     }
   }
