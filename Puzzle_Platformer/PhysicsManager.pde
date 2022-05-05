@@ -14,8 +14,11 @@ class PhysicsManager {
   ArrayList<Pendulum> pendulums;
   ArrayList<Player> players;
   ArrayList<Domino> dominos;
+  
+  boolean universe_paused;
 
   PhysicsManager() {
+    this.universe_paused = false;
     this.prisons = new ArrayList<Prison>();
     this.blocks = new ArrayList<PlayBlock>();
     this.players = new ArrayList<Player>();
@@ -26,8 +29,16 @@ class PhysicsManager {
     this.dominos = new ArrayList<Domino>();
 
   }
-
+  void pause(){
+    this.universe_paused = true;
+  }
+  
+  void unpause(){
+    this.universe_paused = false;
+  }
   void update_universe() {
+    if (this.universe_paused) return;
+    
     // moves universe forward by one timestamp
     this.set_jump_attributes();
     this.apply_friction_to_universe();
