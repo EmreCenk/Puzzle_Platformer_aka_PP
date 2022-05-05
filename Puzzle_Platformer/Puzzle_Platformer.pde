@@ -50,7 +50,7 @@ void setup() {
 }
 
 void draw() {
-
+  if (open) shopWindow.setLocation(0, 200); // buttons don't work otherwise. (don't think about this line too much)
   if (!landing.started_game) return;
   frameRate(60);
   background(255);
