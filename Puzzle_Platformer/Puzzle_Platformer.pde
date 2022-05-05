@@ -184,7 +184,7 @@ void showInvMain(int x, int y) {// displays the inventory to the main sketch win
   for ( int j = 0; j < emre.inventory.size(); j++) {
 
     if (emre.inventory.get(j).mainSelected) {
-      outlineMain(x, y, size, color(255, 0, 0));
+      outlineMain(x, y, size, color(0, 255, 0));
     } else {
       outlineMain(x, y, size, 0);
     }
