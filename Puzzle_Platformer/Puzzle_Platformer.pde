@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 int inventorySize = 8;
-int money = 20;
+int money = 80;
 boolean open = false;
 Shop itemShop = new Shop();
 
@@ -31,6 +31,9 @@ Circle goal_ball;
 //-----------------------------------------------
 
 Point mouse; // from library
+
+//landing page:
+LandingPage landing;
 
 void setup() {
   fill(0);
@@ -84,7 +87,7 @@ void setup() {
   //---------------------------------------------------------------------------\\
 
   physics.add_prison(new Prison());
-  physics.display_universe();
+
 
   mouse.x = 0;
   itemShop.stock.get(0).shopClicked();
@@ -92,19 +95,27 @@ void setup() {
 
 
   itemShop.update();
-  loop();
+  noLoop();
+  landing = new LandingPage();
+  landing.draw_buttons();
 }
 
 void draw() {
+  if (!landing.started_game) return;
   frameRate(60);
-  mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
   background(255);
+  mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
   physics.update_universe(); // increment the universe by 1 timestamp
   showInvMain(width - size * min(emre.inventory.size(), 4), 0); // show inventory
-
 }
 
 void mousePressed() {
+   
+  if (!landing.started_game){
+    landing.check_clicked();
+    return;
+  }
+  
   boolean something_clicked = false;
   for (int i = 0; i < 4; i ++) {
     for (int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++) {
