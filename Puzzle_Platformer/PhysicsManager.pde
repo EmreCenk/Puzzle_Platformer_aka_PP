@@ -57,15 +57,15 @@ class PhysicsManager {
     //keeping things above and below platforms:
     for (int i = 0; i < this.platforms.size(); i++){
       for (int j = 0; j < this.objs.size(); j++){
-        this.platforms.get(i).keep_object_above_platform(this.objs.get(j));
+        this.platforms.get(i).keep_object_outside(this.objs.get(j));
       }
       
       for (int j = 0; j<this.blocks.size(); j++){
-        this.platforms.get(i).keep_object_above_platform(this.blocks.get(j));
+        this.platforms.get(i).keep_object_outside(this.blocks.get(j));
       }
       
       for (int j = 0; j<this.players.size(); j++){
-        this.platforms.get(i).keep_object_above_platform(this.players.get(j));
+        this.platforms.get(i).keep_object_outside(this.players.get(j));
       }
     }
     
@@ -92,11 +92,11 @@ class PhysicsManager {
     //block collision
     for (int i = 0; i < this.blocks.size(); i++){
       for (int j = 0; j < this.players.size(); j++){
-        this.blocks.get(i).keep_object_above_platform(this.players.get(j));
+        this.blocks.get(i).keep_object_outside(this.players.get(j));
       }
       
       for (int j = i + 1; j < this.blocks.size(); j++){
-        this.blocks.get(i).keep_object_above_platform(this.blocks.get(j));
+        this.blocks.get(i).keep_object_outside(this.blocks.get(j));
       }
 
     }
@@ -352,7 +352,7 @@ class PhysicsManager {
         collision_to_process.velocity = new PVector(0, 0);
       }
       else if (collision_to_process instanceof Player){
-        this.blocks.get(i).keep_object_above_platform(collision_to_process);
+        this.blocks.get(i).keep_object_outside(collision_to_process);
 //        float magnitude = this.blocks.get(i).width_/2 + collision_to_process.radius - dist(collision_to_process.coordinate.x,
 //                                                                                                       collision_to_process.coordinate.y,
 //                                                                                                       this.blocks.get(i).coordinate.x,

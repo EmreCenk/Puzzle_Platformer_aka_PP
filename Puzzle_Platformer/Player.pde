@@ -1,60 +1,58 @@
+
+
+
 class Player extends Circle{
+  //represents a player in the physics universe
+  
   int money;
   int invSize;
   ArrayList <Tool> inventory = new ArrayList <Tool>();
   
-  boolean moving_down, moving_right, moving_left;
+  boolean moving_down, moving_right, moving_left; // stores whether the player is moving in either of these directions
   float walking_speed, jump_power, terminal_velocity;
-  boolean dynamic_colours;
+  boolean dynamic_colours; // feature for debugging (decides whether or not to change the color depending on if the jumping value is true or false)
   
-  Tool equipped_tool;
+  Tool equipped_tool; // the tool that the player has selected (from the top right corner)
   
-  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int m, float weight){
+  Player(PVector coordinates_, float radius_, color colour_, float walking_speed_, int inv, int money_, float weight){
     super(new PVector(0, 0), coordinates_, radius_, colour_);
-    invSize = inv;
-    money = m;
+    
+    // initializing values:
+    this.invSize = inv;
+    this.money = money_;
     this.moving_down = false;
     this.moving_right = false;
     this.moving_left = false;
     this.walking_speed = walking_speed_;
     this.dynamic_colours = false;
-    
     this.jump_power = 6;
-
     this.terminal_velocity = DEFAULT_PLAYER_HORIZONTAL_TERMINAL_VELOCITY;
     this.bounciness = DEFAULT_PLAYER_BOUNCINESS;
     this.mass = weight;
-    
     this.equipped_tool = null;
 }
   
 
   
   void jump(){
-    if (this.jumping) return;
+    // makes the player jump
+    if (this.jumping) return; // if already jumping do nothing
     this.velocity.y -= this.jump_power;
     this.jumping = true;
     
   }
   void move(){
+    // checking whether the player is being controlled by the user:
     if (this.moving_left) this.velocity.x = max(-this.terminal_velocity, this.velocity.x - this.walking_speed);
     if (this.moving_right) this.velocity.x = min(this.terminal_velocity, this.velocity.x + this.walking_speed);
     
-    super.move();    
-
-    //if (this.moving_left) this.velocity.x += this.walking_speed;
-    //if (this.moving_right) this.velocity.x -= this.walking_speed;
-    
+    // proceed with normal velocity-position calculations:
+    super.move();   
 
   }
-  //void check_player_movement(){
-    //if (this.moving_up) this.move_up();
-    //if (this.moving_down) this.move_down();
-    //if (this.moving_right) this.walk_right();
-    //if (this.moving_left) this.walk_left();
-  //}
-  
+
   void key_press_movement(){
+    // to process multiple inputs at once we have the keys control boolean values
     if (keyCode == UP) this.jump();
     //else if (keyCode == DOWN) this.moving_down = true;
     if (keyCode == RIGHT) this.moving_right = true;
@@ -63,14 +61,19 @@ class Player extends Circle{
   
 
   void key_up_movement(){
+    // same logic as key_press_movement
+    
     //if (keyCode == UP) this.moving_up = false;
     //else if (keyCode == DOWN) this.moving_down = false;
     if (keyCode == RIGHT) this.moving_right = false;
     else if (keyCode == LEFT) this.moving_left = false;
   }
-    void clicked_screen(PhysicsManager phys){
+  void clicked_screen(PhysicsManager phys){
+    // what to do when the user clicks on the screen
+    // we check which tool the user has selected and take a specific action depending on the tool they have
+    
     if (this.equipped_tool instanceof Block){
-      println("block equipped");
+      // placing a block on the screen:
       PlayBlock some_block;
       if (this.equipped_tool instanceof BouncyBlock){
         some_block = new BouncyPlayBlock(new PVector(mouseX, mouseY), 30);
@@ -81,26 +84,30 @@ class Player extends Circle{
       phys.add_block(some_block);
     }
     else if (this.equipped_tool instanceof Pend_block){
-      println("pendulum inserted");
+      // placing a pendulum:
       phys.add_pendulum(new Pendulum(new PVector(mouseX, mouseY), 10, 30, 30));
     }
     else if (this.equipped_tool instanceof Pickaxe){
-      println("pickaxe attempting to destroy");
+      // pickaxe destorying blocks
       ArrayList<PlayBlock> to_remove = new ArrayList<PlayBlock>();
-      for (PlayBlock b: phys.blocks){
-        if (b.indestructible) continue;
-        if (circle_in_rect(b.get_top_left(), b.get_bottom_right(), new PVector(mouseX, mouseY), 0, 0)){
-          to_remove.add(b);
+      for (PlayBlock b: phys.blocks){ // loop through all blocks
+        if (b.indestructible) continue; // if indestructible we ignore
+        
+        if (circle_in_rect(b.get_top_left(), b.get_bottom_right(), new PVector(mouseX, mouseY), 0, 0)){ // checking if mouse is on the block
+          to_remove.add(b); // if the mouse is clicking the block, add the block to the list of blocks that are going to be deleted from the universe
         }
       }    
+      
       for (PlayBlock b: to_remove){
-        phys.blocks.remove(b);
+        phys.blocks.remove(b); // removing the block(s) that the pickaxe has selected
       }        
       
+      
+      // doing the exact same thing for pendulums and destroying them if needed:
       ArrayList<Pendulum> to_remove2 = new ArrayList<Pendulum>();
       for (Pendulum b: phys.pendulums){
         if (b.indestructible) continue;
-
+  
         if (circle_in_rect(new PVector(b.pivot.coordinate.x - b.string_length, b.pivot.coordinate.y - b.string_length),
                            new PVector(b.pivot.coordinate.x + b.string_length, b.pivot.coordinate.y + b.string_length),
                            new PVector(mouseX, mouseY), 0, 0)){
@@ -111,10 +118,11 @@ class Player extends Circle{
         phys.pendulums.remove(b);
       }     
     }
-  
+
   }
   
   void display(){
+    // displays player
     color color_to_use;
     if (this.dynamic_colours && !this.jumping){
       color_to_use = lerpColor(this.colour, color(0, 255, 0), 1);
@@ -132,6 +140,7 @@ class Player extends Circle{
   }
   
   void display_inveontory_in_shop_window(){
+    // displays the player's inventory in the shop window
     int x = 200;
     int y = 260;
     for( int j = 0 ; j < inventory.size(); j++){ 
