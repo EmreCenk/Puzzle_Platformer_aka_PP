@@ -85,7 +85,7 @@ class Player extends Circle{
     }
     else if (this.equipped_tool instanceof Pend_block){
       // placing a pendulum:
-      phys.add_pendulum(new Pendulum(new PVector(mouseX, mouseY), 10, 30, 30));
+      phys.add_pendulum(new Pendulum(new PVector(mouseX, mouseY), 10, 100, radians(30)));
     }
     else if (this.equipped_tool instanceof Pickaxe){
       // pickaxe destorying blocks
@@ -143,6 +143,7 @@ class Player extends Circle{
     // displays the player's inventory in the shop window
     int x = 200;
     int y = 260;
+
     for( int j = 0 ; j < inventory.size(); j++){ 
       outline(x, y, size, 0);
       shopWindow.image(inventory.get(j).icon, x, y);

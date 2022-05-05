@@ -162,7 +162,6 @@ int tdToOd(int x, int y) {
 }
 
 void iconClicked() {
-  // todo: comment
   int xOffset = 0;
   int yOffset = 230;
   for (int y = 0; y < ceil(itemShop.stock.size() / 4.0); y++) {
@@ -198,6 +197,8 @@ void outlineMain(int x, int y, int size, color col) {
 void showInvMain(int x, int y) {
   // todo: comment
   int tempX = x;
+      fill(color(255, 255, 255));
+
   for ( int j = 0; j < emre.inventory.size(); j++) { 
     if (emre.inventory.get(j).mainSelected) {
       outlineMain(x, y, size, color(255, 0, 0));

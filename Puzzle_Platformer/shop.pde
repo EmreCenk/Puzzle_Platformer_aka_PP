@@ -23,6 +23,7 @@ class Shop{
     PImage temp = loadImage("images/money.png");
     temp.resize(size, size);
     shopWindow.image(temp, 200, 0);
+    
     PImage tempShop;
     moneyLabel.setText(str(emre.money));
     for( int i = 0 ; i < stock.size(); i++){ 
