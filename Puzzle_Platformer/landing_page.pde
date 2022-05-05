@@ -4,32 +4,47 @@ class LandingPage{
   
   PVector but1_center, but2_center;
   boolean started_game;
+  float w, k;
   LandingPage(){
     this.but1_center = new PVector(width/2, height*0.3);
     this.but2_center = new PVector(width/2, height*0.7);
     this.started_game = false;
+    w = 0.5 * width;
+    k = 0.2 * height;
   }
   
-  PVector get_top_left(PVector center, float height_, float width_){ // gets top left corner
-    return new PVector(center.x - width_/2, center.y - height_/2);
+  PVector get_top_left(PVector center){ // gets top left corner
+    return new PVector(center.x - w/2, center.y - k/2);
   }
-  PVector get_bottom_right(PVector center, float height_, float width_){ //gets top right corner
-    return new PVector(center.x + width_/2, center.y + height_/2);
+  PVector get_bottom_right(PVector center){ //gets top right corner
+    return new PVector(center.x + w/2, center.y + k/2);
   }
   
   void draw_buttons(){
-    float w = 0.5;
-    float k = 0.2;
+
     fill(color(255, 255, 255));
-    rect(this.but1_center.x - width*w*0.5, this.but1_center.y, width*w, height*k);
-    rect(this.but2_center.x - width*w*0.5, this.but2_center.y, width*w, height*k);
+    PVector a = this.get_top_left(this.but1_center);
+    rect(a.x, a.y, w, k);
+    
+    PVector b = this.get_top_left(this.but2_center);
+    rect(b.x, b.y, w, k);
     
     
     fill(color(0, 0, 0));
-    textAlign(CENTER, TOP);
+    textAlign(CENTER, CENTER);
     textSize(32);
-    text("Sandbox Mode", this.but1_center.x, this.but1_center.y + height*k/4);
-    text("Play a Level", this.but2_center.x, this.but2_center.y + height*k/4);
+    text("Sandbox Mode", this.but1_center.x, this.but1_center.y);
+    text("Play a Level", this.but2_center.x, this.but2_center.y);
+  }
+  
+  void check_clicked(){
+
+    if (circle_in_rect(this.get_top_left(this.but1_center), this.get_bottom_right(this.but1_center), new PVector(mouseX, mouseY), 0, 0)){
+      println("sandbox mode");
+    }
+    if (circle_in_rect(this.get_top_left(this.but2_center), this.get_bottom_right(this.but2_center), new PVector(mouseX, mouseY), 0, 0)){
+      println("level mode");
+    }
   }
 
 }

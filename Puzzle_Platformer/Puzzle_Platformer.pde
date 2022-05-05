@@ -122,6 +122,12 @@ void eq_info(){
         width, (ceil(emre.inventory.size()/4.0) + 1) * size);
 }
 void mousePressed() {
+   
+  if (!landing.started_game){
+    landing.check_clicked();
+    return;
+  }
+  
   boolean something_clicked = false;
   for (int i = 0; i < 4; i ++) {
     for (int j = 0; j < ceil(emre.inventory.size() / 4.0); j ++) {
