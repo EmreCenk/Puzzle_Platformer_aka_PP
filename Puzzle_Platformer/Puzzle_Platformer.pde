@@ -37,35 +37,12 @@ LandingPage landing;
 void settings() {
   size(1200, 500);
 
-
-  //initializing golden ball
-  goal_ball = new Circle(new PVector(width*0.1, height*0.4), 10, color(100, 100, 0));
-  goal_ball.mass = 4;
-  physics = new PhysicsManager();
-  physics.add_circle(goal_ball);
-
-
-  // initializing player
-  emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
-  emre.mass = 10;
-  emre.jump_power = 10;
-  physics.add_player(emre);
-
-  // creating platforms:
-  physics.add_platform(new Platform(new PVector(30, 230), 500, 20, color(255, 0, 0))); // red
-  physics.add_platform(new Platform(new PVector(960, 475), 300, 20, color(0, 255, 0))); // green
-
-  //creating a domino:
-  physics.add_domino(new Domino(new PVector(100, 100), 100));
-
-  //creating blocks:
-  b = new BouncyPlayBlock(new PVector(width/2, height*0.5), 50);
-  b.velocity = new PVector(0, 0);
-  physics.add_block(b);
 }
+
+Level current_level;
 void setup() {
 
-  Level current_level = create_level1();
+  current_level = create_level1();
   emre = current_level.player;
   physics = current_level.physics; // if the gamemode is sandbox then this gets emptied
   landing = new LandingPage();
@@ -75,12 +52,16 @@ void setup() {
 }
 
 void draw() {
+
   if (!landing.started_game) return;
   frameRate(60);
   background(255);
+  
+     
   mouse = MouseInfo.getPointerInfo().getLocation(); // update the location of the mouse
   physics.update_universe(); // increment the universe by 1 timestamp
   showInvMain(width - size * min(emre.inventory.size(), 4), 0); // show inventory
+  current_level.check_player();
 }
 
 void mousePressed() {

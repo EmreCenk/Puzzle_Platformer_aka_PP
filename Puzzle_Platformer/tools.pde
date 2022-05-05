@@ -118,7 +118,7 @@ class Block extends Tool {
 //-------------------------------pend-------------------------------
 class Pend_block extends Tool {
   Pend_block() {
-    super(100, loadImage("images/pend.png"), "A pendulum", 1);
+    super(40, loadImage("images/pend.png"), "A pendulum", 1);
   }
   void explain() {
     usesLabel.setText("uses :" + str(uses));

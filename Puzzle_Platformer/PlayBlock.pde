@@ -58,7 +58,7 @@ class BouncyPlayBlock extends PlayBlock {
 
   BouncyPlayBlock (PVector center_, float height_) {
     super(center_, height_, color(0, 206, 209));
-    this.bounce_power = 10;
+    this.bounce_power = 6;
   }
 
   void substance_collided(Substance pl) {
