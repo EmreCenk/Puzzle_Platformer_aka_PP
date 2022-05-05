@@ -44,11 +44,10 @@ class LandingPage{
       loop();
       this.started_game = true;
       emre.money = 999999; // infinite money
+      set_up_gui_values();
       for(int i = 0; i < itemShop.stock.size(); i ++){
         itemShop.stock.get(i).uses = 1000000000; // infinite uses
       }
-      
-      set_up_gui_values();
       physics = new PhysicsManager(); // empty the universe
       physics.add_player(emre);
       physics.add_prison(new Prison());
