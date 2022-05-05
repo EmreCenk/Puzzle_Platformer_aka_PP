@@ -69,8 +69,9 @@ void setup() {
   Level current_level = create_level1();
   emre = current_level.player;
   physics = current_level.physics; // if the gamemode is sandbox then this gets emptied
+  landing = new LandingPage();
+  landing.draw_buttons();
   
-  set_up_gui_values();
   noLoop();
 
 }
@@ -236,7 +237,6 @@ void set_up_gui_values(){
   itemShop.stock.get(0).shopClicked();
 
   itemShop.update();
-  landing = new LandingPage();
-  landing.draw_buttons();
+  
 
 }

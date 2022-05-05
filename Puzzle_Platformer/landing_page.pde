@@ -43,13 +43,18 @@ class LandingPage{
     if (circle_in_rect(this.get_top_left(this.but1_center), this.get_bottom_right(this.but1_center), new PVector(mouseX, mouseY), 0, 0)){
       loop();
       this.started_game = true;
-      emre.money = 1000000; // infinite money
+      emre.money = 999999; // infinite money
+      for(int i = 0; i < itemShop.stock.size(); i ++){
+        itemShop.stock.get(i).uses = 1000000000; // infinite uses
+      }
+      
+      set_up_gui_values();
       physics = new PhysicsManager(); // empty the universe
     }
     else if (circle_in_rect(this.get_top_left(this.but2_center), this.get_bottom_right(this.but2_center), new PVector(mouseX, mouseY), 0, 0)){
       loop();
       this.started_game = true;
-
+      set_up_gui_values();
     }
   }
 
