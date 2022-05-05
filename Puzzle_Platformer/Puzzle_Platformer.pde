@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 int inventorySize = 8;
-int money = 2000;
+int money = 20;
 boolean open = false;
 Shop itemShop = new Shop();
 
@@ -47,11 +47,6 @@ void setup() {
   emre = new Player(new PVector(width/2, height*0.01), 25, color(0, 0, 0), 0.6, inventorySize, money, 3);
   emre.mass = 10;
   emre.jump_power = 10;
-=======
-  emre.mass = 1000000;
-  emre.jump_power = 15; //for debugging
-  //emre.velocity = new PVector(10, -10000);
->>>>>>> Stashed changes
   physics.add_player(emre);
 
   // creating platforms:
@@ -199,18 +194,31 @@ void outlineMain(int x, int y, int size, color col) {
   rect(x, y, size, size);
 }
 
-void showInvMain(int x, int y) {
-  // todo: comment
+void showInvMain(int x, int y) {// displays the inventory to the main sketch window
+  
+  if(!(emre.equipped_tool == null)){
+    fill(0);
+    textSize(20);
+    text("Uses: " + emre.equipped_tool.uses, width - size * min(emre.inventory.size(), 4) - 100, 30);
+  }
+  fill(255);
+ 
   int tempX = x;
-      fill(color(255, 255, 255));
+  
+  for( int i = 0; i < emre.inventory.size(); i++){
+    if(emre.inventory.get(i).uses == 0){
+      emre.inventory.remove(emre.inventory.get(i));
+    }
+  }
 
-  for ( int j = 0; j < emre.inventory.size(); j++) { 
+
+  for ( int j = 0; j < emre.inventory.size(); j++) {
+    
     if (emre.inventory.get(j).mainSelected) {
       outlineMain(x, y, size, color(255, 0, 0));
     } else {
       outlineMain(x, y, size, 0);
     }
-
     image(emre.inventory.get(j).icon, x, y);
     x += size;
     if (j%4 == 3) {

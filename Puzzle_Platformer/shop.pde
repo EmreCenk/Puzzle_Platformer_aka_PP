@@ -17,7 +17,7 @@ class Shop{
   }
   
   void displayIcons(){
-    emre.display_inveontory_in_shop_window();
+    emre.display_inventory_in_shop_window();
     int x = 0;
     int y = 0;
     PImage temp = loadImage("images/money.png");
