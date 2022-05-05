@@ -63,9 +63,10 @@ class BouncyPlayBlock extends PlayBlock{
   BouncyPlayBlock (PVector center_, float height_){
     super(center_, height_, color(0,206,209));
     this.bounce_power = 10;
-
   }
+  
   void substance_collided(Substance pl){
+    //if ( abs(pl.coordinate.y - this.get_top_left().y) > abs(pl.coordinate.y - this.get_bottom_right().y)) return;
     // every time this block collides with a substance, it launches the substance upwards at a rate of this.bounce_power units/s
     pl.velocity.y = min(DEFAULT_PLAYER_VERTICAL_TERMINAL_VELOCITY, pl.velocity.y - this.bounce_power);
 
