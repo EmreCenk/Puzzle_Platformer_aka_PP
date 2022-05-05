@@ -1,4 +1,5 @@
 
+// a bunch of (mostly physics) constants
 float DEFAULT_MASS = 1.1;
 float SUBSTANCE_DEFAULT_BOUNCE = 0.4;
 float DEFAULT_PLAYBLOCK_BOUNCE = 0;

@@ -3,8 +3,7 @@ class Tool{
   int price;
   PImage icon;
   String desc;
-  int hardness; // number of time the item can be used
-  int used = 0;
+  int uses; // number of time the item can be used
   boolean selected = false;
   
   Tool(int p, PImage i, String d, int h){
@@ -12,10 +11,10 @@ class Tool{
     i.resize(50, 50);
     icon = i;
     desc = d;
-    hardness = h;
+    uses = h;
   }
   
-  void shopClicked(){
+  void shopClicked(){// checks if icon is clicked in shop window
     shopBackground();
     for(int i = 0; i < itemShop.stock.size(); i ++){
       itemShop.stock.get(i).selected = false;
@@ -25,7 +24,7 @@ class Tool{
     itemShop.update();
   }
   
-  void explain(){
+  void explain(){ // showcases the item in the shop window screen
     shopBackground();
     label.setText(desc);
     priceLabel.setText("$"+ str(price));
@@ -36,15 +35,19 @@ class Tool{
     
   }
   
-  void displayBuyButton(){
+  void displayBuyButton(){ // displays the buy button in the shop window screen
     shopBackground();
     buyLabel.setText("buy");
     buyLabel.setVisible(true);
-    outline(223, 70, 50, color(0, 255, 0));
+    if(emre.money >= this.price){
+      outline(223, 70, 50, color(0, 255, 0));
+      return;
+    }
+    outline(223, 70, 50, color(255, 0, 0));
   }
   
   
-  void buyButtClicked(){
+  void buyButtClicked(){ // the buy button has been clciekd in the shop window screen
     if(selected){
       if(mouse.x > 223 && mouse.x < 273 && mouse.y > 300 && mouse.y < 350){
         if(itemShop.stock.contains(this)){
@@ -58,7 +61,7 @@ class Tool{
               label.setText("");
               priceLabel.setText("");
               usesLabel.setText("");
-              emre.display_inveontory_in_shop_window();
+              emre.display_inventory_in_shop_window();
               buyLabel.setText("");
               redraw();
             }else{
@@ -86,12 +89,9 @@ class Tool{
     this.mainSelected = true;
     redraw();
     emre.equipped_tool = this;
-    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
-    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
-    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
-    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
-    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
-    //THIS IS RUN WHEN THIS IS CLICKED ON THE MAIN SKETCH WINDOW.
+  }
+  void use(){
+    uses -= 1;
   }
   
   
@@ -103,7 +103,7 @@ class Pickaxe extends Tool{
     super(20, loadImage("images/pick.png"), "A better pickaxe.", 10);
   }
   void explain(){
-    usesLabel.setText("uses :" + str(hardness));
+    usesLabel.setText("uses :" + str(uses));
     super.explain();
   }
 }
@@ -114,7 +114,7 @@ class Block extends Tool{
     super(p, i, d, u);
   }
   void explain(){
-    usesLabel.setText("blocks :" + str(hardness));
+    usesLabel.setText("blocks :" + str(uses));
     super.explain();
   }
 }
@@ -125,7 +125,7 @@ class Pend_block extends Tool{
     super(100, loadImage("images/pend.png"), "A pendulum", 1);
   }
   void explain(){
-    usesLabel.setText("uses :" + str(hardness));
+    usesLabel.setText("uses :" + str(uses));
     super.explain();
   }
   
@@ -136,7 +136,7 @@ class BouncyBlock extends Block{
     super(30, loadImage("images/diamond.png"), "BLUE BOUNCY BLOCK.", 10);
   }
   void explain(){
-    usesLabel.setText("blocks :" + str(hardness));
+    usesLabel.setText("blocks :" + str(uses));
     super.explain();
   }
 }  
@@ -145,7 +145,7 @@ class NormalBlock extends Block{
     super(10, loadImage("images/dirt.png"), "Literally a dirt block what more can I say?", 10);
   }
   void explain(){
-    usesLabel.setText("blocks :" + str(hardness));
+    usesLabel.setText("blocks :" + str(uses));
     super.explain();
   }
 }  

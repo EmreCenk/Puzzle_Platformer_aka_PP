@@ -15,56 +15,55 @@ class Platform extends Substance{
   }
   
 
-  PVector get_top_left(){
+  PVector get_top_left(){ // gets top left corner
     return new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
   }
-  PVector get_bottom_right(){
+  PVector get_bottom_right(){ //gets top right corner
     return new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
   }
-  void keep_object_above_platform(Substance some_substance){
+  
+  void keep_object_outside(Substance some_substance){
 
-    // lifts the substance
-    PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
-    PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+    // makes sure the substance doesn't go inside the platform
     
+    
+    PVector top_left = this.get_top_left();
+    PVector bottom_right = this.get_bottom_right();
+    
+    // checking if substance is outside of y boundaries
     boolean outside_y = (some_substance.coordinate.y < top_left.y - some_substance.radius * 0.5 || some_substance.coordinate.y > bottom_right.y + some_substance.radius * 0.5);
+    
     if (!outside_y){
+      // substance is withing y boundaries, let's fix it's x boundary
       if (abs(top_left.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = top_left.x - some_substance.radius;
       else if (abs(bottom_right.x - some_substance.coordinate.x) < some_substance.radius) some_substance.coordinate.x = bottom_right.x + some_substance.radius;
-      //return;
     }
     
     if (circle_in_rect(top_left, bottom_right, some_substance.coordinate, some_substance.radius, 0.5) ){
-      // could be more efficient if we only checked if they are parralel but that is too much typing lol
-    
-
-
-      if (abs(some_substance.coordinate.y - top_left.y) < abs(some_substance.coordinate.y - bottom_right.y) ){
+      // substance is colliding with platform
+      // fixing the y boundaries::
+      if (abs(some_substance.coordinate.y - top_left.y) < abs(some_substance.coordinate.y - bottom_right.y)){
         some_substance.coordinate.y = top_left.y - some_substance.radius;
       }
       else{
         some_substance.coordinate.y = bottom_right.y + some_substance.radius;
       }
-
+      
+      //modifying the velocity depending on the geometric mean of the bounciness values 
       some_substance.velocity.y *= -sqrt(bounciness * some_substance.bounciness);      
-      some_substance.jumping = false;
+      some_substance.jumping = false; // you can always jump off of platforms since platforms are not effected by gravity
 
     }
-    return; // for better readability
+    
   }
   
   void display(){
-    PVector top_left = new PVector(this.coordinate.x - this.width_/2, this.coordinate.y - height_/2);
-    //PVector bottom_right = new PVector(this.coordinate.x + this.width_/2, this.coordinate.y + height_/2);
+    //draws the rectangle
     
+    PVector top_left = this.get_top_left();    
     stroke(color(255, 0, 0));
-    strokeWeight(2);
     fill(this.colour);
     rect(top_left.x, top_left.y, this.width_, height_);
-    //circle(top_left.x, top_left.y, 10);
-    //circle(bottom_right.x, bottom_right.y, 10);
-    stroke(255);
-    fill(255);
     
   }
 

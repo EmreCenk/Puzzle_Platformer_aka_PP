@@ -1,5 +1,8 @@
 
 class Substance{
+  // basically a skeleton
+  // anything that exists in the world will be some sort of child class of Substance
+  
   color colour;
   PVector velocity, coordinate;
   float radius;

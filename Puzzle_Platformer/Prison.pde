@@ -22,9 +22,7 @@ class Prison{
   }
   
   void imprison(Substance obj){
-    // makes sure ball isn't out of boundaries 
-    // TODO: IF LET AND RIGHT WALL RESET THE JUMP, WE CAN ENABLE WALL JUMPS
-    // TODO: ADD FRICTION TO WALLS SO WALL JUMPS BECOME BIG BRAIN MECHANICS
+    // makes sure ball isn't out of boundaries
     
     if (obj.coordinate.y < this.top_left.y + obj.radius){
       ////top wall

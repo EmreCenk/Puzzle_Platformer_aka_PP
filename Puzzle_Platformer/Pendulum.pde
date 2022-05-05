@@ -1,10 +1,12 @@
 
 
 class Pendulum{
+  //represents a pendulum
   
-  Circle hanging_thing, pivot;
+  Circle hanging_thing, pivot; // hanging_thing is tha hanging bob
+
   
-  float current_theta, string_length, time_period, max_theta;
+  float current_theta, string_length, max_theta;
   float angular_speed;
   float angular_acceleration, minimum_h, maximum_h;
   float usefullness_coefficient;
@@ -13,18 +15,18 @@ class Pendulum{
   Pendulum(PVector coordinate_, float circle_radius, float length_of_string, float theta, color colour){
     
     //note: theta in radians
+    
+    //initializing values:
     this.pivot = new Circle(new PVector(0, 0), coordinate_, circle_radius/2, colour);
-    //this.pivot.mass = 1;
     this.hanging_thing = new Circle(new PVector(0, 0), new PVector(0, 0), 10, colour);
     this.string_length = length_of_string;
-    
+  
     this.max_theta = theta;
     this.current_theta = theta;
     this.angular_acceleration = 0;
     this.angular_speed = 0;
     
-    this.usefullness_coefficient = PENDULUM_VELOCITY_USEFULLNESS_COEFFICIENT;
-    this.initialize_height();
+    this.usefullness_coefficient = PENDULUM_VELOCITY_USEFULLNESS_COEFFICIENT; // explanation in Pendulum.collide()
     
     this.swing(); // we call swing once to properly initialize the coordinates of the hanging_thing
     this.indestructible = false;
@@ -33,25 +35,19 @@ class Pendulum{
     this(coordinate_, circle_radius, length_of_string, theta, color(0,0,0));
   }
   
-  void initialize_height(){
-    
-    this.minimum_h = this.pivot.coordinate.y + this.string_length;
-    this.maximum_h = this.pivot.coordinate.y + this.string_length * cos(this.max_theta);
-  }
+
   void display(){
+    //draws the pendulum onto the screen
     this.pivot.display();
     this.hanging_thing.display();
     line(this.pivot.coordinate.x, this.pivot.coordinate.y, this.hanging_thing.coordinate.x, this.hanging_thing.coordinate.y);
     stroke(color(255, 0, 0));
-    strokeWeight(3);
-    this.draw_velocity();
-    strokeWeight(1);
-
   }
   
   void update_velocity(){
+    // computes the velocity of the pendulum and sets it equal to the bob's velocity
+    // the angular velocity isn't necesarily the same as the velocity vector (for the hanging bob)
     this.hanging_thing.velocity = get_pendulum_velocity(this);
-
   }
   
   
@@ -64,27 +60,21 @@ class Pendulum{
     a = g*sin(theta) [inwards]
     since it's towards the center, a = -g*sin(theta)
     */
-    this.angular_acceleration = -0.5*sin(current_theta)/this.string_length; // calculating acceleration
+    this.angular_acceleration = -0.5*sin(current_theta)/this.string_length; // calculating acceleration (I later decided to divide by string_length due to the formula for torque)
     this.angular_speed += this.angular_acceleration; // acceleration updates velocity
     this.current_theta += this.angular_speed; // angular speed changes angle
     
-    //storing previous coordinates:
-    this.hanging_thing.previous_coordinate = new PVector(hanging_thing.coordinate.x, hanging_thing.coordinate.y);
-    
-    //finding new coordinates:
-    this.hanging_thing.coordinate.x = this.string_length * sin(this.current_theta) + this.pivot.coordinate.x;
-    this.hanging_thing.coordinate.y = this.string_length * cos(this.current_theta) + this.pivot.coordinate.y;
+    //finding new coordiantes with new theta:
+    this.hanging_thing.change_position(new PVector(this.string_length * sin(this.current_theta) + this.pivot.coordinate.x,
+                                                   this.string_length * cos(this.current_theta) + this.pivot.coordinate.y));
     
   }
   
   void collide(Substance obj){
-    this.pivot.collide(obj); // the pivot is always has a velocity of 0 anyways so we don't need to multiply by some coefficient
+    this.pivot.collide(obj); // the pivot always a velocity of 0 anyways so we don't need to multiply by some coefficient
     
     if (!this.hanging_thing.is_colliding(obj)) return; // technically checked twice (once here, then once in the collide function)
-    //if (this.hanging_thing.is_colliding(obj)){
-    //  obj.change_position(new PVector(obj.coordinate.x, obj.coordinate.y));
-    //}
-    
+
     
     // here, the velocity of the pendulum is too small to actually be usefull in most physics calculations
     // To counteract this, we have to multiply with some coefficient to make the velocity usefull
@@ -93,36 +83,28 @@ class Pendulum{
     this.hanging_thing.velocity.mult(this.usefullness_coefficient);
     this.hanging_thing.collide(obj);
     this.hanging_thing.velocity.mult(1/(this.usefullness_coefficient));
-    //ln("1", this.hanging_thing.velocity);
-    //if (obj.getClass().getName() == "Puzzle_Platformer$Player"){
-    obj.jumping = false;
-    //}
-    if (obj.coordinate.x > this.hanging_thing.coordinate.x){
-      
-    }
+
+    obj.jumping = false; //objects can always jump off of pendulums
+    
+    // projecting to get the proper magnitude:
     PVector vel = get_pendulum_velocity(this);
-    //ln("2", this.hanging_thing, this.hanging_thing.velocity, vel);
-
-
     PVector projected = project(this.hanging_thing.velocity, vel);
     this.angular_speed = projected.mag();
     
     // since the magnitude is always positive, if the initial vector is pointing left we need to multiply by -1
-    // adding the following single line to fix a bug took us an extreme amount of time (the amount of pain that went into adding the following line is truly immeasurable)
-    if (projected.x < 0) this.angular_speed *= -1; 
+    // adding the following single line to fix a bug took us an extreme amount of time 
+    // in conclusion, the amount of pain that went into adding the following line is truly immeasurable
+    // please know it's value
+    if (projected.x < 0) this.angular_speed *= -1; // *priceless line <3 <3 <3*
     
-    //ln("3", this.angular_speed);
-    //ln("-------------------------------");
-    //ln();ln();
-    //this.draw_velocity();
-    
-}
+  }
+
   
   void draw_velocity(){
-    //we have to multiply by this or it's not even visible
-    this.update_velocity();
-    this.hanging_thing.velocity.mult(10*this.usefullness_coefficient);
-    //ln(this.hanging_thing.velocity.mag());
+    this.update_velocity(); //updates velocity
+    
+    
+    this.hanging_thing.velocity.mult(10*this.usefullness_coefficient); //we have to multiply by this or it's not even visible
     this.hanging_thing.draw_velocity();
     this.hanging_thing.velocity.mult(1/(10*this.usefullness_coefficient));
 
