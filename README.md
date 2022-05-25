@@ -1,2 +1,2 @@
 # Puzzle_Platformer_aka_PP
-A Puzzle Platformer game (PP) made in Processing.
+A physics engine and Puzzle Platformer game (PP) made in Processing.
