@@ -1,22 +1,21 @@
-class Shop{
+class Shop {
   ArrayList<Tool> stock = new ArrayList<Tool> ();
-  Shop(){
-    
+  Shop() {
   }
-  void opened(){
+  void opened() {
     open = !open;
     shopWindow.setVisible(open);
     shopWindow.fill(255);
-    
     displayIcons();
     update();
+    
   }
-  
-  void addToStock(Tool a){
+
+  void addToStock(Tool a) {
     this.stock.add(a);
   }
-  
-  void displayIcons(){
+
+  void displayIcons() {
 
     emre.display_inventory_in_shop_window();
     int x = 0;
@@ -24,32 +23,29 @@ class Shop{
     PImage temp = loadImage("images/money.png");
     temp.resize(size, size);
     shopWindow.image(temp, 200, 0);
-    
+
     PImage tempShop;
     moneyLabel.setText(str(emre.money));
-    for( int i = 0 ; i < stock.size(); i++){ 
+    for ( int i = 0; i < stock.size(); i++) { 
       outline(x, y, size, 0);
       tempShop = stock.get(i).icon;
       tempShop.resize(size, size);
       shopWindow.image(tempShop, x, y);
-      
+
       x += size;
-      if(i%4 == 3){
+      if (i%4 == 3) {
         x = 0;
         y += size;
       }
-    }  
+    }
   }
-  
-  void update(){
+
+  void update() {
     displayIcons();
   }
-  
-  void itemBought(Tool a){
+
+  void itemBought(Tool a) {
     stock.remove(a);
     update();
   }
-
 }
-  
-  
